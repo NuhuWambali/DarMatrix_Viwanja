@@ -18,7 +18,6 @@
           </svg> Colors</a></li>
       <li class="nav-item">
         <a class="nav-link" href="">
-        <i class="fas fa-user-friends"></i>
           <svg class="nav-icon"></svg> 
           Users
         </a>

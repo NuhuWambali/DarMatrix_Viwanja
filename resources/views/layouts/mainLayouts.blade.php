@@ -14,6 +14,7 @@
         <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
         <meta name="author" content="Łukasz Holeczek">
         <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+        <title>DarMatrix Viwanja | @yield('title')</title>
       @include('layouts._head')
       </head>
       <body>
