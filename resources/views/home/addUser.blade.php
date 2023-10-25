@@ -1,6 +1,6 @@
 @extends('layouts.mainLayouts')
 @section('title','Add User')
-@section('smallTitle','User / Adduser')
+@section('smallTitle','Users / Adduser')
 @section('content')
 @include('sweetalert::alert')
 <div class="row">
@@ -16,7 +16,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputFullname">Fullname</label>
                             <div class="col-sm-8">
-                            <input class="form-control @error('fullname') is-invalid @enderror" type="text" id="fullname" name="fullname" value="{{old('fullname')}}">
+                            <input class="form-control @error('fullname') is-invalid @enderror" type="text" id="fullname" name="fullname" value="{{old('fullname')}}" placeholder="Enter Fullname">
                             @error('fullname')
                             <p class="dismissAlert text-danger" id="dismissAlert">
                                 {{$message}}
@@ -27,7 +27,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputPassword">Username</label>
                             <div class="col-sm-8">
-                            <input class="form-control @error('username') is-invalid @enderror" type="text" id="username" name="username" value="{{old('username')}}">
+                            <input class="form-control @error('username') is-invalid @enderror" type="text" id="username" name="username" value="{{old('username')}}" placeholder="Enter Username">
                             @error('username')
                             <p class="dismissAlert text-danger" id="dismissAlert">
                                 {{$message}}
@@ -39,7 +39,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputEmail">Email</label>
                             <div class="col-sm-8">
-                            <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email" value="{{old('email')}}" >
+                            <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email" value="{{old('email')}}" placeholder="Enter Email" >
                             @error('email')
                             <p class="dismissAlert text-danger" id="dismissAlert">
                                 {{$message}}
@@ -50,7 +50,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputPhone">Phone</label>
                             <div class="col-sm-8">
-                            <input class="form-control @error('phone') is-invalid @enderror" type="number" id="phone" name="phone" value="{{old('phone')}}">
+                            <input class="form-control @error('phone') is-invalid @enderror" type="text" id="phone" name="phone" value="{{old('phone')}}" placeholder="Enter phone">
                             @error('phone')
                             <p class="dismissAlert text-danger" id="dismissAlert">
                                 {{$message}}
