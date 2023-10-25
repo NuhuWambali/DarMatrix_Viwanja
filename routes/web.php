@@ -29,3 +29,4 @@ Route::get('/roles', [RolesController::class, 'getRoles'])->name('roles');
 Route::get('/roles/addRole', [RolesController::class, 'getAddRole'])->name('getAddRole');
 
 Route::post('/addrole',[RolesController::class, 'addrole'])->name('addrole');
+

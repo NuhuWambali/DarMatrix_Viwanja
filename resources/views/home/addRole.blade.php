@@ -14,8 +14,8 @@
                     @csrf         
                     <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
                         <div class="mb-3 row">
-                            <label class="col-sm-2 col-form-label" for="inputPassword">Role Name</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-1 col-form-label" for="inputPassword">Name</label>
+                            <div class="col-sm-7">
                             <input class="form-control @error('role_name') is-invalid @enderror" type="text" id="role_name" name="role_name" value="{{old('role_name')}}" required>
                             @error('role_name')
                             <p class="dismissAlert text-danger" id="dismissAlert">
@@ -23,9 +23,12 @@
                             </p>
                             @enderror
                             </div>
-                            <div class="col-sm-2"> 
+                            <div class="col-sm-1"> 
                                   <button class="btn btn-primary mb-3" type="submit">Add</button>
-                            </div>   
+                            </div>  
+                            <div class="col-sm-2"> 
+                                <a href="{{route('roles')}}" class="btn btn-danger mb-3" >Cancel</a></button>
+                          </div>   
                         </div>
                     </div>
                 </form>

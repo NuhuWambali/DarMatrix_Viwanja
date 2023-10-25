@@ -2,6 +2,7 @@
 @section('title','roles')
 @section('smallTitle','Roles')
 @section('content')
+@include('sweetalert::alert')
 <div class="card mb-4">
     <div class="card-body">
       <div class="">   
@@ -18,21 +19,22 @@
             <thead class="table-light fw-semibold">
                 <tr class="align-middle">
                 <th>#</th>
-                <th >Role Name</th>
+                <th >Name</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($getRoles as $index=>$role)
                 <tr class="align-middle">
                 <td>
-                    <h6>1</h6>
+                    <h6>{{$index+1}}</h6>
                 </td>
             
                 <td>
-                    <h6>Administrator</h6>
+                    <h6>{{$role->role_name}}</h6>
                 </td>
                 
                 </tr>
-           
+              @endforeach
             </tbody>
             </table>
             </div>
