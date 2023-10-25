@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [ManagementController::class, 'index'])->name('index');
+
+Route::get('/roles', [RolesController::class, 'getRoles'])->name('roles');

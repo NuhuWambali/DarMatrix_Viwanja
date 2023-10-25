@@ -8,16 +8,16 @@
       </svg>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
-      <li class="nav-item"><a class="nav-link" href="index.html">
+      <li class="nav-item"><a class="nav-link" href="{{route('index')}}">
           <svg class="nav-icon">
             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
-      <li class="nav-item"><a class="nav-link" href="colors.html">
+      <li class="nav-item"><a class="nav-link" href="{{route('roles')}}">
           <svg class="nav-icon">
             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-          </svg> Colors</a></li>
+          </svg> Roles</a></li>
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="index.html">
           <svg class="nav-icon"></svg> 
           Users
         </a>
