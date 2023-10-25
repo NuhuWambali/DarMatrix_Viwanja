@@ -7,12 +7,7 @@ use Illuminate\Http\Request;
 class ManagementController extends Controller
 {
     //
-    public function index(){
+     public function index(){
         return view('home.dashboard');
      }
-
-     public function getRoles(){
-        return view('home.roles');
-     }
- 
 }
