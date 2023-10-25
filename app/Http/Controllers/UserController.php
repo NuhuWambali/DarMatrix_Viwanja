@@ -10,10 +10,12 @@ class UserController extends Controller
 {
     //
     public function getUser(){
-       return view('home.user');
+        $getUser=User::all();
+       return view('home.user',compact('getUser'));
     }
 
     public function getAddUser(){
+       
         return view('home.addUser');
     }
 
