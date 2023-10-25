@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Roles;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RolesController extends Controller
 {
@@ -17,13 +18,18 @@ class RolesController extends Controller
     }
 
     public function addrole(Request $request){
-        $request->validate([
-            'role_name'=>'required|string',
+
+        $validatedData=$request->validate([
+            'role_name'=>'required|regex:/^[a-zA-Z\s]+$/|min:3',
+        ],[
+            'role_name.min' => 'The name must be at least three characters long.',
         ]);
         $addrole=new Roles;
-        $addrole->role_name=$request->role_name;
+        $addrole->role_name=$validatedData['role_name'];
         $addrole->save();
+        Alert::success('Success','Role is Added Successfully!');
         return to_route('getAddRole');
     }
+  
 
 }
