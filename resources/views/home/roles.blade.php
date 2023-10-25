@@ -20,6 +20,7 @@
                 <tr class="align-middle">
                 <th>#</th>
                 <th >Name</th>
+                <th >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,23 @@
             
                 <td>
                     <h6>{{$role->role_name}}</h6>
+                </td>
+               
+                <td>
+                    @php
+                    $allowedRoles = ['Admin', 'SuperAdmin', 'User', 'Manager', 'Finance', 'Surveyor'];
+                    @endphp
+                    @if(in_array($role->role_name, $allowedRoles))
+                        <form action="{{ route('deleteRole', $role->id) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm" disabled>Delete</button>
+                        </form>
+                    @else
+                            <form action="{{ route('deleteRole', $role->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                    @endif
                 </td>
                 
                 </tr>

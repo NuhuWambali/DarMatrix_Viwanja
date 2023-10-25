@@ -29,8 +29,16 @@ class RolesController extends Controller
             return redirect()->back()->withErrors(['role_name' => 'The role name already exists in the database.'])->withInput();
         }
         $addrole->save();
-        Alert::success('Success','Role is Added Successfully!');
+        Alert::success('Success','Role Added Successfully!');
             return to_route('roles');
     }
 
+
+    public function deleteRole($id,Request $request){
+        $deleteRole=Roles::FindOrfail($id);
+        $deleteRole->delete();
+        Alert::success('Success','Role Deleted Successfully!');
+        return to_route('roles');
+
+    }
 }

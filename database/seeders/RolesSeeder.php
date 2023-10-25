@@ -15,7 +15,8 @@ class RolesSeeder extends Seeder
     public function run(): void
     {
         //
-        $roles = ['Admin', 'User', 'Manager', 'Guest'];
+        $roles = ['Admin', 'SuperAdmin','User', 'Manager','Finance','Surveyor'];
+
         foreach ($roles as $role) {
             if (DB::table('roles')->where('role_name', $role)->doesntExist()) {
                 DB::table('roles')->insert([

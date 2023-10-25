@@ -30,3 +30,4 @@ Route::get('/roles/addRole', [RolesController::class, 'getAddRole'])->name('getA
 
 Route::post('/addrole',[RolesController::class, 'addrole'])->name('addrole');
 
+Route::post('/role/{id}/delete',[RolesController::class, 'deleteRole'])->name('deleteRole');
