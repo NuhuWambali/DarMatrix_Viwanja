@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\SendPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'fullname',
+        'username',
+        'phone',
+        'role_id',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -42,4 +47,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function roles()
+    {
+      return $this->hasMany(Roles::class);
+    }
+
+    public function sendPasswordNotification($email,$password)
+    {
+        $this->notify(new SendPasswordNotification($email,$password));
+    }
 }

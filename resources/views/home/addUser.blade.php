@@ -58,6 +58,23 @@
                             @enderror
                             </div>   
                         </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label" for="inputRoleId">Role</label>
+                            <div class="col-sm-8">
+                                <select class="form-control @error('role_id') is-invalid @enderror" id="role_id" name="role_id">
+                                    <option value="" selected disabled>Select role</option>
+                                    @foreach($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->role_name}}</option>
+                                    @endforeach
+                                </select>
+                                
+                            @error('role_id')
+                            <p class="dismissAlert text-danger" id="dismissAlert">
+                                {{$message}}
+                            </p>
+                            @enderror
+                            </div>   
+                        </div>
                         <div class="row ">
                             <div class="col-sm-2">
 
