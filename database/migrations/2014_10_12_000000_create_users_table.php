@@ -17,12 +17,8 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            // // $table->foreignId('role_id');
-            // $table->unsignedBigInteger('role_id');
-            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            // // $table->unsignedBigInteger('role_id');
-            // // $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->string('status')->default('active');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

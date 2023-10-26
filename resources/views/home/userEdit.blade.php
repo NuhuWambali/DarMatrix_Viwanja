@@ -111,25 +111,4 @@
     }
 </script> --}}
 
-<script>
-    function confirmation(ev,userId){
-        ev.preventDefault();
-        var urlToRedirect=ev.currentTarget.getAttribute("href");
-        swal({
-            title:"Confirm Edit",
-            text:"Are you sure you want to edit?",
-            icon:"warning",
-            buttons:true,
-            primaryMode:true
-        })
-        .then((willCancel)=>{
-            if(willCancel){
-                const form = document.getElementById('edit-form-' + userId);
-                form.submit();
-            }
-
-        });
-    }
-</script>
-
 @endsection

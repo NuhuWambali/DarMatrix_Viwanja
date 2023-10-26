@@ -52,3 +52,5 @@ Route::post('/adduser',[UserController::class, 'addUser'])->name('adduser')->mid
 Route::get('/users/edit/{id}', [UserController::class,'editUserPage'])->name('getEditUser')->middleware('auth');
 
 Route::put('/users/edit/{id}', [UserController::class,'editUser'])->name('editUser')->middleware('auth');
+
+Route::post('/user/deactivate/{id}', [UserController::class, 'deactivateUser'])->name('deactivateUser')->middleware('auth');

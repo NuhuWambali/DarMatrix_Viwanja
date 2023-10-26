@@ -80,8 +80,14 @@ class UserController extends Controller
                $editUser->update($validatedUserdata);
                Alert::success('Success','User Updated Successfully! ');
                return to_route('user');
+    }
 
-
+    public function deactivateUser($id){
+        $deactivateUser=User::findOrFail($id);
+        $deactivateUser->status="inactive";
+        $deactivateUser->save();
+        Alert::success('Success','User Deactiavated Successfully! ');
+        return to_route('user');
     }
 
 }

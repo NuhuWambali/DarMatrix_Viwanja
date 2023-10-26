@@ -14,40 +14,49 @@
                     <h4 style="width:22em">All User</h4>
                 </div>  
             </div>  
-            <div class="table-responsive">
+            <div class="table">
             <table class="table border mb-0">
-            <thead class="table-light fw-semibold">
-                <tr class="align-middle">
-                <th>#</th>
-                <th >Username</th>
-                <th >Email</th>
-                <th >Phone</th>
-                <th >Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($getUser as $index=>$user)
-                <tr class="align-middle">
-                <td>
-                    <h6>{{$index+1}}</h6>
-                </td>
-            
-                <td>
-                    <h6>{{$user->fullname}}</h6>
-                </td>
-                <td>
-                    <h6>{{$user->email}}</h6>
-                </td>
-                <td>
-                    <h6>{{$user->phone}}</h6>
-                </td>
-               <td>
-                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm"> <i class='fas fa-edit'></i></a>
-               </td>
-                
-                </tr>
-              @endforeach
-            </tbody>
+                    <thead class="table-light fw-semibold">
+                        <tr class="align-middle">
+                        <th>#</th>
+                        <th >Username</th>
+                        <th >Email</th>
+                        <th >Phone</th>
+                        <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($getUser as $index=>$user)
+                        <tr class="align-middle">
+                        <td>
+                            <h6>{{$index+1}}</h6>
+                        </td>
+                    
+                        <td>
+                            <h6>{{$user->username}}</h6>
+                        </td>
+                        <td>
+                            <h6>{{$user->email}}</h6>
+                        </td>
+                        <td>
+                            <h6>{{$user->phone}}</h6>
+                        </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm"> <i class='fas fa-edit'></i></a>
+                            </div>
+                            <div class="col-sm-3">
+                                <form action="{{route('deactivateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"> <i class='fas fa-lock'></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
             </table>
             </div>
       </div>
