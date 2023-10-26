@@ -21,11 +21,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('layouts.mainLayouts');
 // });
 
-Route::get('/', [ManagementController::class, 'index'])->name('index');
+Route::get('/dashboard', [ManagementController::class, 'index'])->name('index');
 
 //auth routes
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('login');
 
+Route::post('/createLogin',[AuthController::class, 'createLogin'])->name('createLogin');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 //roles routes
