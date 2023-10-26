@@ -22,14 +22,25 @@
                     <svg class="icon">
                       <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
                     </svg></span>
-                  <input class="form-control" type="email" placeholder="Email" id="email" name="email" @error('email') is-invalid @enderror value="{{old('email')}}">
+                  <input class="form-control" type="text" placeholder="Email" id="email" name="email" @error('email') is-invalid @enderror value="{{old('email')}}">
+                 
                 </div>
-                <div class="input-group mb-4"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
-                    </svg></span>
+                @error('email')
+                <p class="dismissAlert text-danger" id="dismissAlert">
+                     {{$message}}
+                </p>
+              @enderror
+                <div class="input-group mb-3"><span class="input-group-text">
+                  <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                  </svg></span>
                   <input class="form-control" type="password" placeholder="Password" id="password" name="password" @error('password') is-invalid @enderror value="{{old('password')}}">
                 </div>
+                @error('password')
+                  <p class="dismissAlert text-danger" id="dismissAlert">
+                       {{$message}}
+                  </p>
+                @enderror
                 <div class="row">
                   <div class="col-6">
                     <button class="btn btn-primary px-4" type="submit">Login</button>
