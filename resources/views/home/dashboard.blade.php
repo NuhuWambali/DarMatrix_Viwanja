@@ -2,6 +2,7 @@
 @section('title','Dashboard')
 @section('content')
 @section('smallTitle','Dashboard')
+@include('sweetalert::alert')
 <div class="row">
     <div class="col-sm-6 col-lg-3">
       <div class="card mb-4 text-white bg-primary">

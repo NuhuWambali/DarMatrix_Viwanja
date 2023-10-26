@@ -19,10 +19,10 @@
             <thead class="table-light fw-semibold">
                 <tr class="align-middle">
                 <th>#</th>
-                <th >Fullname</th>
                 <th >Username</th>
                 <th >Email</th>
                 <th >Phone</th>
+                <th >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,30 +36,14 @@
                     <h6>{{$user->fullname}}</h6>
                 </td>
                 <td>
-                    <h6>{{$user->username}}</h6>
-                </td>
-                <td>
                     <h6>{{$user->email}}</h6>
                 </td>
                 <td>
                     <h6>{{$user->phone}}</h6>
                 </td>
-                {{-- <td>
-                    @php
-                    $allowedRoles = ['Admin', 'SuperAdmin', 'User', 'Manager', 'Finance', 'Surveyor'];
-                    @endphp
-                    @if(in_array($role->role_name, $allowedRoles))
-                        <form action="{{ route('deleteRole', $role->id) }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" disabled>Delete</button>
-                        </form>
-                    @else
-                            <form action="{{ route('deleteRole', $role->id) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                    @endif --}}
-                {{-- </td> --}}
+               <td>
+                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm"> <i class='fas fa-edit'></i></a>
+               </td>
                 
                 </tr>
               @endforeach

@@ -38,8 +38,7 @@ class UserController extends Controller
                  'role.required'=>'Role is required',
                  'phone.required'=>'Phone is required','phone.min'=>'Phone number length is too small',
               ],
-            );
-                            
+            );             
                 $user = new User;
                 $user->fullname = $validatedUserDetails['fullname'];
                 $user->email = $validatedUserDetails['email'];
@@ -50,9 +49,39 @@ class UserController extends Controller
                 $user->password = bcrypt($randomPassword);
                 $email=$validatedUserDetails['email'];
                 $user->save();   
-                Alert::success('Success','User Added Successfully!, Password is sent to user email');
+                Alert::success('Success','User Added Successfully!, Password is Sent to User Email');
                 $user->sendPasswordNotification($email,$randomPassword); 
                 return to_route('user');      
+    }
+
+    public function editUserPage($id){
+        $user=User::findOrFail($id);
+        $roles=Roles::all();
+        return view('home.userEdit',compact('user','roles'));
+    }
+
+    public function editUser(Request $request, $id){
+        $editUser=User::findOrFail($id);
+        $validatedUserdata=$request->validate(
+            [
+                   'fullname'=>'required|Regex:/^[\D]+$/i|max:100',
+                   'email'=>'required|email|max:255',
+                   'username'=>'required|max:100',
+                   'role_id'=>'required',
+                   'phone'=>'required|min:10',
+                 ],[
+                    'fullname.required' => 'Full name is required',
+                    'email.required' => 'Email is required','email.max'=>'The email is too long',
+                    'username.required'=>'Full name is required',
+                    'role.required'=>'Role is required',
+                    'phone.required'=>'Phone is required','phone.min'=>'Phone number length is too small',
+                 ],
+               );   
+               $editUser->update($validatedUserdata);
+               Alert::success('Success','User Updated Successfully! ');
+               return to_route('user');
+
 
     }
+
 }

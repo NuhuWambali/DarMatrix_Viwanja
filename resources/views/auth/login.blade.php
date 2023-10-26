@@ -1,5 +1,6 @@
 @extends('layouts.auth.authMainLayouts')
 @section('content')
+@section('title','login')
 <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
 
     <div class="container">
