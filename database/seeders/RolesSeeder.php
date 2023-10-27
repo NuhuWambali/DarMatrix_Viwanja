@@ -21,6 +21,8 @@ class RolesSeeder extends Seeder
             if (DB::table('roles')->where('role_name', $role)->doesntExist()) {
                 DB::table('roles')->insert([
                     'role_name' => $role,
+                     'created_at'=>now(),
+                     'updated_at'=>now(),
                 ]);
             } else {
                 error_log("Role '{$role}' already exists in the database.");

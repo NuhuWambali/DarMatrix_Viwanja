@@ -103,4 +103,16 @@ class UserController extends Controller
         return view('home.userDetails',compact('userDetails'));
     }
 
+
+    public function resendPassword($id){
+        $user=User::findOrFail($id);
+        $username=$user->username;
+        $userEmail=$user->email;
+        $randomPassword = Str::random(12); 
+        $user->password = bcrypt($randomPassword);
+        $user->save();   
+        Alert::success('Success','Password Resend Successfully!');
+        $user->ResendPasswordNotification($username,$userEmail,$randomPassword); 
+        return to_route('user');    
+    }
 }

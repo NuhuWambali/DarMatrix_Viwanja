@@ -5,12 +5,12 @@
 
 <div class="card mb-4">
     <div class="card-body">
-      <div class="">   
+      <div class="">
            <div class="row">
                 <div class="col-sm-12 my-3">
                     <h4 style="">All User</h4>
-                </div>  
-            </div>  
+                </div>
+            </div>
             <table class="table table-bordered  roundedCorners">
                 <tbody>
                   <tr>
@@ -35,9 +35,9 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="col-sm-2 mt-2"> 
-                <a href="{{route('user')}}" class="btn btn-danger mb-3" >Back</a></button>
-              </div> 
+              <div class="col-sm-2 mt-2">
+                <a href="{{route('user')}}" style="color:#fff" class="btn btn-danger mb-3" >Back</a></button>
+              </div>
       </div>
     </div>
 </div>

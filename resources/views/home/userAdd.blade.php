@@ -11,7 +11,7 @@
           <div class="example">
             <div class="tab-content rounded-bottom">
                 <form action="{{route('adduser')}}" method="post" enctype="multipart/form-data">
-                    @csrf         
+                    @csrf
                     <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputFullname">Fullname</label>
@@ -22,7 +22,7 @@
                                 {{$message}}
                             </p>
                             @enderror
-                            </div>   
+                            </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputPassword">Username</label>
@@ -34,7 +34,7 @@
                             </p>
                             @enderror
                             </div>
-                             
+
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputEmail">Email</label>
@@ -45,7 +45,7 @@
                                 {{$message}}
                             </p>
                             @enderror
-                            </div>   
+                            </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputPhone">Phone</label>
@@ -56,7 +56,7 @@
                                 {{$message}}
                             </p>
                             @enderror
-                            </div>   
+                            </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputRoleId">Role</label>
@@ -67,26 +67,26 @@
                                     <option value="{{$role->id}}">{{$role->role_name}}</option>
                                     @endforeach
                                 </select>
-                                
+
                             @error('role_id')
                             <p class="dismissAlert text-danger" id="dismissAlert">
                                 {{$message}}
                             </p>
                             @enderror
-                            </div>   
+                            </div>
                         </div>
                         <div class="row ">
                             <div class="col-sm-2">
 
                             </div>
-                            <div class="col-sm-1 mt-2"> 
+                            <div class="col-sm-1 mt-2">
                                 <button class="btn btn-primary mb-3" type="submit">Add</button>
-                            </div>  
-                            <div class="col-sm-2 mt-2"> 
-                              <a href="{{route('user')}}" class="btn btn-danger mb-3" >Cancel</a></button>
-                            </div> 
+                            </div>
+                            <div class="col-sm-2 mt-2">
+                              <a href="{{route('user')}}" style="color:#fff" class="btn btn-danger mb-3" >Cancel</a></button>
+                            </div>
                         </div>
-                       
+
                     </div>
                 </form>
             </div>

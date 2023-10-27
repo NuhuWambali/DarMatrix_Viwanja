@@ -34,6 +34,10 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
 //roles routes
 Route::get('/roles', [RolesController::class, 'getRoles'])->name('roles')->middleware('auth');
 
+Route::get('/editRole/{id}', [RolesController::class, 'editRolePage'])->name('editRole')->middleware('auth');
+
+Route::post('/createEditRole/{id}',[RolesController::class, 'createEditRole'])->name('createEditRole')->middleware('auth');
+
 Route::get('/roles/addRole', [RolesController::class, 'getAddRole'])->name('getAddRole')->middleware('auth');
 
 Route::post('/addrole',[RolesController::class, 'addrole'])->name('addrole')->middleware('auth');

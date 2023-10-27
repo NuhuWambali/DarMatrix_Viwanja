@@ -5,15 +5,15 @@
 @include('sweetalert::alert')
 <div class="card mb-4">
     <div class="card-body">
-      <div class="">   
+      <div class="">
            <div class="row">
                 <div class="col-sm-2">
                 <a href="{{route('getAddUser')}}" class="btn btn-primary mb-3" type="submit">Add User</a>
                 </div>
                 <div class="col-sm-10 ml-5 mt-1 text-center">
                     <h4 style="width:22em">All User</h4>
-                </div>  
-            </div>  
+                </div>
+            </div>
             <div class="table">
             <table class="table border mb-0">
                     <thead class="table-light fw-semibold">
@@ -32,7 +32,7 @@
                         <td>
                             <h6>{{$index+1}}</h6>
                         </td>
-                    
+
                         <td>
                             <h6>{{$user->username}}</h6>
                         </td>
@@ -52,32 +52,31 @@
                     <td>
                         <div class="row">
                             <div class="col-sm-3">
-                                <a href="{{route('userDetails',$user->id)}}" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"title="View"> <i class='fas fa-eye'></i></a>
+                                <a href="{{route('userDetails',$user->id)}}" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"title="View" style="color:#fff"> <i class='fas fa-eye'></i></a>
                             </div>
                             <div class="col-sm-3">
-                                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"title="Edit"> <i class='fas fa-edit'></i></a>
+                                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"title="Edit" > <i class='fas fa-edit'></i></a>
                             </div>
                             <div class="col-sm-3">
                                 @if($user->status=='Active')
                                 <form action="{{route('deactivateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top"title="Deactivate"> <i class='fas fa-lock'></i></button>
+                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top"title="Deactivate" style="color:#fff"> <i class='fas fa-lock'></i></button>
                                 </form>
                                @else
                                 <form action="{{route('activateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"title="Activate"> <i class='fas fa-lock-open'></i></button>
+                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})"  class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"title="Activate" style="color:#fff"> <i class='fas fa-lock-open'></i></button>
                                 </form>
                               @endif
                             </div>
                             <div class="col-sm-3">
-                                <form action="{{route('resendPassword', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
+                                <form action="{{route('resendPassword',['id' => $user->id])}}" id="resend-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                <button type="submit"  onclick="confirmation(event,{{ $user->id }})"  class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"title="Resesnd Password"> <i class='fas fas fa-circle-notch'></i></button>
+                                <button type="submit" onclick="resendPasswordConfirmation(event,{{ $user->id }})" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"title="Resend Password" style="color:#fff"><i class='fas fas fa-circle-notch'></i></button>
                                 </form>
                             </div>
-                             
-                               
+
                         </div>
                     </td>
                         </tr>
@@ -90,3 +89,4 @@
 </div>
 
 @endsection
+

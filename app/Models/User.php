@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\SendPasswordNotification;
+use App\Notifications\ResendPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -53,8 +54,15 @@ class User extends Authenticatable
       return $this->hasMany(Roles::class);
     }
 
+ 
+
     public function sendPasswordNotification($email,$password)
     {
         $this->notify(new SendPasswordNotification($email,$password));
+    }
+
+    public function resendPasswordNotification($username,$userEmail,$password)
+    {
+        $this->notify(new ResendPasswordNotification($username,$userEmail,$password));
     }
 }

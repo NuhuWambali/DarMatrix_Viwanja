@@ -11,7 +11,7 @@
           <div class="example">
             <div class="tab-content rounded-bottom">
                 <form action="{{route('addrole')}}" method="post" enctype="multipart/form-data">
-                    @csrf         
+                    @csrf
                     <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
                         <div class="mb-3 row">
                             <label class="col-sm-1 col-form-label" for="inputPassword">Name</label>
@@ -23,12 +23,12 @@
                             </p>
                             @enderror
                             </div>
-                            <div class="col-sm-1"> 
+                            <div class="col-sm-1">
                                   <button class="btn btn-primary mb-3" type="submit">Add</button>
-                            </div>  
-                            <div class="col-sm-2"> 
-                                <a href="{{route('roles')}}" class="btn btn-danger mb-3" >Cancel</a></button>
-                          </div>   
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="{{route('roles')}}" style="color:#fff" class="btn btn-danger mb-3" >Cancel</a></button>
+                          </div>
                         </div>
                     </div>
                 </form>
@@ -37,6 +37,6 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 @endsection
 
