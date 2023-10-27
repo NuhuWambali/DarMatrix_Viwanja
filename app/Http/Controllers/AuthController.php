@@ -25,8 +25,14 @@ class AuthController extends Controller
               ],
     );
         if(Auth::attempt($validatedData)){
-            Alert::success('Loggedin Successfully','Welcome to DarMatrix Viwanja');
-            return to_route('index');
+            if(Auth::user()->status=='InActive'){
+                return redirect('/')->with('message','User is not active');
+            }
+            else{
+                Alert::success('Loggedin Successfully','Welcome to DarMatrix Viwanja');
+                return to_route('index');
+            }
+           
         }
         return redirect('/')->with('message','Wrong Email or Password');
     }

@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function getAddUser(Roles $roles){
         $roles=Roles::all();
-        return view('home.addUser',compact('roles'));
+        return view('home.userAdd',compact('roles'));
     }
 
     public function addUser(Request $request){
@@ -82,12 +82,25 @@ class UserController extends Controller
                return to_route('user');
     }
 
+    public function activateUser($id){
+        $activateUser=User::findOrFail($id);
+        $activateUser->status="Active";
+        $activateUser->save();
+        Alert::success('Success','User actiavated Successfully! ');
+        return to_route('user');
+    }
+
     public function deactivateUser($id){
         $deactivateUser=User::findOrFail($id);
-        $deactivateUser->status="inactive";
+        $deactivateUser->status="inActive";
         $deactivateUser->save();
         Alert::success('Success','User Deactiavated Successfully! ');
         return to_route('user');
+    }
+
+    public function userDetails($id){
+        $userDetails=User::findOrFail($id);
+        return view('home.userDetails',compact('userDetails'));
     }
 
 }

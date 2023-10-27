@@ -22,7 +22,8 @@
                         <th >Username</th>
                         <th >Email</th>
                         <th >Phone</th>
-                        <th >Action</th>
+                        <th >Status</th>
+                        <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,17 +42,42 @@
                         <td>
                             <h6>{{$user->phone}}</h6>
                         </td>
+                        <td>
+                            @if($user->status=='inActive')
+                            <h6 style="color:red">{{$user->status}}</h6>
+                            @else
+                            <h6 style="color:green">{{$user->status}}</h6>
+                            @endif
+                        </td>
                     <td>
                         <div class="row">
                             <div class="col-sm-3">
-                                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm"> <i class='fas fa-edit'></i></a>
+                                <a href="{{route('userDetails',$user->id)}}" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"title="View"> <i class='fas fa-eye'></i></a>
                             </div>
                             <div class="col-sm-3">
+                                <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"title="Edit"> <i class='fas fa-edit'></i></a>
+                            </div>
+                            <div class="col-sm-3">
+                                @if($user->status=='Active')
                                 <form action="{{route('deactivateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"> <i class='fas fa-lock'></i></button>
+                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top"title="Deactivate"> <i class='fas fa-lock'></i></button>
+                                </form>
+                               @else
+                                <form action="{{route('activateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"title="Activate"> <i class='fas fa-lock-open'></i></button>
+                                </form>
+                              @endif
+                            </div>
+                            <div class="col-sm-3">
+                                <form action="{{route('resendPassword', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                <button type="submit"  onclick="confirmation(event,{{ $user->id }})"  class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"title="Resesnd Password"> <i class='fas fas fa-circle-notch'></i></button>
                                 </form>
                             </div>
+                             
+                               
                         </div>
                     </td>
                         </tr>

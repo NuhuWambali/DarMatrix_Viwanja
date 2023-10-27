@@ -21,6 +21,7 @@
             if(willCancel){
                 const form = document.getElementById('edit-form-' + userId);
                 form.submit();
+               
             }
 
         });

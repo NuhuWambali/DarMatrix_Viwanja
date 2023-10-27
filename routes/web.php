@@ -53,4 +53,10 @@ Route::get('/users/edit/{id}', [UserController::class,'editUserPage'])->name('ge
 
 Route::put('/users/edit/{id}', [UserController::class,'editUser'])->name('editUser')->middleware('auth');
 
+Route::post('/user/activate/{id}', [UserController::class, 'activateUser'])->name('activateUser')->middleware('auth');
+
 Route::post('/user/deactivate/{id}', [UserController::class, 'deactivateUser'])->name('deactivateUser')->middleware('auth');
+
+Route::get('/user/Details/{id}', [UserController::class, 'userDetails'])->name('userDetails')->middleware('auth');
+
+Route::post('/user/resendPassword/{id}', [UserController::class, 'resendPassword'])->name('resendPassword')->middleware('auth');
