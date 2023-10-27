@@ -42,7 +42,8 @@ class ResendPasswordNotification extends Notification
     {
         return (new MailMessage)
         ->subject('New password')
-        ->greeting('Hello,'.$this->username) 
+     
+        ->greeting('Hello,'.$this->username)
         ->line('Your new password is: ' . $this->password)
         ->line('Please keep this password secure.')
         ->salutation('Regards,   DarMatrix Team');

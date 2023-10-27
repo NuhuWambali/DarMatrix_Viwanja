@@ -54,11 +54,11 @@ class User extends Authenticatable
       return $this->hasMany(Roles::class);
     }
 
- 
 
-    public function sendPasswordNotification($email,$password)
+
+    public function sendPasswordNotification($username,$email,$password)
     {
-        $this->notify(new SendPasswordNotification($email,$password));
+        $this->notify(new SendPasswordNotification($username,$email,$password));
     }
 
     public function resendPasswordNotification($username,$userEmail,$password)

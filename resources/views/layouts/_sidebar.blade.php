@@ -12,13 +12,19 @@
           <svg class="nav-icon">
             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('projects')}}">
+              <svg class="nav-icon"></svg>
+             Projects
+            </a>
+          </li>
       <li class="nav-item"><a class="nav-link" href="{{route('roles')}}">
           <svg class="nav-icon">
             <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
           </svg> Roles</a></li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('user')}}">
-          <svg class="nav-icon"></svg> 
+          <svg class="nav-icon"></svg>
           Users
         </a>
       </li>

@@ -11,17 +11,19 @@ class SendPasswordNotification extends Notification
 {
     use Queueable;
 
+    public $username;
     public $email;
     public $password;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($email,$password)
+    public function __construct($username,$email,$password)
     {
         //
         $this->email = $email;
         $this->password = $password;
+        $this->username = $username;
     }
 
     /**
@@ -41,11 +43,11 @@ class SendPasswordNotification extends Notification
     {
         return (new MailMessage)
             ->subject('Welcome to Your DarMatrix Viwanja')
+            ->greeting('Hello, '.$this->username)
             ->line('Your email is: ' . $this->email)
             ->line('Your password is: ' . $this->password)
             ->line('Please keep this password secure.')
             ->salutation('Regards,   DarMatrix Team');
-           
     }
 
     /**

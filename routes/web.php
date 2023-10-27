@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViwanjaProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,9 +50,9 @@ Route::post('/role/{id}/delete',[RolesController::class, 'deleteRole'])->name('d
 //user controller
 Route::get('/users', [UserController::class, 'getUser'])->name('user')->middleware('auth');
 
-Route::get('/users/addUser', [UserController::class, 'getAddUser'])->name('getAddUser')->middleware('auth');
+Route::get('/users/addUser', [UserController::class, 'getAddUser'])->name('getAddUser');
 
-Route::post('/adduser',[UserController::class, 'addUser'])->name('adduser')->middleware('auth');
+Route::post('/adduser',[UserController::class, 'addUser'])->name('adduser');
 
 Route::get('/users/edit/{id}', [UserController::class,'editUserPage'])->name('getEditUser')->middleware('auth');
 
@@ -64,3 +65,7 @@ Route::post('/user/deactivate/{id}', [UserController::class, 'deactivateUser'])-
 Route::get('/user/Details/{id}', [UserController::class, 'userDetails'])->name('userDetails')->middleware('auth');
 
 Route::post('/user/resendPassword/{id}', [UserController::class, 'resendPassword'])->name('resendPassword')->middleware('auth');
+
+
+//projects routes
+Route::get('/projects', [ViwanjaProjectController::class,'getProjectsPage'])->name('projects')->middleware('auth');

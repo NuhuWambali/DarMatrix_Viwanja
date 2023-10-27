@@ -38,20 +38,21 @@ class UserController extends Controller
                  'role.required'=>'Role is required',
                  'phone.required'=>'Phone is required','phone.min'=>'Phone number length is too small',
               ],
-            );             
+            );
                 $user = new User;
                 $user->fullname = $validatedUserDetails['fullname'];
                 $user->email = $validatedUserDetails['email'];
                 $user->username = $validatedUserDetails['username'];
                 $user->role_id = $validatedUserDetails['role_id'];
                 $user->phone = $validatedUserDetails['phone'];
-                $randomPassword = Str::random(12); 
+                $randomPassword = Str::random(12);
+                $username=$user->username;
                 $user->password = bcrypt($randomPassword);
                 $email=$validatedUserDetails['email'];
-                $user->save();   
+                $user->save();
                 Alert::success('Success','User Added Successfully!, Password is Sent to User Email');
-                $user->sendPasswordNotification($email,$randomPassword); 
-                return to_route('user');      
+                $user->sendPasswordNotification($username,$email,$randomPassword);
+                return to_route('user');
     }
 
     public function editUserPage($id){
@@ -76,7 +77,7 @@ class UserController extends Controller
                     'role.required'=>'Role is required',
                     'phone.required'=>'Phone is required','phone.min'=>'Phone number length is too small',
                  ],
-               );   
+               );
                $editUser->update($validatedUserdata);
                Alert::success('Success','User Updated Successfully! ');
                return to_route('user');
@@ -108,11 +109,11 @@ class UserController extends Controller
         $user=User::findOrFail($id);
         $username=$user->username;
         $userEmail=$user->email;
-        $randomPassword = Str::random(12); 
+        $randomPassword = Str::random(12);
         $user->password = bcrypt($randomPassword);
-        $user->save();   
+        $user->save();
         Alert::success('Success','Password Resend Successfully!');
-        $user->ResendPasswordNotification($username,$userEmail,$randomPassword); 
-        return to_route('user');    
+        $user->ResendPasswordNotification($username,$userEmail,$randomPassword);
+        return to_route('user');
     }
 }
