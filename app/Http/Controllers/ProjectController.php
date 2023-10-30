@@ -17,6 +17,10 @@ class ProjectController extends Controller
         return view('home.projects',compact('projects',));
     }
 
+    public function addProjectPage(){
+        return view('home.projectAdd');
+    }
+
     public function addProject(Request $request){
         $username=Auth::user()->username;
         $validatedProjectData=$request->validate([

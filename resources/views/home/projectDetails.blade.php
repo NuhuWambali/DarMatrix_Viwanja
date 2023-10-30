@@ -48,13 +48,13 @@
             <th>Installment Period</th>
             <td>{{$projectDetails->installment_period}}</td>
             <th>File</th>
-            <td>File</td>
+            <td>file</td>
         </tr>
         <tr>
             <th>Start Date</th>
             <td>{{$projectDetails->start_date}}</td>
             <th>End Date</th>
-            <td>end_date</td>
+            <td>{{$projectDetails->end_date}}</td>
         </tr>
         <tr>
             <th>Created Date</th>

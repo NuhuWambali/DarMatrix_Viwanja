@@ -70,6 +70,10 @@ Route::post('/user/resendPassword/{id}', [UserController::class, 'resendPassword
 //projects routes
 Route::get('/projects', [ProjectController::class,'getProjectsPage'])->name('projects');
 
+Route::get('/AddProject',[ProjectController::class, 'addProjectPage'])->name('addProjectPage');
+
 Route::post('/addProjects', [ProjectController::class,'addProject'])->name('addProject');
 
 Route::get('/projectDetails/{id}', [ProjectController::class,'ProjectsDetails'])->name('projectDetails');
+
+
