@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('viwanja_projects', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('address');
@@ -20,15 +20,15 @@ return new class extends Migration
             $table->integer('total_plots');
             $table->integer('available_plots');
             $table->integer('unavailable_plots')->nullable();
-            $table->text('description')->nullable();
+            $table->string('description')->nullable();
             $table->boolean('status')->default(true);
             $table->string('plots_no');
             $table->string('block');
             $table->string('file_path')->nullable();
             $table->integer('installment_period');
             $table->decimal('price_per_sqm', 10, 2);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();
@@ -40,6 +40,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('viwanja_projects');
+        Schema::dropIfExists('projects');
     }
+
 };

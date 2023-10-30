@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ViwanjaProjectController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +48,7 @@ Route::post('/role/{id}/delete',[RolesController::class, 'deleteRole'])->name('d
 
 
 //user controller
-Route::get('/users', [UserController::class, 'getUser'])->name('user')->middleware('auth');
+Route::get('/users', [UserController::class, 'getUser'])->name('user');
 
 Route::get('/users/addUser', [UserController::class, 'getAddUser'])->name('getAddUser');
 
@@ -68,4 +68,8 @@ Route::post('/user/resendPassword/{id}', [UserController::class, 'resendPassword
 
 
 //projects routes
-Route::get('/projects', [ViwanjaProjectController::class,'getProjectsPage'])->name('projects')->middleware('auth');
+Route::get('/projects', [ProjectController::class,'getProjectsPage'])->name('projects');
+
+Route::post('/addProjects', [ProjectController::class,'addProject'])->name('addProject');
+
+Route::get('/projectDetails/{id}', [ProjectController::class,'ProjectsDetails'])->name('projectDetails');

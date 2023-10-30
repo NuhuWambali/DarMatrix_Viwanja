@@ -59,10 +59,7 @@
                         <div class="col-3">
                             <a href="{{route('editRole',$role->id)}}"  class="btn btn-dark btn-sm disable-link" data-toggle="tooltip" data-placement="top"title="Edit Role">Edit</a>
                         </div>
-                        {{-- @else
-                        <div class="col-3">
-                            <a href="{{route('editRole',$role->id)}}"  class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top"title="Edit Role">Edit</a>
-                        </div> --}}
+                      
                         @endif
                     </div>
                 </td>
