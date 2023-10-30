@@ -44,10 +44,22 @@
             }
         });
     }
-
-    function editProject(id){
-        
-        $("#projectModal").modal('show');
+    function deleteProjectConfirmation(ev,projectId){
+        ev.preventDefault();
+        var urlToRedirect=ev.currentTarget.getAttribute("href");
+        swal({
+            title:"Are You Sure?",
+            text:"Project will be deleted",
+            icon:"warning",
+            buttons:true,
+            primaryMode:true
+        })
+        .then((willCancel)=>{
+            if(willCancel){
+                const form = document.getElementById('deleteProject-form-' + projectId);
+                form.submit();
+            }
+        });
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

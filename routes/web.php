@@ -76,4 +76,10 @@ Route::post('/addProjects', [ProjectController::class,'addProject'])->name('addP
 
 Route::get('/projectDetails/{id}', [ProjectController::class,'ProjectsDetails'])->name('projectDetails');
 
+Route::get('/editProject/{id}', [ProjectController::class,'editProjectsPage'])->name('editProjectPage');
+
+Route::post('/editProject/{id}', [ProjectController::class,'editProject'])->name('editProject');
+
+Route::post('/deleteProject/{id}', [ProjectController::class,'deleteProject'])->name('deleteProject');
+
 

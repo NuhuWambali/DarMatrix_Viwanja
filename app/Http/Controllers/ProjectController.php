@@ -78,7 +78,6 @@ class ProjectController extends Controller
         $addProject->updated_at = now();
         $addProject->end_date=null;
         $addProject->save();
-
         Alert::success('Success','Role Updated Successfully!');
         return to_route('projects');
 
@@ -87,5 +86,52 @@ class ProjectController extends Controller
     public function ProjectsDetails($id){
         $projectDetails=Project::findOrFail($id);
         return view('home.projectDetails',compact('projectDetails'));
+    }
+
+    public function editProjectsPage(Request $request,$id){
+        $projectDetails=Project::findOrFail($id);
+        return view('home.projectEdit',compact('projectDetails'));
+    }
+
+    public function editProject($id,Request $request){
+        $projectDetails=Project::findOrFail($id);
+        $validatedProjectData=$request->validate([
+            'name'=>'required|string',
+            'address'=>'required',
+            'city'=>'required|string',
+            'region'=>'required|string',
+            'total_plots'=>'required',
+            'available_plots'=>'required',
+            'available_plots'=>'required',
+            'installment_period'=>'required',
+            'description'=>'',
+            'status'=>'required',
+            'plots_number'=>'',
+            'file_path'=>'',
+            'block'=>'',
+            'price_per_sqm'=>'required',
+            'start_date'=>'',
+        ],[
+            'name.required' => 'The project name is required.',
+            'address.required' => 'Address is required.',
+            'city.required' => 'City is required.',
+            'region.required' => 'Region is required.',
+            'total_plots.required'=>'Total plots is required',
+            'available_plots.required'=>'Available plots is required',
+            'status.required'=>'Status is required',
+            'price_per_sqm.required'=>'Price is required',
+            'installment_period.required'=>'Installment period is required',
+
+        ]);
+        $projectDetails->update($validatedProjectData);
+        Alert::success('Success','Project Edited Successfully!');
+        return to_route('projects');
+    }
+
+    public function deleteProject($id){
+        $deleteProject=Project::findOrFail($id);
+        $deleteProject->delete();
+        Alert::success('Success','Project Deleted Successfully!');
+        return to_route('projects');
     }
 }

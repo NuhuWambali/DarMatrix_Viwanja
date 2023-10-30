@@ -47,13 +47,19 @@
                             <h6>{{number_format($project->price_per_sqm)}}</h6>
                         </td>
                         <td>
-                        <a href="{{route('projectDetails', $project->id)}}" type="button" class="btn btn-primary btn-sm">
+                        <a href="{{route('projectDetails', $project->id)}}" type="button" class="btn btn-success btn-sm">
                             <i class='fas fa-eye'></i>
                         </a>
-                        <a href="" type="button" class="btn btn-primary btn-sm">
+                        <a href="{{route('editProjectPage',$project->id)}}" type="button" class="btn btn-primary btn-sm">
                             <i class='fas fa-edit'></i>
                         </a>
-
+                        {{-- <a type=" " href="{{route('deleteProject',$project->id)}}" class="btn btn-danger btn-sm">
+                            <i class='fas fa-trash'></i>
+                        </a> --}}
+                        <form action="{{route('deleteProject',['id' => $project->id])}}" id="deleteProject-form-{{ $project->id }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                        <button type="submit" onclick="deleteProjectConfirmation(event,{{ $project->id }})" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"title="Delete Project" style="color:#fff"><i class='fas fa-trash'></i></button>
+                        </form>
                         </td>
                         </tr>
                     @endforeach
@@ -64,35 +70,6 @@
     </div>
 </div>
 @endsection
-<div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 100%; width: 80%;" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-12">
-                  <div class="card mb-4">
-                    <div class="card-header"><strong>Add Project</strong></div>
-                    <div class="card-body">
-                      <div class="example">
-                        <div class="tab-content rounded-bottom">
 
-
-                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-
-      </div>
-    </div>
-</div>
 
 
