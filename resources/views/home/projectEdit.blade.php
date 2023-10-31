@@ -106,9 +106,8 @@
                         </div>
                         <div class="mb-3 row">
                             <div class="col-4">
-                                <label class="col-form-label" for="inputFile">File</label>
-                                <input class="form-control @error('file') is-invalid @enderror" type="file" id="file" name="file" value="{{$projectDetails->file_path}}" placeholder="Enter File">
-                                <p>previous file name : {{$projectDetails->file_path}}</p>
+                                <label class="col-form-label" for="inputFile">File @if($projectDetails->file_path)<a href="{{ asset($projectDetails->file_path) }}" target="_blank" class="btn btn-sm btn-primary">View File</a>@endif</label>
+                                <input class="form-control @error('file') is-invalid @enderror" type="file" id="file" name="file" value="{{$projectDetails->file}}" placeholder="Enter File">
                                 @error('file')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}

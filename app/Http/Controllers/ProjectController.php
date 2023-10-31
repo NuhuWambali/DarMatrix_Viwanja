@@ -94,6 +94,7 @@ class ProjectController extends Controller
     }
 
     public function editProject($id,Request $request){
+        // dd($request->file_path);
         $username=Auth::user()->username;
         $editProjectDetails=Project::findOrFail($id);
         $validatedProjectData=$request->validate([
@@ -136,9 +137,11 @@ class ProjectController extends Controller
         $editProjectDetails->plots_no = $validatedProjectData['plots_number'];
         $editProjectDetails->description = $validatedProjectData['description'];
         $editProjectDetails->price_per_sqm = $validatedProjectData['price_per_sqm'];
+        if($request->hasFile('file')){
         $fileName = time().'_'.$request->file->getClientOriginalName();
         $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
         $editProjectDetails->file_path = '/storage/' . $filePath;
+         }
         $editProjectDetails->installment_period = $validatedProjectData['installment_period'];
         $editProjectDetails->block = $validatedProjectData['block'];
         $editProjectDetails->unavailable_plots=$validatedProjectData['total_plots']-$validatedProjectData['available_plots'];

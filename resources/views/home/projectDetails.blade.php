@@ -48,7 +48,7 @@
             <th>Installment Period</th>
             <td>{{$projectDetails->installment_period}}</td>
             <th>File</th>
-            <td>file</td>
+            <td> @if($projectDetails->file_path)<a href="{{ asset($projectDetails->file_path) }}" target="_blank" class="btn btn-sm btn-primary">View File</a>@else no file provided @endif</td>
         </tr>
         <tr>
             <th>Start Date</th>

@@ -7,7 +7,7 @@
     --><!-- Breadcrumb-->
     <html lang="en">
       <head>
-   
+
       @include('layouts._head')
       </head>
       <body>
@@ -15,14 +15,15 @@
         <div class="wrapper d-flex flex-column min-vh-100 bg-light">
           @include('layouts._header')
           <div class="body flex-grow-1 px-3">
-            <div class="container-lg">     
+            <div class="container-lg">
                 @yield('content')
+              
             </div>
           </div>
           @include('layouts._footer')
         </div>
         <!-- CoreUI and necessary plugins-->
       @Include('layouts._scripts')
-    
+
       </body>
     </html>
