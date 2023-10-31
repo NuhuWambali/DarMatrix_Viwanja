@@ -148,7 +148,7 @@ class ProjectController extends Controller
         $editProjectDetails->created_at = now();
         $editProjectDetails->updated_at = now();
         $editProjectDetails->end_date=$validatedProjectData['end_date'];;
-        $editProjectDetails->save();
+        $editProjectDetails->update();
         // $projectDetails->update($validatedProjectData);
         Alert::success('Success','Project Edited Successfully!');
         return to_route('projects');

@@ -60,9 +60,9 @@
                                 </div>
                                 <div class="col-sm-4">
                                 </a>
-                                <form action="{{route('deleteProject',['id' => $project->id])}}" id="deleteProject-form-{{$project->id}}" method="post" enctype="multipart/form-data">
+                                <form action="{{route('deleteProject',$project->id)}}"  method="post" enctype="multipart/form-data">
                                     @csrf
-                                <button type="submit" onclick="deleteProjectConfirmation(event,{{$project->id}})" class="btn btn-danger btn-sm"  data-toggle="tooltip"  data-placement="top" title="Delete Project"  style="color:#fff"><i class='fas fa-trash'></i></button>
+                                <button type="submit" class="btn btn-danger btn-sm"  data-toggle="tooltip"  data-placement="top" title="Delete Project"  style="color:#fff"><i class='fas fa-trash'></i></button>
                             </div>
                         </td>
                         </tr>
