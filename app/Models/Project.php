@@ -23,7 +23,7 @@ class Project extends Model
         'status',
         'plots_no',
         'block',
-        'file_path',
+        'file',
         'installment_period',
         'price_per_sqm',
         'start_date',

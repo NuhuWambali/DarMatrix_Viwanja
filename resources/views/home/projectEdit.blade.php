@@ -9,8 +9,9 @@
         <div class="card-body">
           <div class="example">
             <div class="tab-content rounded-bottom">
-                <form action="{{route('editProject',$projectDetails->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('editProject',['id' => $projectDetails->id])}}"  id="editProject-form-{{ $projectDetails->id }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
                         <div class="mb-3 row">
                             <div class="col-4">
@@ -105,9 +106,10 @@
                         </div>
                         <div class="mb-3 row">
                             <div class="col-4">
-                                <label class=" col-form-label" for="inputFile">File</label>
-                                <input class="form-control @error('file_path') is-invalid @enderror" type="file" id="file_path" name="file_path"  value="{{ $projectDetails->file_path}}" placeholder="Enter File Path">
-                                @error('file_path')
+                                <label class="col-form-label" for="inputFile">File</label>
+                                <input class="form-control @error('file') is-invalid @enderror" type="file" id="file" name="file" value="{{$projectDetails->file_path}}" placeholder="Enter File">
+                                <p>previous file name : {{$projectDetails->file_path}}</p>
+                                @error('file')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
                                 </p>
@@ -143,6 +145,15 @@
                                 @enderror
                             </div>
                             <div class="col-4">
+                                <label class=" col-form-label" for="inputStartDate">End Date</label>
+                                <input class="form-control @error('end_date') is-invalid @enderror" type="date" id="end_date" name="end_date" value="{{$projectDetails->end_date}}" placeholder="Enter End Date">
+                                @error('end_date')
+                                <p class="dismissAlert text-danger" id="dismissAlert">
+                                    {{$message}}
+                                </p>
+                                @enderror
+                            </div>
+                            <div class="col-4">
                                 <label class=" col-form-label" for="inputStatus">Status</label>
                                 <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
                                     <option value="" selected disabled>Select Status</option>
@@ -155,12 +166,14 @@
                                 </p>
                                 @enderror
                             </div>
+                        <div class="mb-3 row">
+
                         </div>
                         <div class="col-4 mt-5">
 
                             <div class="row">
                                 <div class="col-sm-6" >
-                                  <button type="submit" style="float:right" class="btn btn-primary" >
+                                  <button type="submit" style="float:right" onclick="editProjectConfirmation(event,{{ $projectDetails->id }})" class="btn btn-primary" >
                                       Save
                                     </button>
                                 </div>

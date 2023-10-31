@@ -110,8 +110,8 @@
                         <div class="mb-3 row">
                             <div class="col-4">
                                 <label class=" col-form-label" for="inputFile">File</label>
-                                <input class="form-control @error('file_path') is-invalid @enderror" type="file" id="file_path" name="file_path" value="{{old('file_path')}}" placeholder="Enter File Path">
-                                @error('file_path')
+                                <input class="form-control @error('file') is-invalid @enderror" type="file" id="file" name="file" value="{{old('file')}}" placeholder="Enter File">
+                                @error('file')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
                                 </p>
@@ -141,6 +141,15 @@
                                 <label class=" col-form-label" for="inputStartDate">Start Date</label>
                                 <input class="form-control @error('start_date') is-invalid @enderror" type="date" id="start_date" name="start_date" value="{{old('start_date')}}" placeholder="Enter Start Date">
                                 @error('start_date')
+                                <p class="dismissAlert text-danger" id="dismissAlert">
+                                    {{$message}}
+                                </p>
+                                @enderror
+                            </div>
+                            <div class="col-4">
+                                <label class=" col-form-label" for="inputStartDate">End Date</label>
+                                <input class="form-control @error('end_date') is-invalid @enderror" type="date" id="end_date" name="end_date" value="{{old('end_date')}}" placeholder="Enter End Date">
+                                @error('end_date')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
                                 </p>

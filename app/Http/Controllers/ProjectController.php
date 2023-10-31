@@ -35,10 +35,11 @@ class ProjectController extends Controller
             'description'=>'',
             'status'=>'required',
             'plots_number'=>'',
-            'file_path'=>'',
+            'file'=>'',
             'block'=>'',
             'price_per_sqm'=>'required',
             'start_date'=>'',
+            'end_date'=>'',
 
         ],[
             'name.required' => 'The project name is required.',
@@ -64,10 +65,9 @@ class ProjectController extends Controller
         $addProject->plots_no = $validatedProjectData['plots_number'];
         $addProject->description = $validatedProjectData['description'];
         $addProject->price_per_sqm = $validatedProjectData['price_per_sqm'];
-        if ($request->hasFile('file_path')) {
-            $file = $request->file('file_path');
-            $addProject->file_path=$file->store('files', 'public');
-        }
+        $fileName = time().'_'.$request->file->getClientOriginalName();
+        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+        $addProject->file_path = '/storage/' . $filePath;
         $addProject->installment_period = $validatedProjectData['installment_period'];
         $addProject->block = $validatedProjectData['block'];
         $addProject->unavailable_plots=$validatedProjectData['total_plots']-$validatedProjectData['available_plots'];
@@ -76,9 +76,9 @@ class ProjectController extends Controller
         $addProject->updated_by = $username;
         $addProject->created_at = now();
         $addProject->updated_at = now();
-        $addProject->end_date=null;
+        $addProject->end_date=$validatedProjectData['end_date'];;
         $addProject->save();
-        Alert::success('Success','Role Updated Successfully!');
+        Alert::success('Success','Project Added Successfully!');
         return to_route('projects');
 
     }
@@ -94,7 +94,8 @@ class ProjectController extends Controller
     }
 
     public function editProject($id,Request $request){
-        $projectDetails=Project::findOrFail($id);
+        $username=Auth::user()->username;
+        $editProjectDetails=Project::findOrFail($id);
         $validatedProjectData=$request->validate([
             'name'=>'required|string',
             'address'=>'required',
@@ -107,10 +108,11 @@ class ProjectController extends Controller
             'description'=>'',
             'status'=>'required',
             'plots_number'=>'',
-            'file_path'=>'',
+            'file'=>'',
             'block'=>'',
             'price_per_sqm'=>'required',
             'start_date'=>'',
+            'end_date'=>'',
         ],[
             'name.required' => 'The project name is required.',
             'address.required' => 'Address is required.',
@@ -123,7 +125,31 @@ class ProjectController extends Controller
             'installment_period.required'=>'Installment period is required',
 
         ]);
-        $projectDetails->update($validatedProjectData);
+        $editProjectDetails->name = $validatedProjectData['name'];
+        $editProjectDetails->address = $validatedProjectData['address'];
+        $editProjectDetails->city = $validatedProjectData['city'];
+        $editProjectDetails->region = $validatedProjectData['region'];
+        $editProjectDetails->total_plots = $validatedProjectData['total_plots'];
+        $editProjectDetails->available_plots = $validatedProjectData['available_plots'];
+        $editProjectDetails->status = $validatedProjectData['status'] ? 1 : 0;
+        $editProjectDetails->price_per_sqm = $validatedProjectData['price_per_sqm'];
+        $editProjectDetails->plots_no = $validatedProjectData['plots_number'];
+        $editProjectDetails->description = $validatedProjectData['description'];
+        $editProjectDetails->price_per_sqm = $validatedProjectData['price_per_sqm'];
+        $fileName = time().'_'.$request->file->getClientOriginalName();
+        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+        $editProjectDetails->file_path = '/storage/' . $filePath;
+        $editProjectDetails->installment_period = $validatedProjectData['installment_period'];
+        $editProjectDetails->block = $validatedProjectData['block'];
+        $editProjectDetails->unavailable_plots=$validatedProjectData['total_plots']-$validatedProjectData['available_plots'];
+        $editProjectDetails->start_date = $validatedProjectData['start_date'];
+        $editProjectDetails->created_by = $username;
+        $editProjectDetails->updated_by = $username;
+        $editProjectDetails->created_at = now();
+        $editProjectDetails->updated_at = now();
+        $editProjectDetails->end_date=$validatedProjectData['end_date'];;
+        $editProjectDetails->save();
+        // $projectDetails->update($validatedProjectData);
         Alert::success('Success','Project Edited Successfully!');
         return to_route('projects');
     }
@@ -134,4 +160,5 @@ class ProjectController extends Controller
         Alert::success('Success','Project Deleted Successfully!');
         return to_route('projects');
     }
+
 }

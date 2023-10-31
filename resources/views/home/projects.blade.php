@@ -47,19 +47,23 @@
                             <h6>{{number_format($project->price_per_sqm)}}</h6>
                         </td>
                         <td>
-                        <a href="{{route('projectDetails', $project->id)}}" type="button" class="btn btn-success btn-sm">
-                            <i class='fas fa-eye'></i>
-                        </a>
-                        <a href="{{route('editProjectPage',$project->id)}}" type="button" class="btn btn-primary btn-sm">
-                            <i class='fas fa-edit'></i>
-                        </a>
-                        {{-- <a type=" " href="{{route('deleteProject',$project->id)}}" class="btn btn-danger btn-sm">
-                            <i class='fas fa-trash'></i>
-                        </a> --}}
-                        <form action="{{route('deleteProject',['id' => $project->id])}}" id="deleteProject-form-{{ $project->id }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                        <button type="submit" onclick="deleteProjectConfirmation(event,{{ $project->id }})" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"title="Delete Project" style="color:#fff"><i class='fas fa-trash'></i></button>
-                        </form>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="{{route('projectDetails', $project->id)}}" type="button" class="btn btn-success btn-sm">
+                                        <i class='fas fa-eye'></i>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="{{route('editProjectPage',$project->id)}}" type="button" class="btn btn-primary btn-sm">
+                                        <i class='fas fa-edit'></i>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                </a>
+                                <form action="{{route('deleteProject',['id' => $project->id])}}" id="deleteProject-form-{{$project->id}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                <button type="submit" onclick="deleteProjectConfirmation(event,{{$project->id}})" class="btn btn-danger btn-sm"  data-toggle="tooltip"  data-placement="top" title="Delete Project"  style="color:#fff"><i class='fas fa-trash'></i></button>
+                            </div>
                         </td>
                         </tr>
                     @endforeach
