@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\PlotsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
@@ -68,18 +69,24 @@ Route::post('/user/resendPassword/{id}', [UserController::class, 'resendPassword
 
 
 //projects routes
-Route::get('/projects', [ProjectController::class,'getProjectsPage'])->name('projects');
+Route::get('/projects', [ProjectController::class,'getProjectsPage'])->name('projects')->middleware('auth');
 
-Route::get('/AddProject',[ProjectController::class, 'addProjectPage'])->name('addProjectPage');
+Route::get('/AddProject',[ProjectController::class, 'addProjectPage'])->name('addProjectPage')->middleware('auth');
 
-Route::post('/addProjects', [ProjectController::class,'addProject'])->name('addProject');
+Route::post('/addProjects', [ProjectController::class,'addProject'])->name('addProject')->middleware('auth');
 
-Route::get('/projectDetails/{id}', [ProjectController::class,'ProjectsDetails'])->name('projectDetails');
+Route::get('/projectDetails/{id}', [ProjectController::class,'ProjectsDetails'])->name('projectDetails')->middleware('auth');
 
-Route::get('/editProject/{id}', [ProjectController::class,'editProjectsPage'])->name('editProjectPage');
+Route::get('/editProject/{id}', [ProjectController::class,'editProjectsPage'])->name('editProjectPage')->middleware('auth');
 
-Route::put('/editProject/{id}', [ProjectController::class,'editProject'])->name('editProject');
+Route::put('/editProject/{id}', [ProjectController::class,'editProject'])->name('editProject')->middleware('auth');
 
-Route::post('/deleteProject/{id}', [ProjectController::class,'deleteProject'])->name('deleteProject');
+Route::post('/deleteProject/{id}', [ProjectController::class,'deleteProject'])->name('deleteProject')->middleware('auth');
 
 
+//plots routes
+Route::get('/project/plots/',[PlotsController::class,'viewPlots'])->name('viewPlots')->middleware('auth');
+
+Route::get('/project/addPlot', [PlotsController::class,'viewAddPlot'])->name('viewAddPlot')->middleware('auth');
+
+Route::post('/project/addPlot', [PlotsController::class, 'addPlot'])->name('addPlot')->middleware('auth');

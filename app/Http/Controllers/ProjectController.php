@@ -64,7 +64,6 @@ class ProjectController extends Controller
         $addProject->price_per_sqm = $validatedProjectData['price_per_sqm'];
         $addProject->plots_no = $validatedProjectData['plots_number'];
         $addProject->description = $validatedProjectData['description'];
-        $addProject->price_per_sqm = $validatedProjectData['price_per_sqm'];
         $fileName = time().'_'.$request->file->getClientOriginalName();
         $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
         $addProject->file_path = '/storage/' . $filePath;
@@ -163,5 +162,7 @@ class ProjectController extends Controller
         Alert::success('Success','Project Deleted Successfully!');
         return to_route('projects');
     }
+
+
 
 }

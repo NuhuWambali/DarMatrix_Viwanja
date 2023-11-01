@@ -61,12 +61,12 @@
                                 @if($user->status=='Active')
                                 <form action="{{route('deactivateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top"title="Deactivate" style="color:#fff"> <i class='fas fa-lock'></i></button>
+                                    <button type="submit" onclick="deactivateUserConfirmation(event,{{ $user->id }})" class="btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top"title="Deactivate" style="color:#fff"> <i class='fas fa-lock'></i></button>
                                 </form>
                                @else
                                 <form action="{{route('activateUser', ['id' => $user->id]) }}" id="edit-form-{{ $user->id }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button type="submit" onclick="confirmation(event,{{ $user->id }})"  class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"title="Activate" style="color:#fff"> <i class='fas fa-lock-open'></i></button>
+                                    <button type="submit" onclick="activateUserConfirmation(event,{{ $user->id }})"  class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"title="Activate" style="color:#fff"> <i class='fas fa-lock-open'></i></button>
                                 </form>
                               @endif
                             </div>

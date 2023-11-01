@@ -10,12 +10,31 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-    function confirmation(ev,userId){
+    function deactivateUserConfirmation(ev,userId){
         ev.preventDefault();
         var urlToRedirect=ev.currentTarget.getAttribute("href");
         swal({
             title:"Are You Sure?",
-            text:"Cancel if You Are Not Sure!",
+            text:"This User will be Deactivated",
+            icon:"warning",
+            buttons:true,
+            primaryMode:true
+        })
+        .then((willCancel)=>{
+            if(willCancel){
+                const form = document.getElementById('edit-form-' + userId);
+                form.submit();
+            }
+
+        });
+    }
+
+    function activateUserConfirmation(ev,userId){
+        ev.preventDefault();
+        var urlToRedirect=ev.currentTarget.getAttribute("href");
+        swal({
+            title:"Are You Sure?",
+            text:"This User will be Activated",
             icon:"warning",
             buttons:true,
             primaryMode:true

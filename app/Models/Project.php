@@ -9,6 +9,8 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+    
     protected $table='projects';
 
     protected $fillable = [
@@ -40,5 +42,10 @@ class Project extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function Plot()
+    {
+      return $this->hasMany(Plot::class);
+    }
 
 }

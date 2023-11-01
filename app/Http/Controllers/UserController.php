@@ -8,8 +8,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 
 
-
-
 class UserController extends Controller
 {
     //
@@ -99,11 +97,11 @@ class UserController extends Controller
         return to_route('user');
     }
 
+
     public function userDetails($id){
         $userDetails=User::findOrFail($id);
         return view('home.userDetails',compact('userDetails'));
     }
-
 
     public function resendPassword($id){
         $user=User::findOrFail($id);
@@ -116,4 +114,5 @@ class UserController extends Controller
         $user->ResendPasswordNotification($username,$userEmail,$randomPassword);
         return to_route('user');
     }
+
 }
