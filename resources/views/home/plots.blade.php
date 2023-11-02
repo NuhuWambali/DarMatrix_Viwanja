@@ -38,13 +38,13 @@
                             <h6>{{$plot->plot_number}}</h6>
                         </td>
                         <td>
-                            <h6>{{$plot->plot_size}}</h6>
+                            <h6>{{(int)$plot->plot_size}}</h6>
                         </td>
                         <td>
                             <h6>{{$plot->land_use}}</h6>
                         </td>
                         <td>
-                            <h6>{{$plot->installment_total_price}}</h6>
+                            <h6>{{number_format($plot->installment_total_price)}}</h6>
                         </td>
                         <td>
                             <div class="row">

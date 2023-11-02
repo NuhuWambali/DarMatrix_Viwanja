@@ -141,17 +141,15 @@
                                     </button>
                                 </div>
                                 <div class="col-sm-2">
-                                  {{-- <a href="{{route('viewPlots')}}" type="button" style="color:#fff" class="btn btn-danger"  >
-                                      Cancel
-                                  </a> --}}
+                                    <a href="{{route('viewPlots',$project_id)}}" style="color:#fff" class="btn btn-danger mb-3" >Cancel</a></button>
                                 </div>
                                 <div class="col-sm-8">
-
                                   </div>
                             </div>
                       </div>
                     </div>
                 </form>
+
             </div>
           </div>
         </div>
