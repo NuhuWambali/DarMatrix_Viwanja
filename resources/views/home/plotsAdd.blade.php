@@ -36,6 +36,7 @@
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
+                            <input class="form-control @error('project_id') is-invalid @enderror" type="number" id="project_id" name="project_id" value="{{$project_id}}" placeholder="Enter Plot Number" hidden>
                             <div class="col-4">
                                 <label class=" col-form-label" for="inputAddress">Plot Number</label>
                                 <input class="form-control @error('plot_number') is-invalid @enderror" type="text" id="plot_number" name="plot_number" value="{{old('plot_number')}}" placeholder="Enter Plot Number">
@@ -46,9 +47,9 @@
                                 @enderror
                             </div>
                             <div class="col-4">
-                                <label class=" col-form-label" for="inputSize">Size ( in sqm )</label>
-                                <input class="form-control @error('size') is-invalid @enderror" type="number" id="size" name="size" value="{{old('size')}}" placeholder="Enter Plot Size">
-                                @error('size')
+                                <label class=" col-form-label" for="inputSize">Plot Size ( in sqm )</label>
+                                <input class="form-control @error('plot_size') is-invalid @enderror" type="number" id="plot_size" name="plot_size" value="{{old('plot_size')}}" placeholder="Enter Plot Size">
+                                @error('plot_size')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
                                 </p>
@@ -66,8 +67,8 @@
                                 @enderror
                             </div>
                             <div class="col-4">
-                                <label class=" col-form-label" for="inputTotalPlots">Cash Value</label>
-                                <input class="form-control @error('cash_value') is-invalid @enderror" type="number" id="cash_value" name="cash_value" value="{{old('cash_value')}}" placeholder="Enter Cash Value">
+                                <label class=" col-form-label" for="inputTotalPlots">Cash Price Per Sqm</label>
+                                <input class="form-control @error('cash_price_per_sqm') is-invalid @enderror" type="number" id="cash_price_per_sqm" name="cash_price_per_sqm" value="{{old('cash_price_per_sqm')}}" placeholder="Enter Cash Price Per SQM">
                                 @error('cash_value')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
@@ -140,9 +141,9 @@
                                     </button>
                                 </div>
                                 <div class="col-sm-2">
-                                  <a href="{{route('viewPlots')}}" type="button" style="color:#fff" class="btn btn-danger"  >
+                                  {{-- <a href="{{route('viewPlots')}}" type="button" style="color:#fff" class="btn btn-danger"  >
                                       Cancel
-                                  </a>
+                                  </a> --}}
                                 </div>
                                 <div class="col-sm-8">
 

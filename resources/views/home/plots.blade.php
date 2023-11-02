@@ -8,7 +8,7 @@
       <div class="">
            <div class="row">
                 <div class="col-sm-2 mb-3">
-                     <a href="{{route('viewAddPlot')}}" type="button" class="btn btn-primary" >
+                     <a href="{{route('viewAddPlot',$project_id)}}" type="button" class="btn btn-primary" >
                         Add Plot
                       </a>
                 </div>
@@ -29,27 +29,27 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($plots as $index=>$plot)
                         <tr class="align-middle">
                         <td>
-                            <h6>1</h6>
+                            <h6>{{$index+1}}</h6>
                         </td>
                         <td>
-                            <h6>fjuerre</h6>
+                            <h6>{{$plot->plot_number}}</h6>
                         </td>
                         <td>
-                            <h6>erfgbujcbe</h6>
+                            <h6>{{$plot->plot_size}}</h6>
                         </td>
                         <td>
-                            <h6>rfvgjrer</h6>
+                            <h6>{{$plot->land_use}}</h6>
                         </td>
                         <td>
-                            <h6>jhfbsdjfj</h6>
+                            <h6>{{$plot->installment_total_price}}</h6>
                         </td>
                         <td>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <a href="" type="button" class="btn btn-success btn-sm">
+                                    <a href="{{route('plotDetails',$plot->id)}}" type="button" class="btn btn-success btn-sm">
                                         <i class='fas fa-eye'></i>
                                     </a>
                                 </div>
@@ -67,7 +67,7 @@
 
                         </td>
                         </tr>
-
+                     @endforeach
                     </tbody>
             </table>
             </div>

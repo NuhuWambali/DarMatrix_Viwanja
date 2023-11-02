@@ -11,9 +11,9 @@ class ProjectController extends Controller
 {
     //
 
+
     public function getProjectsPage(){
         $projects=Project::all();
-
         return view('home.projects',compact('projects',));
     }
 
@@ -51,7 +51,6 @@ class ProjectController extends Controller
             'status.required'=>'Status is required',
             'price_per_sqm.required'=>'Price is required',
             'installment_period.required'=>'Installment period is required',
-
         ]);
         $addProject = new Project;
         $addProject->name = $validatedProjectData['name'];
@@ -75,7 +74,7 @@ class ProjectController extends Controller
         $addProject->updated_by = $username;
         $addProject->created_at = now();
         $addProject->updated_at = now();
-        $addProject->end_date=$validatedProjectData['end_date'];;
+        $addProject->end_date=$validatedProjectData['end_date'];
         $addProject->save();
         Alert::success('Success','Project Added Successfully!');
         return to_route('projects');

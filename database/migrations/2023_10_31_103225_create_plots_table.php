@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->string('plot_number')->nullable();
-            $table->decimal('installment_total_price');
             $table->decimal('plot_size');
             $table->string('land_use')->nullable();
+            $table->integer('installment_period');
             $table->decimal('price_per_sqm');
             $table->decimal('cash_price_per_sqm');
-            $table->integer('installment_period');
             $table->decimal('monthly_installment_price');
             $table->decimal('cash_total_value');
+            $table->decimal('installment_total_price');
             $table->string('description1')->nullable();
             $table->string('description2')->nullable();
             $table->string('description3')->nullable();

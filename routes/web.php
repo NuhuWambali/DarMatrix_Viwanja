@@ -49,11 +49,11 @@ Route::post('/role/{id}/delete',[RolesController::class, 'deleteRole'])->name('d
 
 
 //user controller
-Route::get('/users', [UserController::class, 'getUser'])->name('user');
+Route::get('/users', [UserController::class, 'getUser'])->name('user')->middleware('auth');
 
-Route::get('/users/addUser', [UserController::class, 'getAddUser'])->name('getAddUser');
+Route::get('/users/addUser', [UserController::class, 'getAddUser'])->name('getAddUser')->middleware('auth');
 
-Route::post('/adduser',[UserController::class, 'addUser'])->name('adduser');
+Route::post('/adduser',[UserController::class, 'addUser'])->name('adduser')->middleware('auth');
 
 Route::get('/users/edit/{id}', [UserController::class,'editUserPage'])->name('getEditUser')->middleware('auth');
 
@@ -85,8 +85,10 @@ Route::post('/deleteProject/{id}', [ProjectController::class,'deleteProject'])->
 
 
 //plots routes
-Route::get('/project/plots/',[PlotsController::class,'viewPlots'])->name('viewPlots')->middleware('auth');
+Route::get('/project/{id}/plots',[PlotsController::class,'viewPlots'])->name('viewPlots')->middleware('auth');
 
-Route::get('/project/addPlot', [PlotsController::class,'viewAddPlot'])->name('viewAddPlot')->middleware('auth');
+Route::get('/project/{id}/plots/addPlot', [PlotsController::class,'viewAddPlot'])->name('viewAddPlot')->middleware('auth');
 
 Route::post('/project/addPlot', [PlotsController::class, 'addPlot'])->name('addPlot')->middleware('auth');
+
+Route::get('/project/{id}/plot/plotDetails', [PlotsController::class,'plotDetails'])->name('plotDetails')->middleware('auth');
