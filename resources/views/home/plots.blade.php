@@ -54,13 +54,13 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-3">
-                                    <a href="" type="button" class="btn btn-primary btn-sm">
+                                    <a href="{{route('plotEdit',$plot->id)}}" type="button" class="btn btn-primary btn-sm">
                                         <i class='fas fa-edit'></i>
                                     </a>
                                 </div>
                                 <div class="col-sm-3">
                                 </a>
-                                <form action=""  method="post" enctype="multipart/form-data">
+                                <form action="{{route('deletePlot',$plot->id)}}"  method="post" enctype="multipart/form-data">
                                     @csrf
                                 <button type="submit" class="btn btn-danger btn-sm"  data-toggle="tooltip"  data-placement="top" title="Delete Project"  style="color:#fff"><i class='fas fa-trash'></i></button>
                             </div>
@@ -70,6 +70,10 @@
                      @endforeach
                     </tbody>
             </table>
+
+            </div>
+            <div class="col-sm-2 mt-3">
+                <a href="{{route('projects',$plot->project_id)}}" style="color:#fff" class="btn btn-primary btn-sm mb-3" >back</a></button>
             </div>
       </div>
     </div>

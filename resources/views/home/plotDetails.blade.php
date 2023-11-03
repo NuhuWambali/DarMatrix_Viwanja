@@ -59,7 +59,7 @@
 </tbody>
 </table>
 <div class="col-sm-2">
-    <a href="{{route('viewPlots',$plot->id)}}" style="color:#fff" class="btn btn-primary mb-3" >back</a></button>
+    <a href="{{route('viewPlots',$plot->project_id)}}" style="color:#fff" class="btn btn-primary mb-3" >back</a></button>
 </div>
 
 @endsection

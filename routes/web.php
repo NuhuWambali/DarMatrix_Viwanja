@@ -92,3 +92,10 @@ Route::get('/project/{id}/plots/addPlot', [PlotsController::class,'viewAddPlot']
 Route::post('/project/addPlot', [PlotsController::class, 'addPlot'])->name('addPlot')->middleware('auth');
 
 Route::get('/project/{id}/plot/plotDetails', [PlotsController::class,'plotDetails'])->name('plotDetails')->middleware('auth');
+
+Route::get('/project/{id}/plot/plotEdit', [PlotsController::class,'plotEdit'])->name('plotEdit')->middleware('auth');
+
+Route::put('/project/editPlot/{id}', [PlotsController::class, 'createPlotEdit'])->name('editPlot')->middleware('auth');
+
+Route::post('/project/deletePlot/{id}', [PlotsController::class, 'deletePlot'])->name('deletePlot')->middleware('auth');
+

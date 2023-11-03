@@ -18,11 +18,11 @@ return new class extends Migration
             $table->decimal('plot_size');
             $table->string('land_use')->nullable();
             $table->integer('installment_period');
-            $table->decimal('price_per_sqm');
-            $table->decimal('cash_price_per_sqm');
-            $table->decimal('monthly_installment_price');
-            $table->decimal('cash_total_value');
-            $table->decimal('installment_total_price');
+            $table->decimal('price_per_sqm',10,2);
+            $table->decimal('cash_price_per_sqm',10,2);
+            $table->decimal('monthly_installment_price',10,2);
+            $table->decimal('cash_total_value',10,2);
+            $table->decimal('installment_total_price',10,2);
             $table->string('description1')->nullable();
             $table->string('description2')->nullable();
             $table->string('description3')->nullable();
