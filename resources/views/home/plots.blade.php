@@ -12,8 +12,21 @@
                         Add Plot
                       </a>
                 </div>
-                <div class="col-sm-10 ml-5 mt-1 text-center">
+                <div class="col-sm-7 ml-5 mt-1 text-center">
                     <h4 style="width:22em" class="mb-3">All Plots</h4>
+                </div>
+                <div class="col-sm-2 ml-5 mt-1 text-center">
+                    {{-- <form action="" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="excelFile">Upload Excel File:</label>
+                                <input type="file" class="form-control-file" id="excelFile" name="excelFile">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Import Excel</button>
+                        </div>
+
+                    </form> --}}
                 </div>
             </div>
             <div class="table">
