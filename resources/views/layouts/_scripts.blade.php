@@ -103,4 +103,22 @@
         });
     }
 
+    function EditCustomerOnconfirmation(ev,CustomerId){
+        ev.preventDefault();
+        var urlToRedirect=ev.currentTarget.getAttribute("href");
+        swal({
+            title:"Are You Sure?",
+            text:"User will be Edited",
+            icon:"warning",
+            buttons:true,
+            primaryMode:true
+        })
+        .then((willCancel)=>{
+            if(willCancel){
+                const form = document.getElementById('edit-customer-form-' + CustomerId);
+                form.submit();
+            }
+        });
+    }
+
 </script>

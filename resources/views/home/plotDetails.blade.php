@@ -2,7 +2,7 @@
 @section('title','plot details')
 @section('smallTitle','Project / Plot / plotDetails')
 @section('content')
-<table class="table table-bordered  roundedCorners">
+<table class="table table-bordered  table-responsive roundedCorners">
     <tbody>
         <tr>
             <th>Plot Number</th>

@@ -28,6 +28,12 @@
           Users
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('viewCustomers')}}">
+          <svg class="nav-icon"></svg>
+          Customers
+        </a>
+      </li>
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
   </div>

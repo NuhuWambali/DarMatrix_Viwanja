@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function createLogin(Request $request){
       $validatedData=$request->validate(
-            [  
+            [
                 'email'=>'required|email',
                 'password'=>'required',
               ],[
@@ -32,12 +32,12 @@ class AuthController extends Controller
                 Alert::success('Loggedin Successfully','Welcome to DarMatrix Viwanja');
                 return to_route('index');
             }
-           
+
         }
         return redirect('/')->with('message','Wrong Email or Password');
     }
 
-    
+
     public function logout(){
         session::flush();
         Auth::logout();

@@ -97,7 +97,6 @@ class UserController extends Controller
         return to_route('user');
     }
 
-
     public function userDetails($id){
         $userDetails=User::findOrFail($id);
         return view('home.userDetails',compact('userDetails'));
@@ -116,3 +115,4 @@ class UserController extends Controller
     }
 
 }
+
