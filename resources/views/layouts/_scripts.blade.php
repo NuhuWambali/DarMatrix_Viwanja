@@ -121,4 +121,23 @@
         });
     }
 
+    function deleteCustomerOnconfirmation(ev,CustomerId){
+        ev.preventDefault();
+        var urlToRedirect=ev.currentTarget.getAttribute("href");
+        swal({
+            title:"Are You Sure?",
+            text:"User will be Deleted",
+            icon:"warning",
+            buttons:true,
+            primaryMode:true
+        })
+        .then((willCancel)=>{
+            if(willCancel){
+                const form = document.getElementById('delete-customer-form-' + CustomerId);
+                console.log(CustomerId);
+                form.submit();
+            }
+        });
+    }
+
 </script>
