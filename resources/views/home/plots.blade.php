@@ -6,7 +6,7 @@
 <div class="card mb-4">
     <div class="card-body">
       <div class="">
-           <div class="row">
+           <div class="row ">
                 <div class="col-sm-2 mb-3">
                      <a href="{{route('viewAddPlot',$project_id)}}" type="button" class="btn btn-primary" >
                         Add Plot
@@ -16,19 +16,10 @@
                     <h4 style="width:22em" class="mb-3">All Plots</h4>
                 </div>
                 <div class="col-sm-2 ml-5 mt-1 text-center">
-                    {{-- <form action="" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="excelFile">Upload Excel File:</label>
-                                <input type="file" class="form-control-file" id="excelFile" name="excelFile">
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm">Import Excel</button>
-                        </div>
-
-                    </form> --}}
                 </div>
             </div>
+
+            @if($plots->count())
             <div class="table">
             <table class="table border mb-0">
                     <thead class="table-light fw-semibold">
@@ -90,5 +81,7 @@
             </div>
       </div>
     </div>
+    @else
+    @endif
 </div>
 @endsection
