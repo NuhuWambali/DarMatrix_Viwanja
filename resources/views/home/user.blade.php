@@ -43,16 +43,16 @@
                             <h6>{{$user->phone}}</h6>
                         </td>
                         <td>
-                            @if($user->status=='inActive')
-                            <h6 style="color:red">{{$user->status}}</h6>
+                            @if($user->status == 'inActive')
+                                <h6 class="text-center" style="background-color: red; border-radius: 16px; padding: 2px; color: white;">{{$user->status}}</h6>
                             @else
-                            <h6 style="color:green">{{$user->status}}</h6>
+                                <h6 class="text-center" style="background-color: green; border-radius: 16px; padding: 2px; color: white;">{{$user->status}}</h6>
                             @endif
                         </td>
+
                     <td>
                         <div class="row">
                             <div class="col-sm-3">
-                                <a href="{{route('userDetails',$user->id)}}" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"title="View" style="color:#fff"> <i class='fas fa-eye'></i></a>
                             </div>
                             <div class="col-sm-3">
                                 <a href="{{route('getEditUser',$user->id)}}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"title="Edit" > <i class='fas fa-edit'></i></a>

@@ -10,7 +10,7 @@
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
       <li class="nav-item"><a class="nav-link" href="{{route('index')}}">
           <svg class="nav-icon">
-            {{-- <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use> --}}
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('projects')}}">
@@ -20,7 +20,7 @@
           </li>
       <li class="nav-item"><a class="nav-link" href="{{route('roles')}}">
           <svg class="nav-icon">
-            {{-- <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use> --}}
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
           </svg> Roles</a></li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('user')}}">
@@ -32,6 +32,12 @@
         <a class="nav-link" href="{{route('viewCustomers')}}">
           <svg class="nav-icon"></svg>
           Customers
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('paymentMethod')}}">
+          <svg class="nav-icon"></svg>
+         Payment Methods
         </a>
       </li>
     </ul>

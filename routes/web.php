@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PlotsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
@@ -100,17 +102,24 @@ Route::put('/project/editPlot/{id}', [PlotsController::class, 'createPlotEdit'])
 
 Route::post('/project/deletePlot/{id}', [PlotsController::class, 'deletePlot'])->name('deletePlot')->middleware('auth');
 
-//customers routes
-Route::get('/customers',[CustomerController::class, 'viewCustomers'])->name('viewCustomers')->middleware('auth');
 
-Route::get('/addCustomer',[CustomerController::class, 'addCustomerPage'])->name('addCustomerPage')->middleware('auth');
+Route::middleware(['auth'])->group(function(){
+    //customers routes
+    Route::get('/customers', [CustomerController::class, 'viewCustomers'])->name('viewCustomers');
+    Route::get('/addCustomer', [CustomerController::class, 'addCustomerPage'])->name('addCustomerPage');
+    Route::post('/addCustomer', [CustomerController::class, 'addCustomer'])->name('addCustomer');
+    Route::get('/customerDetails/{id}', [CustomerController::class, 'customerDetails'])->name('customerDetails');
+    Route::get('/editCustomer/{id}', [CustomerController::class, 'editCustomerPage'])->name('editCustomer');
+    Route::put('/editCustomer/{id}', [CustomerController::class, 'editCustomer'])->name('customer');
+    Route::post('/deleteCustomer/{id}', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
 
-Route::post('/addCustomer',[CustomerController::class, 'addCustomer'])->name('addCustomer')->middleware('auth');
+// payment method
+    Route::get('/paymentMethods',[PaymentMethodController::class,'paymentMethodPage'])->name('paymentMethod');
+    Route::get('/addPaymentMethod',[PaymentMethodController::class, 'addPaymentMethodPage'])->name('addPaymentMethodPage');
+    Route::post('/addPaymentMethod',[PaymentMethodController::class, 'addPaymentMethod'])->name('addPaymentMethod');
+    Route::post('/deletePaymentMethod/{id}',[PaymentMethodController::class, 'deletePaymentMethod'])->name('deletePaymentMethod');
+    Route::get('/editPaymentMethod/{id}', [PaymentMethodController::class, 'editPaymentMethodPage'])->name('editPaymentMethodPage');
+    Route::put('/editPaymentMethod/{id}', [PaymentMethodController::class,'editPaymentMethod'])->name('editPaymentMethod');
+});
 
-Route::get('/customerDetails/{id}', [CustomerController::class,'customerDetails'])->name('customerDetails')->middleware('auth');
 
-Route::get('/editCustomer/{id}', [CustomerController::class,'editCustomerPage'])->name('editCustomer')->middleware('auth');
-
-Route::put('/editCustomer/{id}', [CustomerController::class, 'editCustomer'])->name('customer')->middleware('auth');
-
-Route::post('/deleteCustomer/{id}', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer')->middleware('auth');
