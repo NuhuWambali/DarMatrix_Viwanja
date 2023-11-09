@@ -22,7 +22,7 @@ class PaymentMethodController extends Controller
     public function addPaymentMethod(Request $request){
         $validatedData=$request->validate([
             'name'=>'required',
-            'description'=>'required',
+            'description'=>'',
         ]);
         $addPaymentMethod=new PaymentMethod;
         $addPaymentMethod->name=$validatedData['name'];
@@ -43,8 +43,8 @@ class PaymentMethodController extends Controller
     public function editPaymentMethod(Request $request,$id){
         $editPaymentMethod=PaymentMethod::findOrFail($id);
         $validatedData=$request->validate([
-            'name'=>'required',
-            'description'=>'required',
+            'name'=>'required|unique:payment_methods,name,' . $editPaymentMethod->id,
+            'description'=>'',
         ]);
         $editPaymentMethod->name=$validatedData['name'];
         $editPaymentMethod->description=$validatedData['description'];

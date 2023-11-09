@@ -155,13 +155,16 @@ class ProjectController extends Controller
         return to_route('projects');
     }
 
-    public function deleteProject($id){
-        $deleteProject=Project::findOrFail($id);
-        $deleteProject->delete();
-        Alert::success('Success','Project Deleted Successfully!');
-        return to_route('projects');
+    public function deleteProject($id)
+     {
+      $project = Project::findOrFail($id);
+       if ($project->plots->count()) {
+        Alert::error('Error', 'Cannot delete project with plots!');
+        return back();
     }
-
-
+    $project->delete();
+    Alert::success('Success', 'Project Deleted Successfully!');
+    return to_route('projects');
+}
 
 }

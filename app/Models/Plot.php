@@ -35,7 +35,7 @@ class Plot extends Model
         'updated_by',
     ];
 
-    public function Project()
+    public function project()
     {
        return $this->belongsTo(Project::class);
     }

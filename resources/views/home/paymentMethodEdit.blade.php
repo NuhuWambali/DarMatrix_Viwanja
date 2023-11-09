@@ -27,7 +27,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label" for="inputPassword">Description</label>
                             <div class="col-sm-7">
-                            <input class="form-control @error('description') is-invalid @enderror" type="text" id="description" name="description" value="{{$paymentMethods->description}}" required>
+                            <input class="form-control @error('description') is-invalid @enderror" type="text" id="description" name="description" value="{{$paymentMethods->description}}" >
                             @error('description')
                             <p class="dismissAlert text-danger" id="dismissAlert">
                                 {{$message}}
