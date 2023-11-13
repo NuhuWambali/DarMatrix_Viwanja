@@ -40,4 +40,12 @@ class Plot extends Model
        return $this->belongsTo(Project::class);
     }
 
+    public function customers(){
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
+
 }

@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use HasFactory;
-    
+
     protected $table='payment_methods';
 
     protected $fillable=['name','description'];
+
+    public function payments(){
+      return  $this->belongsToMany(Payment::class);
+    }
 
 }

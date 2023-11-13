@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Customer;
+use App\Models\{Project,Customer,Plot};
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
@@ -112,4 +112,18 @@ class CustomerController extends Controller
         Alert::success('Success', 'Customer Deleted Successfully');
         return to_route('viewCustomers');
     }
+
+
+    public function assignPlotsPage(){
+        $projects=Project::all();
+        $plots=Plot::all();
+        return view('home.customersAssignPlots',compact('projects','plots'));
+    }
+
+    // public function getPlots($projectId)
+    // {
+    //     $plots = Plot::where('project_id', $projectId)->get();
+
+    //     return response()->json($plots);
+    // }
 }

@@ -41,24 +41,15 @@
                     <h6>{{$customer->address}}</h6>
                 </td>
                 <td>
-                    <div class="row">
+                    <a href="{{route('assignPlots',$customer->id)}}" class="btn btn-dark btn-sm" data-toggle="tooltip"  data-placement="top" title="Assign Plots"  style="color:#fff"><i class="fas fa-id-card" aria-hidden="true"></i></a>
 
-                        <div class="col-3">
-                            <a href="{{route('customerDetails',$customer->id)}}" type="button" class="btn btn-primary btn-sm">
-                                <i class='fas fa-eye'></i>
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            <a href="{{route('editCustomer',$customer->id)}}" type="button" class="btn btn-success btn-sm">
-                                <i class='fas fa-edit'></i>
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            <form action="{{route('deleteCustomer',$customer->id)}}"  method="post" enctype="multipart/form-data">
-                                @csrf
-                            <button type="submit" class="btn btn-danger btn-sm"  data-toggle="tooltip"  data-placement="top" title="Delete Customer"  style="color:#fff"><i class='fas fa-trash'></i></button>
-                        </div>
-                    </div>
+                    <a href="{{route('customerDetails',$customer->id)}}" type="button" class="btn btn-primary btn-sm">
+                        <i class='fas fa-eye'></i>
+                    </a>
+                    <a href="{{route('editCustomer',$customer->id)}}" type="button" class="btn btn-success btn-sm">
+                        <i class='fas fa-edit'></i>
+                    </a>
+                    <a href="{{route('deleteCustomer',$customer->id)}}" class="btn btn-danger btn-sm" data-toggle="tooltip"  data-placement="top" title="Delete Customer"  style="color:#fff"><i class='fas fa-trash'></i></a>
                 </td>
                 </tr>
                 @endforeach

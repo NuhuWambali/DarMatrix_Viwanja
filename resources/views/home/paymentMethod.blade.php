@@ -23,7 +23,7 @@
                 <tr class="align-middle">
                 <th>#</th>
                 <th >Name</th>
-                <th>Descritpion</th>
+                <th>Description</th>
                 <th>Action</th>
                 </tr>
             </thead>
