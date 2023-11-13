@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Project,Customer,Plot};
+use App\Models\{Customer,Order,Project};
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
@@ -114,16 +114,25 @@ class CustomerController extends Controller
     }
 
 
-    public function assignPlotsPage(){
+    public function assignPlotsPage($id){
         $projects=Project::all();
-        $plots=Plot::all();
-        return view('home.customersAssignPlots',compact('projects','plots'));
+        $customer=Customer::findOrFail($id);
+        return view('home.customersAssignPlots',compact('customer','projects'));
     }
 
-    // public function getPlots($projectId)
-    // {
-    //     $plots = Plot::where('project_id', $projectId)->get();
-
-    //     return response()->json($plots);
-    // }
+    public function assignPlots(Request $request){
+        $customer_id=$request->customer_id;
+        $createOrder=new Order;
+        $validatedOrderData=$request->validate([
+            'customer_id'=>'required',
+            'project_id'=>'required',
+            'plot_id'=>'required',
+        ]);
+        $createOrder->customer_id=$validatedOrderData['customer_id'];
+        $createOrder->project_id=$validatedOrderData['project_id'];
+        $createOrder->plot_id=$validatedOrderData['plot_id'];
+        $createOrder->save();
+        Alert::success('Success', 'Order Created Successfully!');
+        return to_route('assignPlots',$customer_id);
+    }
 }

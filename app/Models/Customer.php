@@ -39,4 +39,8 @@ class Customer extends Model
     public function plots(){
         return $this->hasMany(Plot::class);
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

@@ -48,4 +48,8 @@ class Plot extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function orders(){
+        return $this->hasOne(Order::class);
+    }
+
 }

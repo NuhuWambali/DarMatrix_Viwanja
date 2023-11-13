@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/project/{id}/plot/plotEdit', [PlotsController::class,'plotEdit'])->name('plotEdit');
     Route::put('/project/editPlot/{id}', [PlotsController::class, 'createPlotEdit'])->name('editPlot');
     Route::post('/project/deletePlot/{id}', [PlotsController::class, 'deletePlot'])->name('deletePlot');
+    Route::get('/get-plots/{projectId}', [PlotsController::class, 'getPlots']);
 
     //customers routes
     Route::get('/customers', [CustomerController::class, 'viewCustomers'])->name('viewCustomers');
@@ -85,8 +86,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/editCustomer/{id}', [CustomerController::class, 'editCustomerPage'])->name('editCustomer');
     Route::put('/editCustomer/{id}', [CustomerController::class, 'editCustomer'])->name('customer');
     Route::get('/deleteCustomer/{id}', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
-    Route::get('/assignPlots/{id}', [CustomerController::class, 'assignPlotsPage'])->name('assignPlots');
-    Route::post('/assignPlots', [CustomerController::class, 'assignPlotsPage'])->name('assign.plots');
+    Route::get('/assignPlots/customer_id/{id}', [CustomerController::class, 'assignPlotsPage'])->name('assignPlots');
+    Route::post('/assignPlot', [CustomerController::class, 'assignPlots'])->name('assign.plots');
 
 
 // payment method
@@ -97,5 +98,4 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/editPaymentMethod/{id}', [PaymentMethodController::class, 'editPaymentMethodPage'])->name('editPaymentMethodPage');
     Route::put('/editPaymentMethod/{id}', [PaymentMethodController::class,'editPaymentMethod'])->name('editPaymentMethod');
 });
-
 
