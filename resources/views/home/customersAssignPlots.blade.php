@@ -14,7 +14,7 @@
                             @csrf
                             <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
                                 <div class="mb-3 row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-form-label" for="inputName">Project</label>
                                         <input type="text" name="customer_id" value="{{$customer->id}}" hidden>
                                         <select class="form-control" id="project" name="project_id">
@@ -29,12 +29,20 @@
                                             </p>
                                         @enderror
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-form-label" for="plots">Plots</label>
                                         <select class="form-control" id="plots" name="plot_id">
                                         </select>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
+                                        <label class="col-form-label" for="payment_way">Select Payment Way</label>
+                                        <select class="form-control" id="payment_way" name="payment_way">
+                                            <option value="installment" selected disable>Select</option>
+                                            <option value="installment">Installment</option>
+                                            <option value="cash">Cash</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
                                         <div class="mb-1 pt-3">
 
                                             <button class="btn btn-primary mt-4" type="submit">Assign</button>
@@ -72,7 +80,6 @@
                         <td>
                             <h6>{{$order->plot->plot_number}}</h6>
                         </td>
-
                         <td>
                             <a href="#" class="btn btn-dark btn-sm pay-button" data-toggle="tooltip" data-placement="top" title="Pay" style="color:#fff" data-bs-toggle="modal" data-bs-target="#exampleModal" data-order-id="{{$order->id}}">
                                 <i class="fas fa-money-bill" aria-hidden="true"></i> Pay
@@ -89,14 +96,32 @@
 </div>
 {{-- modal --}}
 <div class="modal exampleModal" id="exampleModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 650px;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"></h5>
+          <h5  class="modal-title text-primary">{{$order->project->name }} | Payment Section</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+            <div class="row">
+                <div class="col-4">
+                    <h5>Plot Number : {{$order->plot->plot_number}}</h5>
+                </div>
+                <div class="col-4">
+                    <h5>Location : {{$order->project->city }}</h5>
+                </div>
+                <div class="col-4">
+                    <h5>Price Per SQM : {{$order->plot->plot_number}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h5>Total Price : {{$order->plot->plot_number}}</h5>
+                </div>
+                <div class="col-4">
+                    <h5>Location : {{$order->project->city }}</h5>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

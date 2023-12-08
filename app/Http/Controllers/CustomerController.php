@@ -127,6 +127,7 @@ class CustomerController extends Controller
             'customer_id' => 'required',
             'project_id' => 'required',
             'plot_id' => 'required',
+            'payment_way'=>'required',
         ]);
         $existingOrder = Order::where('plot_id', $validatedOrderData['plot_id'])->first();
         if ($existingOrder) {
@@ -137,6 +138,7 @@ class CustomerController extends Controller
         $createOrder->customer_id = $validatedOrderData['customer_id'];
         $createOrder->project_id = $validatedOrderData['project_id'];
         $createOrder->plot_id = $validatedOrderData['plot_id'];
+        $createOrder->plot_id = $validatedOrderData['payment_way'];
         $createOrder->save();
         $plot = Plot::find($validatedOrderData['plot_id']);
         if ($plot) {
