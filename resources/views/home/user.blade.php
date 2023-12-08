@@ -28,6 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($getUser->count())
                         @foreach($getUser as $index=>$user)
                         <tr class="align-middle">
                         <td>
@@ -82,6 +83,11 @@
                     </td>
                         </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <td colspan="12" class="text-center">no records found in database</td>
+                    </tr>
+                    @endif
                     </tbody>
             </table>
             </div>

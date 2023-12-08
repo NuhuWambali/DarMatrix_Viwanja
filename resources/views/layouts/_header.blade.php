@@ -4,12 +4,12 @@
         <svg class="icon icon-lg">
           <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
         </svg>
-      </button><a class="header-brand d-md-none" href="#">
+      </button><a class="header-brand d-md-none" href="">
         <svg width="118" height="46" alt="CoreUI Logo">
           <use xlink:href="assets/brand/coreui.svg#full"></use>
         </svg></a>
       <ul class="header-nav d-none d-md-flex">
-        <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="">Dashboard</a></li>
       </ul>
       <ul class="header-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#">
@@ -26,21 +26,23 @@
             </svg></a></li>
       </ul>
       <ul class="header-nav ms-3">
-        <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="avatar avatar-md"><img class="avatar-img" src="{{asset('assets/img/avatars/8.jpg')}}" alt="user@email.com"></div>
           </a>
           <div class="dropdown-menu dropdown-menu-end pt-0">
             <div class="dropdown-header bg-light py-2">
               <div class="fw-semibold">Account</div>
             </div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{route('profile.show',$userId=Auth::user()->id)}}">
               <svg class="icon me-2">
                 <use xlink:href="{{asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-              </svg> Profile</a><a class="dropdown-item" href="#">
-              <svg class="icon me-2">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
-              </svg> Settings</a><a class="dropdown-item" href="#">
+              </svg>Profile</a><a class="dropdown-item" href="">
+            <a class="dropdown-item" href="{{route('setting.show',$userId=Auth::user()->id)}}">
+                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
+                </svg> Settings</a><a class="dropdown-item" href="#">
               
+
             <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('logout')}}">
               <svg class="icon me-2">
                 <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>

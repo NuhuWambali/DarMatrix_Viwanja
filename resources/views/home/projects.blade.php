@@ -29,6 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($projects->count())
                         @foreach($projects as $index=>$project)
                         <tr class="align-middle">
                         <td>
@@ -70,7 +71,13 @@
                         </td>
                         </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <td colspan="12" class="text-center">no records found in database</td>
+                    </tr>
+                    @endif
                     </tbody>
+
             </table>
             </div>
       </div>

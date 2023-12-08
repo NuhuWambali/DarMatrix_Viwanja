@@ -129,10 +129,8 @@ class PlotsController extends Controller
 
     public function getPlots($projectId)
     {
-        // Assuming you have a Project and Plot model
         $project = Project::findOrFail($projectId);
-        $plots = $project->plots;
-
+        $plots = $project->plots->where('status',1);
         return view('partials.plot-options', compact('plots'));
     }
 

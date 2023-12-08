@@ -17,13 +17,10 @@
           <div class="body flex-grow-1 px-3">
             <div class="container-lg">
                 @yield('content')
-              
             </div>
           </div>
           @include('layouts._footer')
         </div>
-        <!-- CoreUI and necessary plugins-->
-      @Include('layouts._scripts')
-
+        @include('layouts._scripts')
       </body>
     </html>

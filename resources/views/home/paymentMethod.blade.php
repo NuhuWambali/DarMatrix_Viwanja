@@ -28,6 +28,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if($allPaymentMethods->count())
                 @foreach($allPaymentMethods as $index=>$paymentMethod)
                 <tr class="align-middle">
                 <td>
@@ -55,6 +56,10 @@
                 </td>
                 </tr>
                 @endforeach
+                @endif
+                <tr>
+                    <td colspan="12" class="text-center">no records found in database</td>
+                </tr>
             </tbody>
             </table>
 

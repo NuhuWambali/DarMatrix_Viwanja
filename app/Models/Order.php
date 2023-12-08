@@ -17,10 +17,16 @@ class Order extends Model
     protected $table="orders";
 
     public function customers(){
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class,'customer_id');
     }
 
-    public function plots(){
-        return $this->belongsTo(Plot::class);
+    public function plot()
+    {
+        return $this->belongsTo(Plot::class, 'plot_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

@@ -24,6 +24,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if($getRoles ->count())
                 @foreach($getRoles as $index=>$role)
                 <tr class="align-middle">
                 <td>
@@ -59,13 +60,18 @@
                         <div class="col-3">
                             <a href="{{route('editRole',$role->id)}}"  class="btn btn-dark btn-sm disable-link" data-toggle="tooltip" data-placement="top"title="Edit Role">Edit</a>
                         </div>
-                      
+
                         @endif
                     </div>
                 </td>
 
                 </tr>
               @endforeach
+              @else
+              <tr>
+                <td colspan="12" class="text-center">no records found in database</td>
+              </tr>
+              @endif
             </tbody>
             </table>
             </div>

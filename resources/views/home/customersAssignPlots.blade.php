@@ -45,12 +45,68 @@
                         </form>
                     </div>
                 </div>
+                <h4 class="text-center my-4">My Plots Order</h4>
+                <div class="table">
+                    <table class="table border mb-0">
+                    <thead class="table-light fw-semibold">
+                        <tr class="align-middle">
+                        <th>#</th>
+                        <th >Name</th>
+                        <th>Project</th>
+                        <th>Plot Number</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($orders as $index=>$order )
+                        <tr class="align-middle">
+                        <td>
+                            <h6>{{$index+1}}</h6>
+                        </td>
+                        <td>
+                            <h6>{{$customer->fullname}}</h6>
+                        </td>
+                        <td>
+                            <h6>{{$order->project->name }}</h6>
+                        </td>
+                        <td>
+                            <h6>{{$order->plot->plot_number}}</h6>
+                        </td>
+
+                        <td>
+                            <a href="#" class="btn btn-dark btn-sm pay-button" data-toggle="tooltip" data-placement="top" title="Pay" style="color:#fff" data-bs-toggle="modal" data-bs-target="#exampleModal" data-order-id="{{$order->id}}">
+                                <i class="fas fa-money-bill" aria-hidden="true"></i> Pay
+                            </a>
+                        </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    </table>
+                    </div>
             </div>
         </div>
     </div>
 </div>
+{{-- modal --}}
+<div class="modal exampleModal" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 650px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Pay</button>
+        </div>
+      </div>
+    </div>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#project').change(function () {
@@ -60,7 +116,6 @@
                     type: 'GET',
                     url: '/get-plots/' + projectId,
                     success: function (data) {
-                        console.log(data);
                         $('#plots').html(data);
                     }
                 });
@@ -70,4 +125,30 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        $('.pay-button').click(function (e) {
+            e.preventDefault();
+            var orderId = $(this).data('order-id');
+            $.ajax({
+                type: 'GET',
+                url: '/get-order-details/' + orderId,
+                success: function (data) {
+                    // Extracting title and content separately
+                    var title = $(data).filter('h4').text();
+                    var bodyContent = $(data).not('h4').html();
+                    // Setting the title and body content to the modal
+                    $('#exampleModal .modal-body').html(bodyContent);
+                    $('#exampleModal .modal-title').text(title).addClass('text-primary');
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+
 @endsection

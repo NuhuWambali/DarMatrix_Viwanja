@@ -49,11 +49,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    // public function roles()
+    // {
+    //   return $this->hasMany(Roles::class);
+    // }
+
     public function roles()
     {
-      return $this->hasMany(Roles::class);
+        return $this->belongsTo(Roles::class, 'role_id');
     }
-
 
 
     public function sendPasswordNotification($username,$email,$password)

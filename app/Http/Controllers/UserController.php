@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\{User,Roles};
 use RealRashid\SweetAlert\Facades\Alert;
@@ -24,14 +25,14 @@ class UserController extends Controller
     public function addUser(Request $request){
         $validatedUserDetails=$request->validate(
          [
-                'fullname'=>'required|Regex:/^[\D]+$/i|max:100',
-                'email'=>'required|email|max:255|unique:users',
+                'fullname'=>'required|Regex:/^[\D]+$/i|max:200',
+                'email'=>'required|email|unique:users',
                 'username'=>'required|max:100',
                 'role_id'=>'required',
                 'phone'=>'required|min:10',
               ],[
                  'fullname.required' => 'Full name is required',
-                 'email.required' => 'Email is required', 'email.unique'=>'Email is already taken','email.max'=>'The email is too long',
+                 'email.required' => 'Email is required', 'email.unique'=>'Email is already taken',
                  'username.required'=>'Full name is required',
                  'role.required'=>'Role is required',
                  'phone.required'=>'Phone is required','phone.min'=>'Phone number length is too small',
@@ -64,13 +65,13 @@ class UserController extends Controller
         $validatedUserdata=$request->validate(
             [
                    'fullname'=>'required|Regex:/^[\D]+$/i|max:100',
-                   'email'=>'required|email|max:255',
+                   'email'=>'required|email',
                    'username'=>'required|max:100',
-                   'role_id'=>'required',
+                   'role_id'=>'',
                    'phone'=>'required|min:10',
                  ],[
                     'fullname.required' => 'Full name is required',
-                    'email.required' => 'Email is required','email.max'=>'The email is too long',
+                    'email.required' => 'Email is required',
                     'username.required'=>'Full name is required',
                     'role.required'=>'Role is required',
                     'phone.required'=>'Phone is required','phone.min'=>'Phone number length is too small',
@@ -114,5 +115,49 @@ class UserController extends Controller
         return to_route('user');
     }
 
+    public function Profile($id){
+        $userInformations=User::findOrFail($id);
+        $roles=Roles::all();
+        $roleName = $userInformations->roles->role_name;
+        $roleName = $userInformations->roles->role_name;
+        return view('home.userProfile',compact('userInformations','roleName','roles'));
+    }
+
+    public function updateProfile(Request $request,$id){
+        $userData=User::findOrFail($id);
+        $validatedUserData=$request->validate(
+            [
+                   'fullname'=>'required|Regex:/^[\D]+$/i|max:100',
+                   'email'=>'required|email',
+                   'username'=>'required|max:100',
+                   'role_id'=>'required',
+                   'phone'=>'required|min:10',
+                 ],
+               );
+        $userData->update($validatedUserData);
+        Alert::success('Success','User Updated Successfully! ');
+        return to_route('user');
+    }
+
+    public function setting($id){
+
+        return view('home.settingPage');
+    }
+
+    public function changePassword($id,Request $request){
+        $userData=User::findOrFail($id);
+        $userId=$userData->id;
+        $validatedData=$request->validate([
+            'newPassword' => 'required|min:8',
+            'confirmPassword' => 'same:newPassword',
+        ]);
+        if($validatedData){
+            $userData->password = bcrypt($request->input('newPassword'));
+            $userData->save();
+            Alert::success('Success','Password Updated Successfully!');
+            return to_route('profile.show',$userId);
+        }
+
+    }
 }
 

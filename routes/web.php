@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PlotsController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('layouts.mainLayouts');
 // });
 
-Route::get('/dashboard', [ManagementController::class, 'index'])->name('index')->middleware('auth');
+Route::get('/dashboard', [AuthController::class, 'index'])->name('index');
 
 //auth routes
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -71,7 +72,7 @@ Route::middleware(['auth'])->group(function(){
     //plots routes
     Route::get('/project/{id}/plots',[PlotsController::class,'viewPlots'])->name('viewPlots');
     Route::get('/project/{id}/plots/addPlot', [PlotsController::class,'viewAddPlot'])->name('viewAddPlot');
-    Route::post('/project/addPlot', [PlotsController::class, 'addPlot'])->name('addPlot')->middleware('auth');
+    Route::post('/project/addPlot', [PlotsController::class, 'addPlot'])->name('addPlot');
     Route::get('/project/{id}/plot/plotDetails', [PlotsController::class,'plotDetails'])->name('plotDetails');
     Route::get('/project/{id}/plot/plotEdit', [PlotsController::class,'plotEdit'])->name('plotEdit');
     Route::put('/project/editPlot/{id}', [PlotsController::class, 'createPlotEdit'])->name('editPlot');
@@ -97,5 +98,19 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/deletePaymentMethod/{id}',[PaymentMethodController::class, 'deletePaymentMethod'])->name('deletePaymentMethod');
     Route::get('/editPaymentMethod/{id}', [PaymentMethodController::class, 'editPaymentMethodPage'])->name('editPaymentMethodPage');
     Route::put('/editPaymentMethod/{id}', [PaymentMethodController::class,'editPaymentMethod'])->name('editPaymentMethod');
+
+    //order
+    Route::get('/get-order-details/{orderId}',[OrderController::class, 'getOrderDetails'] )->name('get.order.details');
+
+
+    //payment
+    // Route::get('/makePayment/{id}',[])
+
+    //setting routes
+    Route::get('/profile/{userId}',[UserController::class,'profile'])->name('profile.show');
+    Route::put('updateProfile/{userId}',[UserController::class,'updateProfile'])->name('updateProfile');
+    Route::get('setting/{userId}',[UserController::class,'setting'])->name('setting.show');
+    Route::put('changePassword/{userId}',[UserController::class,'changePassword'])->name('changePassword');
+
 });
 

@@ -18,8 +18,6 @@ class Payment extends Model
         'down_payment',
         'monthly_installment_period',
         'payment_method_id',
-        'monthly_installment_period',
-        'payment_method_id',
         'payment_date',
         'amount_paid',
         'amount_remain',
@@ -30,15 +28,15 @@ class Payment extends Model
     ];
 
     public function Customer(){
-        $this->belongsTo(Customer::class);
+        $this->belongsTo(Customer::class,'customer_id');
     }
 
     public function payment_methods(){
-       return $this->hasMany(PaymentMethod::class);
+       return $this->hasMany(PaymentMethod::class,'payment_method_id');
     }
 
     public function plots(){
-        return $this->belongsTo(Plot::class);
+        return $this->belongsTo(Plot::class,'plot_id');
     }
 
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Customer,Order,Project};
+use App\Models\{Customer,Order,Project,Plot};
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
@@ -115,24 +115,37 @@ class CustomerController extends Controller
 
 
     public function assignPlotsPage($id){
-        $projects=Project::all();
-        $customer=Customer::findOrFail($id);
-        return view('home.customersAssignPlots',compact('customer','projects'));
+        $customer = Customer::findOrFail($id);
+        $projects = Project::all();
+        $orders = Order::where('customer_id', $customer->id)->with('project','plot')->get();
+        return view('home.customersAssignPlots', compact('customer', 'projects', 'orders'));
     }
 
     public function assignPlots(Request $request){
-        $customer_id=$request->customer_id;
-        $createOrder=new Order;
-        $validatedOrderData=$request->validate([
-            'customer_id'=>'required',
-            'project_id'=>'required',
-            'plot_id'=>'required',
+        $customer_id = $request->customer_id;
+        $validatedOrderData = $request->validate([
+            'customer_id' => 'required',
+            'project_id' => 'required',
+            'plot_id' => 'required',
         ]);
-        $createOrder->customer_id=$validatedOrderData['customer_id'];
-        $createOrder->project_id=$validatedOrderData['project_id'];
-        $createOrder->plot_id=$validatedOrderData['plot_id'];
+        $existingOrder = Order::where('plot_id', $validatedOrderData['plot_id'])->first();
+        if ($existingOrder) {
+            Alert::error('Error', 'Order already exists for this plot!');
+            return redirect()->route('assignPlots', $customer_id);
+        }
+        $createOrder = new Order;
+        $createOrder->customer_id = $validatedOrderData['customer_id'];
+        $createOrder->project_id = $validatedOrderData['project_id'];
+        $createOrder->plot_id = $validatedOrderData['plot_id'];
         $createOrder->save();
+        $plot = Plot::find($validatedOrderData['plot_id']);
+        if ($plot) {
+            $plot->status = 0;
+            $plot->save();
+        }
         Alert::success('Success', 'Order Created Successfully!');
-        return to_route('assignPlots',$customer_id);
+        return redirect()->route('assignPlots', $customer_id);
     }
+
+
 }

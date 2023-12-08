@@ -22,6 +22,7 @@ class ProjectController extends Controller
     }
 
     public function addProject(Request $request){
+
         $username=Auth::user()->username;
         $validatedProjectData=$request->validate([
             'name'=>'required|string',
@@ -29,7 +30,6 @@ class ProjectController extends Controller
             'city'=>'required|string',
             'region'=>'required|string',
             'total_plots'=>'required',
-            'available_plots'=>'required',
             'available_plots'=>'required',
             'installment_period'=>'required',
             'description'=>'',
@@ -92,7 +92,6 @@ class ProjectController extends Controller
     }
 
     public function editProject($id,Request $request){
-        // dd($request->file_path);
         $username=Auth::user()->username;
         $editProjectDetails=Project::findOrFail($id);
         $validatedProjectData=$request->validate([
@@ -101,7 +100,6 @@ class ProjectController extends Controller
             'city'=>'required|string',
             'region'=>'required|string',
             'total_plots'=>'required',
-            'available_plots'=>'required',
             'available_plots'=>'required',
             'installment_period'=>'required',
             'description'=>'',
@@ -161,7 +159,7 @@ class ProjectController extends Controller
        if ($project->plots->count()) {
         Alert::error('Error', 'Cannot delete project with plots!');
         return back();
-    }
+       }
     $project->delete();
     Alert::success('Success', 'Project Deleted Successfully!');
     return to_route('projects');
