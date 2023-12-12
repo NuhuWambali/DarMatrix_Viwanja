@@ -38,7 +38,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
 
 
 
-Route::middleware(['auth'])->group(function(){
+// Route::middleware(['auth'])->group(function(){
 
     //roles routes
     Route::get('/roles', [RolesController::class, 'getRoles'])->name('roles');
@@ -111,6 +111,5 @@ Route::middleware(['auth'])->group(function(){
     Route::put('updateProfile/{userId}',[UserController::class,'updateProfile'])->name('updateProfile');
     Route::get('setting/{userId}',[UserController::class,'setting'])->name('setting.show');
     Route::put('changePassword/{userId}',[UserController::class,'changePassword'])->name('changePassword');
-
-});
+// });
 

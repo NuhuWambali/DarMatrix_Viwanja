@@ -14,10 +14,10 @@
                             @csrf
                             <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
                                 <div class="mb-3 row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label class="col-form-label" for="inputName">Project</label>
                                         <input type="text" name="customer_id" value="{{$customer->id}}" hidden>
-                                        <select class="form-control" id="project" name="project_id">
+                                        <select class="form-control @error('project_id') is-invalid @enderror" id="project" name="project_id">
                                             <option value="" disabled selected>Select a Project</option>
                                             @foreach($projects as $project)
                                                 <option value="{{ $project->id }}">{{ $project->name }}</option>
@@ -29,22 +29,28 @@
                                             </p>
                                         @enderror
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label class="col-form-label" for="plots">Plots</label>
-                                        <select class="form-control" id="plots" name="plot_id">
+                                        <select class="form-control  @error('plot_id') is-invalid @enderror" id="plots" name="plot_id">
                                         </select>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label class="col-form-label" for="payment_way">Select Payment Way</label>
-                                        <select class="form-control" id="payment_way" name="payment_way">
-                                            <option value="installment" selected disable>Select</option>
+                                        <select class="form-control @error('payment_way') is-invalid @enderror" id="payment_way" name="payment_way">
                                             <option value="installment">Installment</option>
                                             <option value="cash">Cash</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
+                                        <label class="col-form-label" for="payment_way">Method</label>
+                                        <select class="form-control @error('payment_method_id') is-invalid @enderror" id="payment_method_id" name="payment_method_id">
+                                            @foreach($payment_methods as $payment_method)
+                                            <option value="{{$payment_method->id}}">{{$payment_method->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
                                         <div class="mb-1 pt-3">
-
                                             <button class="btn btn-primary mt-4" type="submit">Assign</button>
                                         </div>
                                     </div>
@@ -66,6 +72,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if($orders->count())
                       @foreach ($orders as $index=>$order )
                         <tr class="align-middle">
                         <td>
@@ -87,6 +94,13 @@
                         </td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr class="align-middle">
+                            <td colspan="12" class="text-center">
+                               No Record Found in Database
+                            </td>
+                        </tr>
+                        @endif
                     </tbody>
                     </table>
                     </div>
@@ -95,39 +109,60 @@
     </div>
 </div>
 {{-- modal --}}
-<div class="modal exampleModal" id="exampleModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5  class="modal-title text-primary">{{$order->project->name }} | Payment Section</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-4">
-                    <h5>Plot Number : {{$order->plot->plot_number}}</h5>
-                </div>
-                <div class="col-4">
-                    <h5>Location : {{$order->project->city }}</h5>
-                </div>
-                <div class="col-4">
-                    <h5>Price Per SQM : {{$order->plot->plot_number}}</h5>
+<div class="modal exampleModal" id="exampleModal" tabindex="">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- Modal Title -->
+                @if($orders->count())
+                <h5 class="modal-title text-primary">{{$order->project->name }} | Payment Section</h5>
+                @else
+                <h5 class="modal-title text-primary"> Payment Section</h5>
+                @endif
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true"> General History </button>
+                    </li>
+                    <li class="nav-item" role="presentation" >
+                        <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">Payment History</button>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                        <!-- Tab 1 content -->
+                        @if($orders->count())
+                            <div class="row mt-3" style="border-radius:10%; border:2px 3px red">
+                                <div class="col-4">
+                                    <h6>Project name : {{$order->project->name}}</h6>
+                                </div>
+                                <div class="col-4">
+                                    <h6>Plot Number : {{$order->plot->plot_number}}</h6>
+                                </div>
+                                <div class="col-4">
+                                    <h6>Location : {{$order->project->region}}</h6>
+                                </div>
+                            </div>
+                            @else
+                            <h4>No Order Right Now!</h4>
+                        @endif
+                    </div>
+
+                   <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+
+                   </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4">
-                    <h5>Total Price : {{$order->plot->plot_number}}</h5>
-                </div>
-                <div class="col-4">
-                    <h5>Location : {{$order->project->city }}</h5>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Pay</button>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Pay</button>
-        </div>
-      </div>
     </div>
 </div>
 

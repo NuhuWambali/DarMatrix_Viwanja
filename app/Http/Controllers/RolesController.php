@@ -16,6 +16,7 @@ class RolesController extends Controller
     }
 
     public function getAddRole(){
+
         return view('home.roleAdd');
     }
 
@@ -27,7 +28,7 @@ class RolesController extends Controller
         ]);
         $addrole=new Roles;
         $addrole->role_name=$validatedRoleName['role_name'];
-        if (Roles::where('role_name', $addrole->role_name)->exists()) {
+        if(Roles::where('role_name', $addrole->role_name)->exists()) {
             return redirect()->back()->withErrors(['role_name' => 'The role name already exists in the database.'])->withInput();
         }
         $addrole->save();

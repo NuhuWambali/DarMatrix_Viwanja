@@ -33,15 +33,19 @@
             <div class="dropdown-header bg-light py-2">
               <div class="fw-semibold">Account</div>
             </div>
-            <a class="dropdown-item" href="{{route('profile.show',$userId=Auth::user()->id)}}">
+                @auth
+                <a class="dropdown-item" href="{{route('profile.show',$userId=Auth::user()->id)}}">
+                @endauth
               <svg class="icon me-2">
                 <use xlink:href="{{asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
               </svg>Profile</a><a class="dropdown-item" href="">
-            <a class="dropdown-item" href="{{route('setting.show',$userId=Auth::user()->id)}}">
+                @auth
+               <a class="dropdown-item" href="{{route('setting.show',$userId=Auth::user()->id)}}">
+                @endauth
                 <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
                 </svg> Settings</a><a class="dropdown-item" href="#">
-              
+
 
             <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('logout')}}">
               <svg class="icon me-2">

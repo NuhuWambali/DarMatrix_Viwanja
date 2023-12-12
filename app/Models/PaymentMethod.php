@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use HasFactory;
-
+    protected $connection='mysql';
     protected $table='payment_methods';
 
     protected $fillable=['name','description'];
 
-    public function payments(){
-      return  $this->belongsToMany(Payment::class);
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 
 }

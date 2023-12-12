@@ -10,8 +10,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 class ProjectController extends Controller
 {
     //
-
-
     public function getProjectsPage(){
         $projects=Project::all();
         return view('home.projects',compact('projects',));

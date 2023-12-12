@@ -56,10 +56,11 @@
                 </td>
                 </tr>
                 @endforeach
-                @endif
+                @else
                 <tr>
                     <td colspan="12" class="text-center">no records found in database</td>
                 </tr>
+                @endif
             </tbody>
             </table>
 
