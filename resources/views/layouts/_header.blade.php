@@ -45,8 +45,6 @@
                 <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
                 </svg> Settings</a><a class="dropdown-item" href="#">
-
-
             <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('logout')}}">
               <svg class="icon me-2">
                 <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>

@@ -16,7 +16,7 @@ class Order extends Model
 
     protected $table="orders";
 
-    public function customers(){
+    public function customer(){
         return $this->belongsTo(Customer::class,'customer_id');
     }
 

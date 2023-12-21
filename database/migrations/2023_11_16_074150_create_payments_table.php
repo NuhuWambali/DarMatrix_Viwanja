@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->decimal('total_amount')->nullable();
-            $table->decimal('amount_paid')->nullable();
-            $table->decimal('amount_remain')->nullable();
-            $table->string('payment_status');
-            $table->string('installment_number');
+            $table->decimal('total_amount',15,4)->nullable();
+            $table->decimal('amount_paid',15,4)->nullable();
+            $table->decimal('amount_remain',15,4)->nullable();
+            $table->string('payment_status',15,4);
+            $table->string('installment_number',15,4);
             $table->string('created_by');
-            $table->string('modified_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }
@@ -28,8 +28,11 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+
     public function down(): void
     {
         Schema::dropIfExists('payments');
     }
+
+
 };

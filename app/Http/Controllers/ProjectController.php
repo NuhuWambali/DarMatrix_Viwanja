@@ -61,9 +61,11 @@ class ProjectController extends Controller
         $addProject->price_per_sqm = $validatedProjectData['price_per_sqm'];
         $addProject->plots_no = $validatedProjectData['plots_number'];
         $addProject->description = $validatedProjectData['description'];
-        $fileName = time().'_'.$request->file->getClientOriginalName();
-        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
-        $addProject->file_path = '/storage/' . $filePath;
+        if($request->file){
+             $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+            $addProject->file_path = '/storage/' . $filePath;
+        }
         $addProject->installment_period = $validatedProjectData['installment_period'];
         $addProject->block = $validatedProjectData['block'];
         $addProject->unavailable_plots=$validatedProjectData['total_plots']-$validatedProjectData['available_plots'];

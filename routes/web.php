@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('layouts.mainLayouts');
 // });
 
-Route::get('/dashboard', [AuthController::class, 'index'])->name('index');
 
 //auth routes
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -37,8 +36,9 @@ Route::post('/createLogin',[AuthController::class, 'createLogin'])->name('create
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 
-
-// Route::middleware(['auth'])->group(function(){
+ Route::middleware(['auth'])->group(function(){
+     //dashboard route
+    Route::get('/dashboard', [AuthController::class, 'index'])->name('index');
 
     //roles routes
     Route::get('/roles', [RolesController::class, 'getRoles'])->name('roles');
@@ -48,7 +48,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::post('/addrole',[RolesController::class, 'addrole'])->name('addrole');
     Route::post('/role/{id}/delete',[RolesController::class, 'deleteRole'])->name('deleteRole');
 
-    //user controller
+    //user routers
     Route::get('/users', [UserController::class, 'getUser'])->name('user');
     Route::get('/users/addUser', [UserController::class, 'getAddUser'])->name('getAddUser');
     Route::post('/adduser',[UserController::class, 'addUser'])->name('adduser');
@@ -87,11 +87,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::get('/editCustomer/{id}', [CustomerController::class, 'editCustomerPage'])->name('editCustomer');
     Route::put('/editCustomer/{id}', [CustomerController::class, 'editCustomer'])->name('customer');
     Route::get('/deleteCustomer/{id}', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
-    Route::get('/assignPlots/customer_id/{id}', [CustomerController::class, 'assignPlotsPage'])->name('assignPlots');
-    Route::post('/assignPlot', [CustomerController::class, 'assignPlots'])->name('assign.plots');
 
 
-// payment method
+    //payment method
     Route::get('/paymentMethods',[PaymentMethodController::class,'paymentMethodPage'])->name('paymentMethod');
     Route::get('/addPaymentMethod',[PaymentMethodController::class, 'addPaymentMethodPage'])->name('addPaymentMethodPage');
     Route::post('/addPaymentMethod',[PaymentMethodController::class, 'addPaymentMethod'])->name('addPaymentMethod');
@@ -100,16 +98,17 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::put('/editPaymentMethod/{id}', [PaymentMethodController::class,'editPaymentMethod'])->name('editPaymentMethod');
 
     //order
-    Route::get('/get-order-details/{orderId}',[OrderController::class, 'getOrderDetails'] )->name('get.order.details');
+     Route::get('/assignPlots/customer_id/{id}', [OrderController::class, 'assignPlotsPage'])->name('assignPlots');
+     Route::post('/assignPlot', [OrderController::class, 'assignPlots'])->name('assign.plots');
 
+     //payment
+     Route::get('/paymentDetails/{orderId}',[PaymentController::class,'getPaymentDetails'])->name('orderDetails');
+     Route::post('/addPayment/{orderId}',[PaymentController::class,'addPayment'])->name('addPayment');
 
-    //payment
-    // Route::get('/makePayment/{id}',[])
-
-    //setting routes
+     //setting routes
     Route::get('/profile/{userId}',[UserController::class,'profile'])->name('profile.show');
     Route::put('updateProfile/{userId}',[UserController::class,'updateProfile'])->name('updateProfile');
     Route::get('setting/{userId}',[UserController::class,'setting'])->name('setting.show');
     Route::put('changePassword/{userId}',[UserController::class,'changePassword'])->name('changePassword');
-// });
+ });
 

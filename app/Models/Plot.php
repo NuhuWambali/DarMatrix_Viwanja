@@ -34,7 +34,12 @@ class Plot extends Model
         'created_by',
         'updated_by',
     ];
-
+    protected $casts = [
+        'plot_size'=>'float',
+        'installment_price_per_sqm' => 'float',
+        'cash_price_per_sqm' => 'float',
+        'monthly_installement_price' => 'float',
+    ];
     public function project()
     {
        return $this->belongsTo(Project::class);
@@ -51,5 +56,6 @@ class Plot extends Model
     public function orders(){
         return $this->hasOne(Order::class);
     }
+
 
 }

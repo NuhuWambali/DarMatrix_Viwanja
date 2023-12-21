@@ -2,7 +2,6 @@
 @section('title','Add Plot')
 @section('smallTitle','Project / Plots / Add Plot ')
 @section('content')
-
 <div class="row">
     <div class="col-12">
       <div class="card mb-4">
@@ -63,9 +62,9 @@
                         </div>
                         <div class="mb-3 row">
                             <div class="col-4">
-                                <label class=" col-form-label" for="inputRegion">Monthly Installment Price</label>
-                                <input class="form-control @error('monthly_installment_price') is-invalid @enderror" type="number" id="monthly_installment_price" name="monthly_installment_price" value="{{old('monthly_installment_price')}}" placeholder="Enter Installment Price">
-                                @error('monthly_installment_price')
+                                <label class=" col-form-label" for="inputTotalPlots">Installment Price Per Sqm</label>
+                                <input class="form-control @error('installment_price_per_sqm') is-invalid @enderror" type="number" id="installment_price_per_sqm" name="installment_price_per_sqm" value="{{old('installment_price_per_sqm')}}" placeholder="Enter Installment Price Per SQM">
+                                @error('cash_price_per_sqm')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
                                 </p>
@@ -80,6 +79,11 @@
                                 </p>
                                 @enderror
                             </div>
+
+                        </div>
+                        <div class="mb-3 row">
+                        </div>
+                        <div class="mb-3 row">
                             <div class="col-4">
                                 <label class=" col-form-label" for="inputAvailablePlots">File</label>
                                 <input class="form-control @error('file') is-invalid @enderror" type="file" id="file" name="file" value="{{old('file')}}" placeholder="Enter File">
@@ -89,12 +93,6 @@
                                 </p>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="mb-3 row">
-
-
-                        </div>
-                        <div class="mb-3 row">
                             <div class="col-4">
                                 <label class="col-form-label" for="inputDescription">Description 1</label>
                                 <input class="form-control @error('description1') is-invalid @enderror" type="text" id="description1" name="description1" value="{{old('description1')}}" placeholder="Enter Description 1">
@@ -113,6 +111,9 @@
                                 </p>
                                 @enderror
                             </div>
+
+                        </div>
+                        <div class="mb-3 row">
                             <div class="col-4">
                                 <label class="col-form-label" for="inputDescription">Description 3</label>
                                 <input class="form-control @error('description3') is-invalid @enderror" type="text" id="description3" name="description3" value="{{old('description3')}}" placeholder="Enter Description 3">
@@ -122,8 +123,7 @@
                                 </p>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="mb-3 row">
+
                             <div class="col-4">
                                 <label class=" col-form-label" for="inputStatus">Status</label>
                                 <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">

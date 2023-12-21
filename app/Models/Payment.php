@@ -24,7 +24,9 @@ class Payment extends Model
         'installment_number',
         'payment_status',
         'created_by',
-        'modified_by',
+        'updated_by',
+        'created_at',
+        'updated_at',
     ];
 
     public function Customer(){

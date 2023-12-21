@@ -108,7 +108,6 @@
         </div>
     </div>
 </div>
-{{-- modal --}}
 <div class="modal exampleModal" id="exampleModal" tabindex="">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
         <div class="modal-content">
@@ -121,48 +120,7 @@
                 @endif
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true"> General History </button>
-                    </li>
-                    <li class="nav-item" role="presentation" >
-                        <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">Payment History</button>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-                        <!-- Tab 1 content -->
-                        @if($orders->count())
-                            <div class="row mt-3" style="border-radius:10%; border:2px 3px red">
-                                <div class="col-4">
-                                    <h6>Project name : {{$order->project->name}}</h6>
-                                </div>
-                                <div class="col-4">
-                                    <h6>Plot Number : {{$order->plot->plot_number}}</h6>
-                                </div>
-                                <div class="col-4">
-                                    <h6>Location : {{$order->project->region}}</h6>
-                                </div>
-                            </div>
-                            @else
-                            <h4>No Order Right Now!</h4>
-                        @endif
-                    </div>
-
-                   <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-
-                   </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Pay</button>
-            </div>
-        </div>
+            @include('partials.order-details')
     </div>
 </div>
 
@@ -180,35 +138,13 @@
                     }
                 });
             } else {
+
                 $('#plots').html('<option value="" disabled selected>Select a Project First</option>');
+
             }
         });
     });
-</script>
 
-<script>
-    $(document).ready(function () {
-        $('.pay-button').click(function (e) {
-            e.preventDefault();
-            var orderId = $(this).data('order-id');
-            $.ajax({
-                type: 'GET',
-                url: '/get-order-details/' + orderId,
-                success: function (data) {
-                    // Extracting title and content separately
-                    var title = $(data).filter('h4').text();
-                    var bodyContent = $(data).not('h4').html();
-                    // Setting the title and body content to the modal
-                    $('#exampleModal .modal-body').html(bodyContent);
-                    $('#exampleModal .modal-title').text(title).addClass('text-primary');
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
 </script>
-
 
 @endsection

@@ -32,6 +32,7 @@ class Customer extends Model
         'modified_by',
     ];
 
+
     public function payments(){
        return $this->hasMany(Payment::class);
     }
@@ -41,6 +42,6 @@ class Customer extends Model
     }
 
     public function orders(){
-        return $this->hasMany(Order::class,'customer_id');
+        return $this->hasMany(Order::class,);
     }
 }
