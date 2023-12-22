@@ -72,11 +72,10 @@ class PaymentController extends Controller
 
     }
 
-//   public function getPaymentDetails($orderId){
-//       $paymentDetails=Payment::findOrFail($orderId);
-//       dd($paymentDetails);
-//       $orderDetails=Order::findOrFail($orderId);
-//      return view('partials.order-details',compact('paymentDetails','orderDetails'));
-//   }
+   public function paymentDetails($orderId){
+       $paymentDetails=Payment::findOrFail($orderId);
+       $orderDetails=Order::findOrFail($orderId);
+        return view('home.payment',compact('paymentDetails','orderDetails'));
+   }
 
 }

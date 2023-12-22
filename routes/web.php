@@ -102,8 +102,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
      Route::post('/assignPlot', [OrderController::class, 'assignPlots'])->name('assign.plots');
 
      //payment
-     Route::get('/paymentDetails/{orderId}',[PaymentController::class,'getPaymentDetails'])->name('orderDetails');
-     Route::post('/addPayment/{orderId}',[PaymentController::class,'addPayment'])->name('addPayment');
+     Route::get('/payment/order_id/{orderId}',[PaymentController::class,'paymentDetails'])->name('payment');
+//     Route::post('/addPayment/{orderId}',[PaymentController::class,'addPayment'])->name('addPayment');
 
      //setting routes
     Route::get('/profile/{userId}',[UserController::class,'profile'])->name('profile.show');

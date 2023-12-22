@@ -88,7 +88,7 @@
                             <h6>{{$order->plot->plot_number}}</h6>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-dark btn-sm pay-button" data-toggle="tooltip" data-placement="top" title="Pay" style="color:#fff" data-bs-toggle="modal" data-bs-target="#exampleModal" data-order-id="{{$order->id}}">
+                            <a href="{{route('payment',$order->id)}}" class="btn btn-dark btn-sm"  style="color:#fff" >
                                 <i class="fas fa-money-bill" aria-hidden="true"></i> Pay
                             </a>
                         </td>
@@ -108,43 +108,44 @@
         </div>
     </div>
 </div>
-<div class="modal exampleModal" id="exampleModal" tabindex="">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- Modal Title -->
-                @if($orders->count())
-                <h5 class="modal-title text-primary">{{$order->project->name }} | Payment Section</h5>
-                @else
-                <h5 class="modal-title text-primary"> Payment Section</h5>
-                @endif
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @include('partials.order-details')
-    </div>
-</div>
+{{--<div class="modal exampleModal" id="exampleModal" tabindex="">--}}
+{{--    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <!-- Modal Title -->--}}
+{{--                @if($orders->count())--}}
+{{--                <h5 class="modal-title text-primary">{{$order->project->name }} | Payment Section</h5>--}}
+{{--                @else--}}
+{{--                <h5 class="modal-title text-primary"> Payment Section</h5>--}}
+{{--                @endif--}}
+{{--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--            </div>--}}
+{{--            @include('partials.order-details')--}}
+{{--    </div>--}}
+{{--</div>--}}
 
-<script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>
-<script>
-    $(document).ready(function () {
-        $('#project').change(function () {
-            var projectId = $(this).val();
-            if (projectId) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/get-plots/' + projectId,
-                    success: function (data) {
-                        $('#plots').html(data);
-                    }
-                });
-            } else {
+{{--<script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>--}}
+{{--<script>--}}
+{{--    $(document).ready(function () {--}}
+{{--        $('#project').change(function () {--}}
+{{--            var projectId = $(this).val();--}}
+{{--            if (projectId) {--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: '/get-plots/' + projectId,--}}
+{{--                    success: function (data) {--}}
+{{--                        $('#plots').html(data);--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            } else {--}}
 
-                $('#plots').html('<option value="" disabled selected>Select a Project First</option>');
+{{--                $('#plots').html('<option value="" disabled selected>Select a Project First</option>');--}}
 
-            }
-        });
-    });
+{{--            }--}}
+{{--        });--}}
+{{--    });--}}
 
-</script>
+{{--</script>--}}
+
 
 @endsection
