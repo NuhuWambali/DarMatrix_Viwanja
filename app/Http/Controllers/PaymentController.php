@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\PaymentTransaction;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,9 @@ class PaymentController extends Controller
 
         $orderDetails = Order::findOrFail($id);
         $paymentDetails = Payment::where('order_id', $id)->first();
-        return view('home.payment', compact('orderDetails', 'paymentDetails'));
+        $paymentId=$paymentDetails->id;
+        $paymentTransactions=PaymentTransaction::where('payment_id',$paymentId)->get();
+        return view('home.payment', compact('orderDetails', 'paymentDetails','paymentTransactions'));
     }
 
     public function addPayment(Request $request, $id){

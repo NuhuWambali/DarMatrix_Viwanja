@@ -25,33 +25,47 @@
               <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
             </svg></a></li>
       </ul>
-      <ul class="header-nav ms-3">
-        <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
-            <div class="avatar avatar-md"><img class="avatar-img" src="{{asset('assets/img/avatars/8.jpg')}}" alt="user@email.com"></div>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end pt-0">
-            <div class="dropdown-header bg-light py-2">
-              <div class="fw-semibold">Account</div>
-            </div>
-                @auth
-                <a class="dropdown-item" href="{{route('profile.show',$userId=Auth::user()->id)}}">
-                @endauth
-              <svg class="icon me-2">
-                <use xlink:href="{{asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-              </svg>Profile</a><a class="dropdown-item" href="">
-                @auth
-               <a class="dropdown-item" href="{{route('setting.show',$userId=Auth::user()->id)}}">
-                @endauth
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
-                </svg> Settings</a><a class="dropdown-item" href="#">
-            <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('logout')}}">
-              <svg class="icon me-2">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-              </svg> Logout</a>
-          </div>
-        </li>
-      </ul>
+
+
+        <ul class="header-nav ms-3">
+            <li class="nav-item dropdown">
+                <a class="nav-link py-0" data-coreui-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="d-flex align-items-center  p-3 rounded">
+                        <div class="d-none d-md-block ">
+                            <span class="">{{Auth::user()->username}}</span>
+                        </div>
+                        <div class="avatar avatar-md ml-3">
+                            <img class="avatar-img" src="{{ asset('assets/img/avatars/8.png') }}" alt="User Avatar" style="margin-left:20px">
+                        </div>
+                    </div>
+
+                </a>
+                <div class="dropdown-menu dropdown-menu-end pt-0">
+                    <div class="dropdown-header bg-light py-2">
+                        <div class="fw-semibold">Account</div>
+                    </div>
+                    @auth
+                        <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">
+                            <svg class="icon me-2">
+                                <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user') }}"></use>
+                            </svg> Profile
+                        </a>
+                        <a class="dropdown-item" href="{{ route('setting.show', Auth::user()->id) }}">
+                            <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
+                            </svg> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('logout') }}">
+                            <svg class="icon me-2">
+                                <use xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-account-logout') }}"></use>
+                            </svg> Logout
+                        </a>
+                    @endauth
+                </div>
+            </li>
+        </ul>
+
     </div>
     <div class="header-divider"></div>
     <div class="container-fluid">

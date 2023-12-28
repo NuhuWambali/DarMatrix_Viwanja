@@ -7,8 +7,16 @@
         <div class="card-body">
             <div class="">
                 <div class="row">
-                    <div class="text-center mb-4">
+                    <div class="text-center mb-4 col-8">
                         <h4 style="width:22em" class="text-center "> Plot number : {{$orderDetails->plot->plot_number}} - Payment Section</h4>
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Payment History
+                        </button>
                     </div>
                 </div>
                 <table class="table table-bordered roundedCorners">
@@ -83,6 +91,44 @@
             </div>
         </div>
         </form>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Payment Transaction History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Amount Paid</th>
+                            <th scope="col">Transaction Number</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Signed by</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($paymentTransactions as $index=>$paymentTransaction)
+                        <tr>
+                            <th scope="row">{{$index+1}}</th>
+                            <td>Tsh. {{number_format($paymentTransaction->amount_paid)}}</td>
+                            <td>{{$paymentTransaction->installation_number}}</td>
+                            <td>{{$paymentTransaction->transaction_time}}</td>
+                            <td>{{$paymentTransaction->created_by}}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
