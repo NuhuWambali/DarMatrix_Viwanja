@@ -16,7 +16,6 @@ class OrderController extends Controller
         $orders = Order::where('customer_id', $customer->id)->with('project','plot')->get();
         return view('home.customersAssignPlots', compact('customer', 'projects', 'orders','payment_methods'));
     }
-
     public function assignPlots(Request $request){
         $customer_id = $request->customer_id;
         $validatedOrderData = $request->validate([
@@ -45,9 +44,6 @@ class OrderController extends Controller
         }
         Alert::success('Success', 'Order Created Successfully!');
         return redirect()->route('assignPlots', $customer_id);
-
     }
-
-
 
 }

@@ -10,6 +10,11 @@ class Payment extends Model
     use HasFactory;
     protected $table='payments';
 
+    protected $casts = [
+
+    ];
+
+
     protected $fillable=[
         'customer_id',
         'plot_id',
@@ -41,4 +46,7 @@ class Payment extends Model
         return $this->belongsTo(Plot::class,'plot_id');
     }
 
+    public function payment_transactions(){
+        return $this->hasMany(PaymentTransaction::class);
+    }
 }

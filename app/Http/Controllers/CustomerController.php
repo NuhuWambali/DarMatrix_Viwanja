@@ -21,7 +21,6 @@ class CustomerController extends Controller
     }
     public function addCustomer(Request $request, Customer $customer){
         $authUserName=Auth::user()->username;
-        $addCustomer = new Customer;
         $validatedCustomerData=$request->validate([
             'fullname'=>'required',
             'phone_number'=>'required',

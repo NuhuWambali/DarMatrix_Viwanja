@@ -8,7 +8,7 @@
             <div class="">
                 <div class="row">
                     <div class="text-center mb-4">
-                        <h4 style="width:22em" class="text-center"> Plot number : {{$orderDetails->plot->plot_number}} - Payment Section</h4>
+                        <h4 style="width:22em" class="text-center "> Plot number : {{$orderDetails->plot->plot_number}} - Payment Section</h4>
                     </div>
                 </div>
                 <table class="table table-bordered roundedCorners">
@@ -21,18 +21,53 @@
                             <td>Tsh. {{number_format($orderDetails->plot->cash_total_value)}}</td>
                         @endif
                             <th>Duration</th>
-                        <td>{{$orderDetails->plot->installment_period}} Month</td>
+                        @if(empty($paymentDetails))
+                        <td>0 / {{$orderDetails->plot->installment_period}} Month</td>
+                        @else
+                            <td>{{$paymentDetails->installment_number}} / {{$orderDetails->plot->installment_period}} Month</td>
+                        @endif
                     </tr>
                     <tr>
-                        <th>Amount Paid</th>
-                        <td>Tsh. {{number_format($paymentDetails->amount_paid)}}</td>
-                        <th>Amount Remain</th>
-                        <td>Tsh. {{number_format($paymentDetails->amount_remain)}}</td>
+                        @if(empty($paymentDetails))
+                            <th>Amount Paid</th>
+                            <td>Tsh. 0</td>
+                            <th>Amount Remain</th>
+                            <td>
+                                @if($orderDetails->payment_way === "installment")
+                                    Tsh. {{ number_format($orderDetails->plot->installment_total_value) }}
+                                @else
+                                    Tsh. {{ number_format($orderDetails->plot->cash_total_value) }}
+                                @endif
+                            </td>
+                        @else
+                            <th>Amount Paid</th>
+                            <td>Tsh. {{ number_format($paymentDetails->amount_paid) }}</td>
+                            <th>Amount Remain</th>
+                            <td>Tsh. {{ number_format($paymentDetails->amount_remain) }}</td>
+                        @endif
+
                     </tr>
+                    @if(empty($paymentDetails))
+                    <tr>
+                        <th>Payment Status</th>
+                        <td colspan="12" class="text-center text-success">Not Initiated</td>
+                    </tr>
+                    @else
+                        <tr>
+                            <th>Payment Status</th>
+                            @if($paymentDetails->amount_paid>=$paymentDetails->total_amount)
+                            <td colspan="12" class="text-center text-success">Payment Done</td>
+                            @else
+                                <td colspan="12" class="text-center text-primary">On Progress</td>
+                            @endif
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>
         </div>
+        <form action="{{route('addPayment',$orderDetails->id)}}" method="post">
+            @csrf
         <div class="mb-3  ml-3 row">
             <label class="col-sm-2  " for="input" style="padding-left: 30px">Enter Amount</label>
             <div class="col-sm-7">
@@ -44,9 +79,10 @@
                 @enderror
             </div>
             <div class="col-sm-3">
-                <button type="button" class="btn btn-primary">Pay</button>
+                <button type="submit" class="btn btn-primary">Pay</button>
             </div>
         </div>
+        </form>
     </div>
 
 @endsection

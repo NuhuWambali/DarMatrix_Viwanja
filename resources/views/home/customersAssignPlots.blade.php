@@ -88,7 +88,8 @@
                             <h6>{{$order->plot->plot_number}}</h6>
                         </td>
                         <td>
-                            <a href="{{route('payment',$order->id)}}" class="btn btn-dark btn-sm"  style="color:#fff" >
+
+                            <a href="{{route('payment',$order->id)}}" class="btn btn-dark btn-sm"  >
                                 <i class="fas fa-money-bill" aria-hidden="true"></i> Pay
                             </a>
                         </td>
@@ -124,28 +125,28 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-{{--<script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>--}}
-{{--<script>--}}
-{{--    $(document).ready(function () {--}}
-{{--        $('#project').change(function () {--}}
-{{--            var projectId = $(this).val();--}}
-{{--            if (projectId) {--}}
-{{--                $.ajax({--}}
-{{--                    type: 'GET',--}}
-{{--                    url: '/get-plots/' + projectId,--}}
-{{--                    success: function (data) {--}}
-{{--                        $('#plots').html(data);--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            } else {--}}
+<script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        $('#project').change(function () {
+            var projectId = $(this).val();
+            if (projectId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/get-plots/' + projectId,
+                    success: function (data) {
+                        $('#plots').html(data);
+                    }
+                });
+            } else {
 
-{{--                $('#plots').html('<option value="" disabled selected>Select a Project First</option>');--}}
+                $('#plots').html('<option value="" disabled selected>Select a Project First</option>');
 
-{{--            }--}}
-{{--        });--}}
-{{--    });--}}
+            }
+        });
+    });
 
-{{--</script>--}}
+</script>
 
 
 @endsection
