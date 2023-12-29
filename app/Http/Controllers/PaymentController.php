@@ -36,14 +36,24 @@ class PaymentController extends Controller
 //
 //    }
 
+//    public function paymentDetails($id)
+//    {
+//
+//        $orderDetails = Order::findOrFail($id);
+//        $paymentDetails = Payment::where('order_id', $id)->first();
+//        $paymentId=$paymentDetails->id;
+//        $paymentTransactions=PaymentTransaction::where('payment_id',$paymentId)->get();
+//        return view('home.payment', compact('orderDetails', 'paymentDetails','paymentTransactions'));
+//    }
     public function paymentDetails($id)
     {
-
         $orderDetails = Order::findOrFail($id);
         $paymentDetails = Payment::where('order_id', $id)->first();
-        $paymentId=$paymentDetails->id;
-        $paymentTransactions=PaymentTransaction::where('payment_id',$paymentId)->get();
-        return view('home.payment', compact('orderDetails', 'paymentDetails','paymentTransactions'));
+        $paymentTransactions = collect();
+        if ($paymentDetails) {
+            $paymentTransactions = PaymentTransaction::where('payment_id', $paymentDetails->id)->get();
+        }
+        return view('home.payment', compact('orderDetails', 'paymentDetails', 'paymentTransactions'));
     }
 
     public function addPayment(Request $request, $id){

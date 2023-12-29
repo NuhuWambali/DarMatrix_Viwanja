@@ -8,11 +8,11 @@
       <div class="card mb-4 text-white bg-primary">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
           <div>
-            <div class="fs-4 fw-semibold">26K <span class="fs-6 fw-normal">(-12.4%
+            <div class="fs-4 fw-semibold">{{$totalCustomers}} <span class="fs-6 fw-normal">
                 <svg class="icon">
                   <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
-                </svg>)</span></div>
-            <div>Users</div>
+                </svg></span></div>
+            <div>Customers</div>
           </div>
           <div class="dropdown">
             <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,11 +33,11 @@
       <div class="card mb-4 text-white bg-info">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
           <div>
-            <div class="fs-4 fw-semibold">$6.200 <span class="fs-6 fw-normal">(40.9%
+            <div class="fs-4 fw-semibold">{{$totalProjects}} <span class="fs-6 fw-normal">
                 <svg class="icon">
                   <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-top"></use>
-                </svg>)</span></div>
-            <div>Income</div>
+                </svg></span></div>
+            <div>Total Projects</div>
           </div>
           <div class="dropdown">
             <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,11 +58,11 @@
       <div class="card mb-4 text-white bg-warning">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
           <div>
-            <div class="fs-4 fw-semibold">2.49% <span class="fs-6 fw-normal">(84.7%
+            <div class="fs-4 fw-semibold">{{$totalPlots}} <span class="fs-6 fw-normal">
                 <svg class="icon">
                   <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-top"></use>
-                </svg>)</span></div>
-            <div>Conversion Rate</div>
+                </svg></span></div>
+            <div>Total Plots</div>
           </div>
           <div class="dropdown">
             <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,11 +83,11 @@
       <div class="card mb-4 text-white bg-danger">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
           <div>
-            <div class="fs-4 fw-semibold">44K <span class="fs-6 fw-normal">(-23.6%
+            <div class="fs-4 fw-semibold">Tsh. {{number_format($netAmount) }}<span class="fs-6 fw-normal">
                 <svg class="icon">
                   <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
-                </svg>)</span></div>
-            <div>Sessions</div>
+                </svg></span></div>
+            <div>Net Amount</div>
           </div>
           <div class="dropdown">
             <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

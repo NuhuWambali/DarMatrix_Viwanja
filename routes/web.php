@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -38,7 +39,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
 
  Route::middleware(['auth'])->group(function(){
      //dashboard route
-    Route::get('/dashboard', [AuthController::class, 'index'])->name('index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
     //roles routes
     Route::get('/roles', [RolesController::class, 'getRoles'])->name('roles');

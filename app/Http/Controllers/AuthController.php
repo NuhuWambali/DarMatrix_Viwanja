@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     //
-    public function index(){
-        return view('home.dashboard');
-    }
 
     public function login(){
         return view('auth.login');

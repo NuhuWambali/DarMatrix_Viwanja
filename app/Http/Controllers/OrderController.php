@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Customer, Order, Payment, PaymentMethod, Plot, Project};
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
@@ -17,6 +19,7 @@ class OrderController extends Controller
         return view('home.customersAssignPlots', compact('customer', 'projects', 'orders','payment_methods'));
     }
     public function assignPlots(Request $request){
+        $username=Auth::user()->username;
         $customer_id = $request->customer_id;
         $validatedOrderData = $request->validate([
             'customer_id' => 'required',
@@ -42,6 +45,16 @@ class OrderController extends Controller
             $plot->status = 0;
             $plot->save();
         }
+//        DB::table('payments')->insert([
+//            'order_id' => $createOrder->id,
+//            'total_amount'=>null,
+//            'amount_paid'=>'',
+//            'amount_remain' => '',
+//            'payment_status' => 1,
+//            'installment_number' => '',
+//            'created_by'=>$username,
+//            'updated_by'=>$username
+//        ]);
         Alert::success('Success', 'Order Created Successfully!');
         return redirect()->route('assignPlots', $customer_id);
     }
