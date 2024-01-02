@@ -53,20 +53,19 @@
                             <th>Amount Remain</th>
                             <td>Tsh. {{ number_format($paymentDetails->amount_remain) }}</td>
                         @endif
-
                     </tr>
                     @if(empty($paymentDetails))
                     <tr>
                         <th>Payment Status</th>
-                        <td colspan="12" class="text-center text-success">Not Initiated</td>
+                        <td colspan="12" class="text-center text-danger text-bold"><p style="font-size:23px">Not Initiated</p></td>
                     </tr>
                     @else
                         <tr>
                             <th>Payment Status</th>
-                            @if($paymentDetails->amount_paid>=$paymentDetails->total_amount)
-                            <td colspan="12" class="text-center text-success">Payment Done</td>
+                            @if($paymentDetails->amount_paid>=$paymentDetails->total_amount && $paymentDetails->payment_status="inactive")
+                            <td colspan="12" class="text-center text-success"><p style="font-size:20px">Payment Done</p></td>
                             @else
-                                <td colspan="12" class="text-center text-primary">On Progress</td>
+                                <td colspan="12" class="text-center text-primary"><p style="font-size:20px">On Progress</p></td>
                             @endif
                         </tr>
                     @endif
@@ -74,10 +73,11 @@
                 </table>
             </div>
         </div>
-        <form action="{{route('addPayment',$orderDetails->id)}}" method="post">
-            @csrf
+        @if($paymentDetails && $paymentDetails->payment_status=='inactive')
+        <form action="{{route('addPayment',$orderDetails->id)}}" method="post" hidden>
+        @csrf
         <div class="mb-3  ml-3 row">
-            <label class="col-sm-2  " for="input" style="padding-left: 30px">Enter Amount</label>
+            <label class="col-sm-2 " for="input" style="padding-left: 30px">Enter Amount</label>
             <div class="col-sm-7">
                 <input class="form-control @error('amount') is-invalid @enderror" type="text" id="amount" name="amount" value="{{old('amount')}}" required>
                 @error('amount')
@@ -91,6 +91,26 @@
             </div>
         </div>
         </form>
+        @else
+        <form action="{{route('addPayment',$orderDetails->id)}}" method="post">
+            @csrf
+            <div class="mb-3  ml-3 row">
+                <label class="col-sm-2 " for="input" style="padding-left: 30px">Enter Amount</label>
+                <div class="col-sm-7">
+                    <input class="form-control @error('amount') is-invalid @enderror" type="text" id="amount" name="amount" value="{{old('amount')}}" required>
+                    @error('amount')
+                    <p class="dismissAlert text-danger" id="dismissAlert">
+                        {{$message}}
+                    </p>
+                    @enderror
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary">Pay</button>
+                </div>
+            </div>
+            </form>
+        @endif
+
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,15 +132,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($paymentTransactions as $index=>$paymentTransaction)
+                        @if($paymentTransactions->count())
+                                @foreach($paymentTransactions as $index=>$paymentTransaction)
+                                <tr>
+                                    <th scope="row">{{$index+1}}</th>
+                                    <td>Tsh. {{number_format($paymentTransaction->amount_paid)}}</td>
+                                    <td>{{$paymentTransaction->installation_number}}</td>
+                                    <td>{{$paymentTransaction->transaction_time}}</td>
+                                    <td>{{$paymentTransaction->created_by}}</td>
+                                </tr>
+                                @endforeach
+                        @else
                         <tr>
-                            <th scope="row">{{$index+1}}</th>
-                            <td>Tsh. {{number_format($paymentTransaction->amount_paid)}}</td>
-                            <td>{{$paymentTransaction->installation_number}}</td>
-                            <td>{{$paymentTransaction->transaction_time}}</td>
-                            <td>{{$paymentTransaction->created_by}}</td>
+                            <td colspan="12" class="text-center">No Data Found In Database</td>
                         </tr>
-                        @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

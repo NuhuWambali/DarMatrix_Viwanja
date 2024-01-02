@@ -60,6 +60,7 @@ class PaymentController extends Controller
         $username = Auth::user()->username;
         $orderDetails = Order::findOrFail($id);
         $paymentDetails = Payment::where('order_id', $id)->first();
+     
         $totalAmount = ($orderDetails->plot->payment_way == 'cash') ? $orderDetails->plot->cash_total_value : $orderDetails->plot->installment_total_value;
         if($paymentDetails){
             $amountPaid = $paymentDetails ? $paymentDetails->amount_paid : 0; // Assuming $paymentDetails is available
@@ -83,14 +84,18 @@ class PaymentController extends Controller
                 $amountRemain = $totalAmount - $addPayment->amount_paid;
                 $installmentNumber = $addPayment->installment_number + 1;
             }
-
+            $addPayment->payment_status=1;
             $addPayment->order_id = $orderDetails->id;
             $addPayment->total_amount = $totalAmount;
             $addPayment->amount_remain = $amountRemain;
             $addPayment->installment_number = $installmentNumber;
-            $addPayment->payment_status = 1;
             $addPayment->created_by = $username;
             $addPayment->updated_by = $username;
+            if ($addPayment->amount_paid >= $totalAmount) {
+                $addPayment->payment_status = 0;
+            } else {
+                $addPayment->payment_status = 1;
+            }
             $addPayment->save();
             DB::table('payment_transactions')->insert([
                 'payment_id' => $addPayment->id,
@@ -103,8 +108,9 @@ class PaymentController extends Controller
             return redirect()->route('payment', $orderDetails->id);
         }
         catch (ModelNotFoundException $exception) {
-            Alert::error('Error', 'Order or Payment not found.');
+            Alert::error('Error', 'Order or Payment not found.',);
             return redirect()->back();
         }
     }
+
 }

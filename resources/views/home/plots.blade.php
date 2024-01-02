@@ -18,8 +18,6 @@
                 <div class="col-sm-2 ml-5 mt-1 text-center">
                 </div>
             </div>
-
-            @if($plots->count())
             <div class="table">
             <table class="table border mb-0">
                     <thead class="table-light fw-semibold">
@@ -33,7 +31,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if($plots->count())
                     @foreach($plots as $index=>$plot)
+
                         <tr class="align-middle">
                         <td>
                             <h6>{{$index+1}}</h6>
@@ -48,7 +48,7 @@
                             <h6>{{$plot->land_use}}</h6>
                         </td>
                         <td>
-                            <h6>{{number_format($plot->installment_total_price)}}</h6>
+                            <h6>{{number_format($plot->installment_total_value)}}</h6>
                         </td>
                         <td>
                             <div class="row">
@@ -70,18 +70,19 @@
                             </div>
 
                         </td>
+                    </tr>
+                    @endforeach
+                        @else
+                        <tr>
+                            <td colspan="12" class="text-center">no records found in database</td>
                         </tr>
-                     @endforeach
+                        @endif
                     </tbody>
             </table>
+            </div>
 
-            </div>
-            <div class="col-sm-2 mt-3">
-                <a href="{{route('projects',$plot->project_id)}}" style="color:#fff" class="btn btn-primary btn-sm mb-3" >back</a></button>
-            </div>
       </div>
     </div>
-    @else
-    @endif
+
 </div>
 @endsection

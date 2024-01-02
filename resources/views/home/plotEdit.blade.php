@@ -57,8 +57,8 @@
                         </div>
                         <div class="mb-3 row">
                             <div class="col-4">
-                                <label class=" col-form-label" for="inputRegion">Monthly Installment Price</label>
-                                <input class="form-control @error('monthly_installment_price') is-invalid @enderror" type="number" id="monthly_installment_price" name="monthly_installment_price" value="{{$plot->monthly_installment_price}}" placeholder="Enter Installment Price">
+                                <label class=" col-form-label" for="inputRegion">Installment Price Per Sqm</label>
+                                <input class="form-control @error('installment_price_per_sqm') is-invalid @enderror" type="number" id="installment_price_per_sqm" name="installment_price_per_sqm" value="{{$plot->installment_price_per_sqm}}" placeholder="Enter Installment Price">
                                 @error('monthly_installment_price')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
@@ -85,8 +85,6 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-
-
                         </div>
                         <div class="mb-3 row">
                             <div class="col-4">

@@ -13,6 +13,10 @@ class Payment extends Model
     protected $casts = [
 
     ];
+    public function getStatusAttribute($value)
+    {
+        return $value ? 'active' : 'inactive';
+    }
 
 
     protected $fillable=[

@@ -49,7 +49,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function getStatusAttribute($value)
+    {
+        return $value ? 'active' : 'inactive';
+    }
 
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value === 'active' ? 1 : 0;
+    }
     // public function roles()
     // {
     //   return $this->hasMany(Roles::class);
