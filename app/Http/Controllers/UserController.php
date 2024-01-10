@@ -30,7 +30,8 @@ class UserController extends Controller
                 'username'=>'required|max:100',
                 'role_id'=>'required',
                 'phone'=>'required|min:10',
-              ],[
+              ],
+              [
                  'fullname.required' => 'Full name is required',
                  'email.required' => 'Email is required', 'email.unique'=>'Email is already taken',
                  'username.required'=>'Full name is required',

@@ -43,7 +43,7 @@
                                         <button class="btn btn-primary mb-3"  type="submit" onclick="">Change</button>
                                     </div>
                                     <div class="col-3">
-                                    <a href="" style="color:#fff" class="btn btn-danger mb-3" >Cancel</a></button>
+                                    <a href="{{route('index')}}" style="color:#fff" class="btn btn-danger mb-3" >Cancel</a></button>
                                     </div>
                                 </div>
                         </form>

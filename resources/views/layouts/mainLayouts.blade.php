@@ -7,7 +7,6 @@
     --><!-- Breadcrumb-->
     <html lang="en">
       <head>
-
       @include('layouts._head')
       </head>
       <body>

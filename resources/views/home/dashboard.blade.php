@@ -15,12 +15,7 @@
             <div>Customers</div>
           </div>
           <div class="dropdown">
-            <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg class="icon">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-              </svg>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></div>
+            <i class="fa fa-users fa-3x"></i>
           </div>
         </div>
         <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -28,7 +23,7 @@
         </div>
       </div>
     </div>
-    <!-- /.col-->
+
     <div class="col-sm-6 col-lg-3">
       <div class="card mb-4 text-white bg-info">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
@@ -40,12 +35,7 @@
             <div>Total Projects</div>
           </div>
           <div class="dropdown">
-            <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg class="icon">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-              </svg>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></div>
+            <i class="fas fa-project-diagram fa-3x"></i>
           </div>
         </div>
         <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -53,7 +43,7 @@
         </div>
       </div>
     </div>
-    <!-- /.col-->
+
     <div class="col-sm-6 col-lg-3">
       <div class="card mb-4 text-white bg-warning">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
@@ -65,12 +55,7 @@
             <div>Total Plots</div>
           </div>
           <div class="dropdown">
-            <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg class="icon">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-              </svg>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></div>
+            <i class="fa fa-area-chart fa-3x"></i>
           </div>
         </div>
         <div class="c-chart-wrapper mt-3" style="height:70px;">
@@ -78,9 +63,9 @@
         </div>
       </div>
     </div>
-    <!-- /.col-->
+   
     <div class="col-sm-6 col-lg-3">
-      <div class="card mb-4 text-white bg-danger">
+      <div class="card mb-4 text-white bg-success">
         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
           <div>
             <div class="fs-4 fw-semibold">Tsh. {{number_format($netAmount) }}<span class="fs-6 fw-normal">
@@ -90,12 +75,6 @@
             <div>Net Amount</div>
           </div>
           <div class="dropdown">
-            <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg class="icon">
-                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-              </svg>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></div>
           </div>
         </div>
         <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -103,6 +82,6 @@
         </div>
       </div>
     </div>
-    <!-- /.col-->
+
 </div>
 @endsection

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('plot_id')->constrained()->onDelete('cascade');
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->foreignId('payment_method_id')->constrained()->onDelete('cascade');
+            $table->foreignId('plot_id')->references('id')->on('plots');
+            $table->foreignId('payment_method_id')->references('id')->on('payment_methods');
             $table->string('payment_way')->nullable();
+            $table->string('signed_by')->nullable();
             $table->timestamps();
         });
     }

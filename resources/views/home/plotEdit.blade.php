@@ -59,7 +59,7 @@
                             <div class="col-4">
                                 <label class=" col-form-label" for="inputRegion">Installment Price Per Sqm</label>
                                 <input class="form-control @error('installment_price_per_sqm') is-invalid @enderror" type="number" id="installment_price_per_sqm" name="installment_price_per_sqm" value="{{$plot->installment_price_per_sqm}}" placeholder="Enter Installment Price">
-                                @error('monthly_installment_price')
+                                @error('installment_price_per_sqm')
                                 <p class="dismissAlert text-danger" id="dismissAlert">
                                     {{$message}}
                                 </p>

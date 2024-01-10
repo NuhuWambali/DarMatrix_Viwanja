@@ -20,7 +20,7 @@
                                         <select class="form-control @error('project_id') is-invalid @enderror" id="project" name="project_id">
                                             <option value="" disabled selected>Select a Project</option>
                                             @foreach($projects as $project)
-                                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('project')
@@ -31,8 +31,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="col-form-label" for="plots">Plots</label>
-                                        <select class="form-control  @error('plot_id') is-invalid @enderror" id="plots" name="plot_id">
+                                        <select class="form-control  @error('plot_id') is-invalid @enderror" id="plot_id" name="plot_id">
                                         </select>
+
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="col-form-label" for="payment_way">Select Payment Way</label>
@@ -82,16 +83,26 @@
                             <h6>{{$customer->fullname}}</h6>
                         </td>
                         <td>
-                            <h6>{{$order->project->name }}</h6>
+                            <h6>{{$order->plot->project->name }}</h6>
                         </td>
                         <td>
                             <h6>{{$order->plot->plot_number}}</h6>
                         </td>
                         <td>
-
-                            <a href="{{route('payment',$order->id)}}" class="btn btn-dark btn-sm"  >
-                                <i class="fas fa-money-bill" aria-hidden="true"></i> Pay
-                            </a>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="{{route('payment',$order->id)}}" class="btn btn-dark btn-sm"  >
+                                        <i class="fas fa-money-bill" aria-hidden="true"></i> Pay
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <form action="{{route('deleteOrder',$order->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                         </tr>
                         @endforeach
@@ -109,44 +120,29 @@
         </div>
     </div>
 </div>
-{{--<div class="modal exampleModal" id="exampleModal" tabindex="">--}}
-{{--    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">--}}
-{{--        <div class="modal-content">--}}
-{{--            <div class="modal-header">--}}
-{{--                <!-- Modal Title -->--}}
-{{--                @if($orders->count())--}}
-{{--                <h5 class="modal-title text-primary">{{$order->project->name }} | Payment Section</h5>--}}
-{{--                @else--}}
-{{--                <h5 class="modal-title text-primary"> Payment Section</h5>--}}
-{{--                @endif--}}
-{{--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
-{{--            </div>--}}
-{{--            @include('partials.order-details')--}}
-{{--    </div>--}}
-{{--</div>--}}
-
 <script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>
 <script>
-    $(document).ready(function () {
-        $('#project').change(function () {
-            var projectId = $(this).val();
-            if (projectId) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/get-plots/' + projectId,
-                    success: function (data) {
-                        $('#plots').html(data);
-                    }
-                });
-            } else {
-
-                $('#plots').html('<option value="" disabled selected>Select a Project First</option>');
-
-            }
-        });
+$(document).ready(function () {
+    $('#project').change(function () {
+        var projectId = $(this).val();
+        loadPlots(projectId);
     });
-
+    function loadPlots(projectId) {
+        if (projectId) {
+            $.ajax({
+                type: 'GET',
+                url: '/get-plots/' + projectId,
+                success: function (data) {
+                    $('#plot_id').html(data);
+                    console.log(data);
+                }
+            });
+        } else {
+            $('#plot_id').html('<option value="" disabled selected> Select a Project First </option>');
+        }
+    }
+}
+)
 </script>
-
 
 @endsection

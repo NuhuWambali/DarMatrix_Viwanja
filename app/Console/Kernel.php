@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // $schedule->command('inspire->storage/logs/inspire.log')->everyMinute();
+        $schedule->command('orders:delete-unpaid')->daily();
     }
 
     /**

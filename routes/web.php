@@ -11,6 +11,7 @@ use App\Http\Controllers\PlotsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,7 +79,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::get('/project/{id}/plot/plotEdit', [PlotsController::class,'plotEdit'])->name('plotEdit');
     Route::put('/project/editPlot/{id}', [PlotsController::class, 'createPlotEdit'])->name('editPlot');
     Route::post('/project/deletePlot/{id}', [PlotsController::class, 'deletePlot'])->name('deletePlot');
-    Route::get('/get-plots/{projectId}', [PlotsController::class, 'getPlots']);
+    Route::get('/get-plots/{projectId}', [PlotsController::class, 'getPlots'])->name('plots');
 
     //customers routes
     Route::get('/customers', [CustomerController::class, 'viewCustomers'])->name('viewCustomers');
@@ -101,6 +102,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     //order
      Route::get('/assignPlots/customer_id/{id}', [OrderController::class, 'assignPlotsPage'])->name('assignPlots');
      Route::post('/assignPlot', [OrderController::class, 'assignPlots'])->name('assign.plots');
+     Route::delete('/deleteOrder/{orderId}', [OrderController::class, 'deleteOrder'])->name('deleteOrder');
 
      //payment
      Route::get('/payment/order_id/{id}',[PaymentController::class,'paymentDetails'])->name('payment');
@@ -111,5 +113,20 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::put('updateProfile/{userId}',[UserController::class,'updateProfile'])->name('updateProfile');
     Route::get('setting/{userId}',[UserController::class,'setting'])->name('setting.show');
     Route::put('changePassword/{userId}',[UserController::class,'changePassword'])->name('changePassword');
+
+    //report routes
+    Route::get('/customerReport',[ReportController::class,'customerReport'])->name('customer_report.show');
+    Route::get('/downloadCustomerReport', [ReportController::class,'downloadCustomersReportPDF'])->name('downloadCustomersReportPDF');
+    Route::get('/projectReport',[ReportController::class,'projectReport'])->name('project_report.show');
+    Route::get('/downloadProjectReport',[ReportController::class,'downloadProjectsReportPDF'])->name('downloadProjectsReportPDF');
+    Route::get('/plotsReport',[ReportController::class,'plotsReport'])->name('plot_report.show');
+    Route::get('/downloadPlotsReport',[ReportController::class,'downloadPlotsReportPDF'])->name('downloadPlotsReportPDF');
+    Route::get('/paymentReport',[ReportController::class,'paymentReport'])->name('payment_report.show');
+    Route::get('/downloadPaymentReportPDF',[ReportController::class,'downloadPaymentReportPDF'])->name('downloadPaymentsReportPDF');
+
+
+
+
+
  });
 

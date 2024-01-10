@@ -53,4 +53,7 @@ class Payment extends Model
     public function payment_transactions(){
         return $this->hasMany(PaymentTransaction::class);
     }
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
 }
