@@ -12,7 +12,7 @@
                 <div class="col-sm-2 my-3">
                     <h6>Download</h6>
                     <a href="{{route('downloadPlotsReportPDF')}}" class="btn btn-primary btn-sm">PDF</a>
-                    <div class="btn  btn-outline-primary btn-sm">Excel</div>
+                    <a href="{{route('downloadExcelPlot')}}" class="btn  btn-outline-primary btn-sm">Excel</a>
                 </div>
             </div>
             <div class="table-responsive">

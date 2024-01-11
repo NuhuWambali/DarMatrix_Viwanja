@@ -82,26 +82,7 @@ class ReportController extends Controller
 
     }
 
-    // public function generateExcel()
-    // {
-    //     // Create a new PhpSpreadsheet instance
-    //     $spreadsheet = new Spreadsheet();
-
-    //     // Add data to the spreadsheet
-    //     $sheet = $spreadsheet->getActiveSheet();
-    //     $sheet->setCellValue('A1', 'Nuhu');
-    //     $sheet->setCellValue('B1', 'Adams');
-
-    //     // Save the spreadsheet to a file
-    //     $filename = storage_path('app/project_report.xlsx');
-    //     $writer = new Xlsx($spreadsheet);
-    //     $writer->save($filename);
-
-    //     // Return a response to download the file
-    //     return response()->download($filename, 'project_report.xlsx');
-    // }
-
-    public function generateExcel()
+    public function generateProjectExcel()
     {
         $data = Project::all();
         $spreadsheet = new Spreadsheet();
@@ -141,13 +122,96 @@ class ReportController extends Controller
             $sheet->setCellValueByColumnAndRow(19, $row, $item->updated_at);
             $row++;
         }
-
-
         $filename = storage_path('app/project_report.xlsx');
         $writer = new Xlsx($spreadsheet);
         $writer->save($filename);
-
-
         return response()->download($filename, 'project_report.xlsx');
     }
+
+    public function generateCustomerExcel()
+    {
+        $data = Customer::all();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $columnHeaders = ['Fullname', 'Phone','Email',
+        'Date Of Birth',' National Id Number','Address',
+        'Description1','Description2','Description3',
+        'Description4','Description5','Description6',
+        'Status','Created By','Modified By','Created At','Updated At',
+    ];
+        $columnIndex = 1;
+        foreach ($columnHeaders as $header) {
+            $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
+            $columnIndex++;
+        }
+        $row = 2;
+        foreach ($data as $item) {
+            $sheet->setCellValueByColumnAndRow(1, $row, $item->fullname);
+            $sheet->setCellValueByColumnAndRow(2, $row, $item->phone_number);
+            $sheet->setCellValueByColumnAndRow(3, $row, $item->email);
+            $sheet->setCellValueByColumnAndRow(4, $row, $item->date_of_birth);
+            $sheet->setCellValueByColumnAndRow(5, $row, $item->national_id_number);
+            $sheet->setCellValueByColumnAndRow(6, $row, $item->address);
+            $sheet->setCellValueByColumnAndRow(7, $row, $item->description1);
+            $sheet->setCellValueByColumnAndRow(8, $row, $item->description2);
+            $sheet->setCellValueByColumnAndRow(9, $row, $item->description3);
+            $sheet->setCellValueByColumnAndRow(10, $row, $item->description4);
+            $sheet->setCellValueByColumnAndRow(11, $row, $item->description5);
+            $sheet->setCellValueByColumnAndRow(12, $row, $item->description6);
+            $sheet->setCellValueByColumnAndRow(13, $row, $item->status);
+            $sheet->setCellValueByColumnAndRow(14, $row, $item->created_by);
+            $sheet->setCellValueByColumnAndRow(15, $row, $item->modified_by);
+            $sheet->setCellValueByColumnAndRow(16, $row, $item->created_at);
+            $sheet->setCellValueByColumnAndRow(17, $row, $item->updated_at);
+            $row++;
+        }
+        $filename = storage_path('app/customer_report.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filename);
+        return response()->download($filename, 'customer_report.xlsx');
+    }
+
+    public function generatePlotExcel()
+    {
+        $data = Plot::all();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $columnHeaders = ['Project Id','Plot Number', 'Plot Size','Land Use',
+        'Installment Period','Installment Price Per SQM ','Cash Price per SQM',  'Total Installment Value',
+        'Total Cash Value','Description1','Description2',
+        'Description3','Status','Created By',
+        'Updated By','Created At','Updated At',
+    ];
+        $columnIndex = 1;
+        foreach ($columnHeaders as $header) {
+            $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
+            $columnIndex++;
+        }
+        $row = 2;
+        foreach ($data as $item) {
+            $sheet->setCellValueByColumnAndRow(1, $row, $item->project_id);
+            $sheet->setCellValueByColumnAndRow(2, $row, $item->plot_number);
+            $sheet->setCellValueByColumnAndRow(3, $row, $item->plot_size);
+            $sheet->setCellValueByColumnAndRow(4, $row, $item->land_use);
+            $sheet->setCellValueByColumnAndRow(5, $row, $item->installment_period);
+            $sheet->setCellValueByColumnAndRow(6, $row, $item->installment_price_per_sqm);
+            $sheet->setCellValueByColumnAndRow(7, $row, $item->cash_price_per_sqm);
+            $sheet->setCellValueByColumnAndRow(8, $row, $item->monthly_installment_price);
+            $sheet->setCellValueByColumnAndRow(9, $row, $item->cash_total_value);
+            $sheet->setCellValueByColumnAndRow(10, $row, $item->description1);
+            $sheet->setCellValueByColumnAndRow(11, $row, $item->description2);
+            $sheet->setCellValueByColumnAndRow(12, $row, $item->description3);
+            $sheet->setCellValueByColumnAndRow(13, $row, $item->status);
+            $sheet->setCellValueByColumnAndRow(14, $row, $item->created_by);
+            $sheet->setCellValueByColumnAndRow(15, $row, $item->updated_by);
+            $sheet->setCellValueByColumnAndRow(16, $row, $item->created_at);
+            $sheet->setCellValueByColumnAndRow(17, $row, $item->updated_at);
+            $row++;
+        }
+        $filename = storage_path('app/plots_report.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filename);
+        return response()->download($filename, 'plots_report.xlsx');
+    }
+
 }

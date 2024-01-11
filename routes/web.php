@@ -125,7 +125,12 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::get('/downloadPaymentReportPDF',[ReportController::class,'downloadPaymentReportPDF'])->name('downloadPaymentsReportPDF');
 
     //excel
-    Route::get('/download-excel', [ReportController::class, 'generateExcel'])->name('downloadExcelProject');
+    Route::get('/download-excel-projects', [ReportController::class, 'generateProjectExcel'])->name('downloadExcelProject');
+    Route::get('/download-excel-customers', [ReportController::class, 'generateCustomerExcel'])->name('downloadExcelCustomer');
+    Route::get('/download-excel-plots', [ReportController::class, 'generatePlotExcel'])->name('downloadExcelPlot');
+
+
+
 
 
  });
