@@ -25,16 +25,15 @@ class Order extends Model
         return $this->belongsTo(Plot::class, 'plot_id');
     }
 
-    public function project()
-    {
-        return $this->belongsTo(Project::class, 'project_id');
-    }
-
     public function paymentMethod(){
         return $this->belongsTo(PaymentMethod::class,'payment_method_id');
     }
-    public function payments() {
+    public function payment() {
         return $this->hasMany(Payment::class);
+    }
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
 }

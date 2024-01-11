@@ -54,6 +54,9 @@ class Payment extends Model
         return $this->hasMany(PaymentTransaction::class);
     }
     public function order() {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class,'order_id');
+    }
+    public function project() {
+        return $this->belongsTo(Project::class,'project_id');
     }
 }

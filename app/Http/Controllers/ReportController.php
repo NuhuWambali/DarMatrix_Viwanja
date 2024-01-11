@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Project;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ReportController extends Controller
@@ -21,10 +22,12 @@ class ReportController extends Controller
 
 
     public function downloadCustomersReportPDF(){
+        $username=Auth::user()->username;
+        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
         $customers=Customer::all();
         $date=now();
         $totalCustomers=Customer::all()->count();
-        $pdf=PDF::loadView('home.download.CustomerReport',compact('customers','totalCustomers','date'));
+        $pdf=PDF::loadView('home.download.CustomerReport',compact('customers','totalCustomers','date','username','randomInvoiceNumber'));
         return $pdf->download('Customer_Report.pdf');
     }
     public function projectReport(){
@@ -34,10 +37,12 @@ class ReportController extends Controller
     }
 
     public function downloadProjectsReportPDF(){
+        $username=Auth::user()->username;
+        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
         $projects=Project::all();
         $date=now();
         $totalProjects=Project::all()->count();
-        $pdf=PDF::loadView('home.download.ProjectReport',compact('projects','totalProjects','date'));
+        $pdf=PDF::loadView('home.download.ProjectReport',compact('projects','totalProjects','date','username','randomInvoiceNumber'));
         return $pdf->download('Project_Report.pdf');
     }
     public function plotsReport(){
@@ -46,10 +51,12 @@ class ReportController extends Controller
         return view('home.reportPlot',compact('plots','totalPlots'));
     }
     public function downloadPlotsReportPDF(){
+        $username=Auth::user()->username;
+        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
         $plots=Plot::all();
         $date=now();
         $totalPlots=Plot::all()->count();
-        $pdf=PDF::loadView('home.download.plotReport',compact('plots','totalPlots','date'));
+        $pdf=PDF::loadView('home.download.plotReport',compact('plots','totalPlots','date','username','randomInvoiceNumber'));
         return $pdf->download('Plots_Report.pdf');
 
     }
@@ -60,13 +67,16 @@ class ReportController extends Controller
     }
 
     public function downloadPaymentReportPDF(){
+        $username=Auth::user()->username;
+        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
         $payments=Payment::all();
+        $totalPaidCustomer=Payment::all()->count();
         $date=now();
-        $totalPaidAmount=
-        $totalunPaidAmount=
-        $totalAmount=
-        $pdf=PDF::loadView('home.download.plotReport',compact('plots','totalPlots','date'));
-        return $pdf->download('Plots_Report.pdf');
+        $totalPaidAmount = $payments->sum('amount_paid');
+        $totalUnpaidAmount = $payments->sum('amount_remain');
+        $totalAmount=$payments->sum('total_amount');
+        $pdf=PDF::loadView('home.download.paymentReport',compact('payments','totalPaidAmount','totalUnpaidAmount','totalPaidCustomer','date','randomInvoiceNumber','username'));
+        return $pdf->download('Payment_Report.pdf');
 
     }
 

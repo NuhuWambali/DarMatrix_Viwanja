@@ -2,43 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Report</title>
+    <title>Project Report</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <style>
-        /* Overall styles */
-        body {
-            font-family: 'Sofia Pro', sans-serif;
-            margin: 0;
-            padding: 10px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        .invoice {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-        }
-
-        /* Header styles */
-        .invoice-header {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .invoice-title {
-            font-size: 40px;
-            margin-bottom: 5px;
-            color: #2196F3; /* Shade of blue */
-        }
-
-        .invoice-details {
-            font-size: 18px;
-            color: #777;
-        }
-
         /* Table styles */
         .invoice-table {
             width: 100%;
@@ -93,12 +59,24 @@
 </head>
 <body>
     <div class="invoice">
-        <div class="invoice-header">
-            <h1 class="invoice-title">DarMatrix Viwanja</h1>
-            <div class="invoice-details">
-                <p><strong>Invoice Report: </strong>All Projects</p>
-                <p><strong>Date: </strong> {{$date}}</p>
-                <p><strong>Total Customers: </strong> {{$totalProjects}}</p>
+        <div class="header " style="background-color: #525151; height:20; width:100%; border-radius:0 0 7% 7%;"></div>
+        <div class="row">
+            <div class="col-xl-12">
+                <i class="far fa-building text-danger fa-6x float-start"></i>
+            </div>
+        </div>
+        <div class="row mt-4" >
+            <div class="col-xl-12">
+                <ul class="list-unstyled float-end">
+                    <li class="text-primary" style="font-size: 30px;">DarMatrix Viwanja</li>
+                    <li>123, Elm Street</li>
+                    <li>0688-349-680</li>
+                    <li>darmatrix@gmail.com</li>
+                </ul>
+            </div>
+            <div class="row text-center">
+                <h5 class="text-uppercase text-center mt-3" style="font-size: 40px;">Project Report</h5>
+                <p>{{$randomInvoiceNumber}}</p>
             </div>
         </div>
         <table class="invoice-table table-bordered">
@@ -107,14 +85,16 @@
                 <th>#</th>
                 <th >Name</th>
                 <th >Address</th>
-                <th >City</th>
-                <th >Status</th>
+                <th >Region</th>
+                <th >Total Plots</th>
+                <th >Start</th>
+                <th >End</th>
                 </tr>
             </thead>
             <tbody>
                 @if($projects->count())
                 @foreach($projects as $index=>$project)
-                <tr class="">
+                <tr class="align-middle">
                 <td>
                     <h6>{{$index+1}}</h6>
                 </td>
@@ -129,12 +109,15 @@
                     <h6>{{$project->region}}</h6>
                 </td>
                 <td>
-                    @if($project->status == 1)
-                        <h6 class="" style="">Active</h6>
-                    @else
-                        <h6 class="" style="">Else</h6>
-                    @endif
+                    <h6>{{$project->total_plots}}</h6>
                 </td>
+                <td>
+                    <h6>{{$project->start_date}}</h6>
+                </td>
+                <td>
+                    <h6>{{$project->end_date}}</h6>
+                </td>
+                
                 </tr>
             @endforeach
             @else
@@ -145,6 +128,11 @@
             </tbody>
 
         </table>
+        {{-- <hr> --}}
+        <div class="row mt-2 mb-5 mt-3">
+            <p class="fw-bold text-black">Created At: <span class="text-muted">{{$date}}</span></p>
+            <p class="fw-bold mt-3">Signed By: <span class="text-muted">{{$username}}</span></p>
+        </div>
 
         <div class="invoice-footer">
             <p>Thank you for your business!</p>
@@ -152,4 +140,3 @@
     </div>
 </body>
 </html>
-
