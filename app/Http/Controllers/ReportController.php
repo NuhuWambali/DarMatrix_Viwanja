@@ -9,6 +9,8 @@ use App\Models\Project;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 class ReportController extends Controller
@@ -80,5 +82,72 @@ class ReportController extends Controller
 
     }
 
+    // public function generateExcel()
+    // {
+    //     // Create a new PhpSpreadsheet instance
+    //     $spreadsheet = new Spreadsheet();
 
+    //     // Add data to the spreadsheet
+    //     $sheet = $spreadsheet->getActiveSheet();
+    //     $sheet->setCellValue('A1', 'Nuhu');
+    //     $sheet->setCellValue('B1', 'Adams');
+
+    //     // Save the spreadsheet to a file
+    //     $filename = storage_path('app/project_report.xlsx');
+    //     $writer = new Xlsx($spreadsheet);
+    //     $writer->save($filename);
+
+    //     // Return a response to download the file
+    //     return response()->download($filename, 'project_report.xlsx');
+    // }
+
+    public function generateExcel()
+    {
+        $data = Project::all();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $columnHeaders = ['Name', 'Address','City',
+        'Region','Total Plots','Available Plots',
+        'Unavailable Plots','Descriptions','Status',
+        'Plot Number','Block','Installment Period',
+        'Price Per SQM','Start Date','End Date',
+        'Created By','Updated By','Created At','Updated At',
+    ];
+        $columnIndex = 1;
+        foreach ($columnHeaders as $header) {
+            $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
+            $columnIndex++;
+        }
+        $row = 2;
+        foreach ($data as $item) {
+            $sheet->setCellValueByColumnAndRow(1, $row, $item->name);
+            $sheet->setCellValueByColumnAndRow(2, $row, $item->address);
+            $sheet->setCellValueByColumnAndRow(3, $row, $item->city);
+            $sheet->setCellValueByColumnAndRow(4, $row, $item->region);
+            $sheet->setCellValueByColumnAndRow(5, $row, $item->total_plots);
+            $sheet->setCellValueByColumnAndRow(6, $row, $item->available_plots);
+            $sheet->setCellValueByColumnAndRow(7, $row, $item->unavailable_plots);
+            $sheet->setCellValueByColumnAndRow(8, $row, $item->description);
+            $sheet->setCellValueByColumnAndRow(9, $row, $item->status);
+            $sheet->setCellValueByColumnAndRow(10, $row, $item->plot_number);
+            $sheet->setCellValueByColumnAndRow(11, $row, $item->block);
+            $sheet->setCellValueByColumnAndRow(12, $row, $item->installment_period);
+            $sheet->setCellValueByColumnAndRow(13, $row, $item->price_per_sqm);
+            $sheet->setCellValueByColumnAndRow(14, $row, $item->start_date);
+            $sheet->setCellValueByColumnAndRow(15, $row, $item->end_date);
+            $sheet->setCellValueByColumnAndRow(16, $row, $item->created_by);
+            $sheet->setCellValueByColumnAndRow(17, $row, $item->updated_by);
+            $sheet->setCellValueByColumnAndRow(18, $row, $item->created_at);
+            $sheet->setCellValueByColumnAndRow(19, $row, $item->updated_at);
+            $row++;
+        }
+
+
+        $filename = storage_path('app/project_report.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filename);
+
+
+        return response()->download($filename, 'project_report.xlsx');
+    }
 }
