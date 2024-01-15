@@ -119,7 +119,8 @@ class ReportController extends Controller
             $sheet->setCellValueByColumnAndRow(6, $row, $item->available_plots);
             $sheet->setCellValueByColumnAndRow(7, $row, $item->unavailable_plots);
             $sheet->setCellValueByColumnAndRow(8, $row, $item->description);
-            $sheet->setCellValueByColumnAndRow(9, $row, $item->status);
+            $Status = ($item->status == 0) ? 'inactive' : 'Active';
+            $sheet->setCellValueByColumnAndRow(9, $row, $Status);
             $sheet->setCellValueByColumnAndRow(10, $row, $item->plot_number);
             $sheet->setCellValueByColumnAndRow(11, $row, $item->block);
             $sheet->setCellValueByColumnAndRow(12, $row, $item->installment_period);
