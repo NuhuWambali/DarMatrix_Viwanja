@@ -22,7 +22,7 @@
 <body>
     <div class="card">
         <div class="card-header " style="background-color: #525151;border-radius:0 0 7% 7%;"></div>
-            <div class="card-body">
+            {{-- <div class="card-body"> --}}
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -46,11 +46,12 @@
                     </div>
 
                     <div class="row">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered ">
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
-                                    {{-- <th scope="col">Project</th> --}}
+                                    <th scope="col">Project</th>
+                                    <th scope="col">Plot</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Paid</th>
                                     <th scope="col">Remain</th>
@@ -61,6 +62,8 @@
                                 @foreach($payments as $index=>$payment)
                                 <tr>
                                     <td>{{$payment->order->customer->fullname}}</td>
+                                    <td>{{$payment->order->plot->project->name}}</td>
+                                    <td>{{$payment->order->plot->plot_number}}</td>
                                     <td>{{number_format($payment->total_amount)}}</td>
                                     {{-- <td> {{$payment->order->project->name}}</td> --}}
                                     <td>{{number_format($payment->amount_paid)}}</td>
@@ -70,14 +73,18 @@
                                     @else
                                     <td>Complete</td>
                                     @endif
+
                                 </tr>
                                 @endforeach
                                 <tr>
                                     <td><strong>Total</strong></td>
+
+                                    <td colspan="2" style="background-color: #252323"></td>
+
                                     <td><strong>{{number_format($payments->sum('total_amount'))}}</strong></td>
                                     <td><strong>{{number_format($payments->sum('amount_paid'))}}</strong></td>
                                     <td><strong>{{number_format($payments->sum('amount_remain'))}}</strong></td>
-
+                                    <td style="background-color: #252323"></td>
                                 </tr>
 
                             </tbody>
@@ -89,7 +96,7 @@
 
                                 <li><span class="float-start" style="margin-right: 35px;">Amount Paid: {{number_format($payments->sum('amount_paid'))}}</span><i
                                     class="fas fa-dollar-sign"></i> </li>
-                                <li> <span class="me-5">Amount Remain : </span><i class="fas fa-dollar-sign"></i> {{number_format($payments->sum('amount_remain'))}}</li>
+                                <li><span class="me-5">Amount Remain : </span><i class="fas fa-dollar-sign"></i> {{number_format($payments->sum('amount_remain'))}}</li>
                                 <li><span class="me-3 float-start">Total Amount : {{number_format($payments->sum('total_amount'))}}</span><i class="fas fa-dollar-sign"></i>
                                 </li>
                             </ul>
@@ -112,7 +119,7 @@
                     </div>
 
                 </div>
-            </div>
+            {{-- </div> --}}
 
     </div>
 

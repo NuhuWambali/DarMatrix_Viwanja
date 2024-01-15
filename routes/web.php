@@ -128,6 +128,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
     Route::get('/download-excel-projects', [ReportController::class, 'generateProjectExcel'])->name('downloadExcelProject');
     Route::get('/download-excel-customers', [ReportController::class, 'generateCustomerExcel'])->name('downloadExcelCustomer');
     Route::get('/download-excel-plots', [ReportController::class, 'generatePlotExcel'])->name('downloadExcelPlot');
+    Route::get('/download-excel-payments', [ReportController::class, 'generatePaymentExcel'])->name('downloadPaymentPlotExcel');
 
 
 

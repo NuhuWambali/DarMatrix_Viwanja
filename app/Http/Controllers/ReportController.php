@@ -16,26 +16,69 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class ReportController extends Controller
 {
     //
+
+    //customer methods
     public function customerReport(){
         $totalCustomers=Customer::all()->count();
         $customers=Customer::latest()->paginate(10);
-        return view('home.reportCustomer',compact('customers','totalCustomers'));
+        return view('home.reportsPages.reportCustomer',compact('customers','totalCustomers'));
     }
-
-
     public function downloadCustomersReportPDF(){
         $username=Auth::user()->username;
         $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
         $customers=Customer::all();
         $date=now();
         $totalCustomers=Customer::all()->count();
-        $pdf=PDF::loadView('home.download.CustomerReport',compact('customers','totalCustomers','date','username','randomInvoiceNumber'));
+        $pdf=PDF::loadView('home.reportsTemplatesPDF.CustomerReport',compact('customers','totalCustomers','date','username','randomInvoiceNumber'));
         return $pdf->download('Customer_Report.pdf');
     }
+    public function generateCustomerExcel()   {
+        $data = Customer::all();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $columnHeaders = ['Fullname', 'Phone','Email',
+        'Date Of Birth',' National Id Number','Address',
+        'Description1','Description2','Description3',
+        'Description4','Description5','Description6',
+        'Status','Created By','Modified By','Created At','Updated At',
+    ];
+        $columnIndex = 1;
+        foreach ($columnHeaders as $header) {
+            $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
+            $columnIndex++;
+        }
+        $row = 2;
+        foreach ($data as $item) {
+            $sheet->setCellValueByColumnAndRow(1, $row, $item->fullname);
+            $sheet->setCellValueByColumnAndRow(2, $row, $item->phone_number);
+            $sheet->setCellValueByColumnAndRow(3, $row, $item->email);
+            $sheet->setCellValueByColumnAndRow(4, $row, $item->date_of_birth);
+            $sheet->setCellValueByColumnAndRow(5, $row, $item->national_id_number);
+            $sheet->setCellValueByColumnAndRow(6, $row, $item->address);
+            $sheet->setCellValueByColumnAndRow(7, $row, $item->description1);
+            $sheet->setCellValueByColumnAndRow(8, $row, $item->description2);
+            $sheet->setCellValueByColumnAndRow(9, $row, $item->description3);
+            $sheet->setCellValueByColumnAndRow(10, $row, $item->description4);
+            $sheet->setCellValueByColumnAndRow(11, $row, $item->description5);
+            $sheet->setCellValueByColumnAndRow(12, $row, $item->description6);
+            $sheet->setCellValueByColumnAndRow(13, $row, $item->status);
+            $sheet->setCellValueByColumnAndRow(14, $row, $item->created_by);
+            $sheet->setCellValueByColumnAndRow(15, $row, $item->modified_by);
+            $sheet->setCellValueByColumnAndRow(16, $row, $item->created_at);
+            $sheet->setCellValueByColumnAndRow(17, $row, $item->updated_at);
+            $row++;
+        }
+        $filename = storage_path('app/customer_report.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filename);
+        return response()->download($filename, 'customer_report.xlsx');
+    }
+
+    //project methods
     public function projectReport(){
         $totalProjects=Project::all()->count();
         $projects=Project::latest()->paginate(10);
-        return view('home.reportProject',compact('projects','totalProjects'));
+        return view('home.reportsPages.reportProject',compact('projects','totalProjects'));
     }
 
     public function downloadProjectsReportPDF(){
@@ -44,42 +87,8 @@ class ReportController extends Controller
         $projects=Project::all();
         $date=now();
         $totalProjects=Project::all()->count();
-        $pdf=PDF::loadView('home.download.ProjectReport',compact('projects','totalProjects','date','username','randomInvoiceNumber'));
+        $pdf=PDF::loadView('home.reportsTemplatesPDF.ProjectReport',compact('projects','totalProjects','date','username','randomInvoiceNumber'));
         return $pdf->download('Project_Report.pdf');
-    }
-    public function plotsReport(){
-        $totalPlots=Plot::all()->count();
-        $plots=Plot::latest()->paginate(10);
-        return view('home.reportPlot',compact('plots','totalPlots'));
-    }
-    public function downloadPlotsReportPDF(){
-        $username=Auth::user()->username;
-        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
-        $plots=Plot::all();
-        $date=now();
-        $totalPlots=Plot::all()->count();
-        $pdf=PDF::loadView('home.download.plotReport',compact('plots','totalPlots','date','username','randomInvoiceNumber'));
-        return $pdf->download('Plots_Report.pdf');
-
-    }
-
-    public function paymentReport(){
-        $payments=Payment::latest()->paginate(10);
-        return view('home.reportPayment', compact('payments'));
-    }
-
-    public function downloadPaymentReportPDF(){
-        $username=Auth::user()->username;
-        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
-        $payments=Payment::all();
-        $totalPaidCustomer=Payment::all()->count();
-        $date=now();
-        $totalPaidAmount = $payments->sum('amount_paid');
-        $totalUnpaidAmount = $payments->sum('amount_remain');
-        $totalAmount=$payments->sum('total_amount');
-        $pdf=PDF::loadView('home.download.paymentReport',compact('payments','totalPaidAmount','totalUnpaidAmount','totalPaidCustomer','date','randomInvoiceNumber','username'));
-        return $pdf->download('Payment_Report.pdf');
-
     }
 
     public function generateProjectExcel()
@@ -128,47 +137,21 @@ class ReportController extends Controller
         return response()->download($filename, 'project_report.xlsx');
     }
 
-    public function generateCustomerExcel()
-    {
-        $data = Customer::all();
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $columnHeaders = ['Fullname', 'Phone','Email',
-        'Date Of Birth',' National Id Number','Address',
-        'Description1','Description2','Description3',
-        'Description4','Description5','Description6',
-        'Status','Created By','Modified By','Created At','Updated At',
-    ];
-        $columnIndex = 1;
-        foreach ($columnHeaders as $header) {
-            $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
-            $columnIndex++;
-        }
-        $row = 2;
-        foreach ($data as $item) {
-            $sheet->setCellValueByColumnAndRow(1, $row, $item->fullname);
-            $sheet->setCellValueByColumnAndRow(2, $row, $item->phone_number);
-            $sheet->setCellValueByColumnAndRow(3, $row, $item->email);
-            $sheet->setCellValueByColumnAndRow(4, $row, $item->date_of_birth);
-            $sheet->setCellValueByColumnAndRow(5, $row, $item->national_id_number);
-            $sheet->setCellValueByColumnAndRow(6, $row, $item->address);
-            $sheet->setCellValueByColumnAndRow(7, $row, $item->description1);
-            $sheet->setCellValueByColumnAndRow(8, $row, $item->description2);
-            $sheet->setCellValueByColumnAndRow(9, $row, $item->description3);
-            $sheet->setCellValueByColumnAndRow(10, $row, $item->description4);
-            $sheet->setCellValueByColumnAndRow(11, $row, $item->description5);
-            $sheet->setCellValueByColumnAndRow(12, $row, $item->description6);
-            $sheet->setCellValueByColumnAndRow(13, $row, $item->status);
-            $sheet->setCellValueByColumnAndRow(14, $row, $item->created_by);
-            $sheet->setCellValueByColumnAndRow(15, $row, $item->modified_by);
-            $sheet->setCellValueByColumnAndRow(16, $row, $item->created_at);
-            $sheet->setCellValueByColumnAndRow(17, $row, $item->updated_at);
-            $row++;
-        }
-        $filename = storage_path('app/customer_report.xlsx');
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($filename);
-        return response()->download($filename, 'customer_report.xlsx');
+    //plots
+    public function plotsReport(){
+        $totalPlots=Plot::all()->count();
+        $plots=Plot::latest()->paginate(10);
+        return view('home.reportsPages.reportPlot',compact('plots','totalPlots'));
+    }
+    public function downloadPlotsReportPDF(){
+        $username=Auth::user()->username;
+        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
+        $plots=Plot::all();
+        $date=now();
+        $totalPlots=Plot::all()->count();
+        $pdf=PDF::loadView('home.reportsTemplatesPDF.plotReport',compact('plots','totalPlots','date','username','randomInvoiceNumber'));
+        return $pdf->download('Plots_Report.pdf');
+
     }
 
     public function generatePlotExcel()
@@ -214,4 +197,77 @@ class ReportController extends Controller
         return response()->download($filename, 'plots_report.xlsx');
     }
 
+    //payments methods
+    public function paymentReport(){
+        $payments=Payment::latest()->paginate(10);
+        return view('home.reportsPages.reportPayment', compact('payments'));
+    }
+
+    public function downloadPaymentReportPDF(){
+        $username=Auth::user()->username;
+        $randomInvoiceNumber = now( ).mt_rand(1000000, 9999999);
+        $payments=Payment::all();
+        $totalPaidCustomer=Payment::all()->count();
+        $date=now();
+        $totalPaidAmount = $payments->sum('amount_paid');
+        $totalUnpaidAmount = $payments->sum('amount_remain');
+        $totalAmount=$payments->sum('total_amount');
+        $pdf=PDF::loadView('home.reportsTemplatesPDF.paymentReport',compact('payments','totalPaidAmount','totalUnpaidAmount','totalPaidCustomer','date','randomInvoiceNumber','username'));
+        return $pdf->download('Payment_Report.pdf');
+
+    }
+
+
+    public function generatePaymentExcel()
+    {
+        $data = Payment::all();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $columnHeaders = ['Project Name','Plot Number','Total Amount', 'Amount Paid','Amount Remain',
+        'Payment Status','Installment Number','Created By',  'Updated By',
+        'Created At','Updated At',
+    ];
+        $columnIndex = 1;
+        foreach ($columnHeaders as $header) {
+            $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
+            $columnIndex++;
+        }
+        $row = 2;
+        $row = 2;
+        $totalAmountSum = 0;
+        $amountPaidSum = 0;
+        $amountRemainSum = 0;
+        foreach ($data as $item) {
+            $project = $item->order->plot->project->name;
+            $sheet->setCellValueByColumnAndRow(1, $row, $project);
+            $plot_number = $item->order->plot->plot_number;
+            $sheet->setCellValueByColumnAndRow(2, $row, $plot_number);
+            $sheet->setCellValueByColumnAndRow(3, $row, $item->total_amount);
+            $sheet->setCellValueByColumnAndRow(4, $row, $item->amount_paid);
+            $sheet->setCellValueByColumnAndRow(5, $row, $item->amount_remain);
+            $paymentStatus = ($item->payment_status == 0) ? 'complete' : 'in progress';
+            $sheet->setCellValueByColumnAndRow(6, $row, $paymentStatus);
+            $sheet->setCellValueByColumnAndRow(7, $row, $item->installment_number);
+            $sheet->setCellValueByColumnAndRow(8, $row, $item->created_by);
+            $sheet->setCellValueByColumnAndRow(9, $row, $item->updated_by);
+            $sheet->setCellValueByColumnAndRow(10, $row, $item->created_at);
+            $sheet->setCellValueByColumnAndRow(11, $row, $item->updated_at);
+
+            $totalAmountSum += $item->total_amount;
+            $amountPaidSum += $item->amount_paid;
+            $amountRemainSum += $item->amount_remain;
+            $row++;
+        }
+        $row++;
+        $sheet->setCellValueByColumnAndRow(1, $row, 'Total:');
+        $sheet->setCellValueByColumnAndRow(3, $row, $totalAmountSum);
+        $sheet->setCellValueByColumnAndRow(4, $row, $amountPaidSum);
+        $sheet->setCellValueByColumnAndRow(5, $row, $amountRemainSum);
+        $filename = storage_path('app/payments_report.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filename);
+        return response()->download($filename, 'payments_report.xlsx');
+    }
+
 }
+
