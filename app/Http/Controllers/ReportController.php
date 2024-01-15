@@ -185,7 +185,8 @@ class ReportController extends Controller
             $sheet->setCellValueByColumnAndRow(10, $row, $item->description1);
             $sheet->setCellValueByColumnAndRow(11, $row, $item->description2);
             $sheet->setCellValueByColumnAndRow(12, $row, $item->description3);
-            $sheet->setCellValueByColumnAndRow(13, $row, $item->status);
+            $Status = ($item->status == 0) ? 'Taken' : 'Available';
+            $sheet->setCellValueByColumnAndRow(13, $row,  $Status);
             $sheet->setCellValueByColumnAndRow(14, $row, $item->created_by);
             $sheet->setCellValueByColumnAndRow(15, $row, $item->updated_by);
             $sheet->setCellValueByColumnAndRow(16, $row, $item->created_at);

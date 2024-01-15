@@ -9,11 +9,6 @@
                 <div class="col-sm-10 mt-1">
                     <h4 style="width:22em" class="my-2">All Plots </h4>
                 </div>
-                {{-- <div class="col-sm-2 my-3">
-                    <h6>Download</h6>
-                    <a href="{{route('downloadPlotsReportPDF')}}" class="btn btn-primary btn-sm">PDF</a>
-                    <a href="{{route('downloadExcelPlot')}}" class="btn  btn-outline-primary btn-sm">Excel</a>
-                </div> --}}
                 <div class="col-sm-2 my-3">
                     <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
                         Download
@@ -22,14 +17,14 @@
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title text-primary" id="exampleModalLabel">Report in  PDF or Excel</h5>
+                              <h5 class="modal-title text-primary" id="exampleModalLabel">Plots Report in  PDF or Excel</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body text-center">
-                                <a href="{{route('downloadPaymentsReportPDF')}}" class="btn btn-primary mr-5">PDF</a>
-                                <a href="{{route('downloadPaymentPlotExcel')}}" class="btn  btn-outline-primary ">Excel</a>
+                                <a href="{{route('downloadPlotsReportPDF')}}" class="btn btn-primary mr-5">PDF</a>
+                                <a href="{{route('downloadExcelPlot')}}" class="btn  btn-outline-primary ">Excel</a>
                             </div>
 
                           </div>
